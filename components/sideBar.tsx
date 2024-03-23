@@ -19,7 +19,7 @@ export const Sidebar = ({ className }: Props) => {
     >
       <Link href="/dashboard/alldetails">
         <div className="pt-8 pl-4 pb-7 flex items-center gap-x-3">
-          <h1 className="text-2xl font-extrabold text-green-600 tracking-wide">
+          <h1 className="text-2xl font-extrabold text-white tracking-wide">
             CCMS
           </h1>
         </div>
