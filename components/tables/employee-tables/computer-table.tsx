@@ -48,7 +48,7 @@ interface DataTableProps<TData, TValue> {
   };
 }
 
-export function EmployeeTable<TData, TValue>({
+export function ComputerTable<TData, TValue>({
   columns,
   data,
   pageNo,
@@ -69,10 +69,6 @@ export function EmployeeTable<TData, TValue>({
   const perPageAsNumber = Number(per_page);
   const fallbackPerPage = isNaN(perPageAsNumber) ? 10 : perPageAsNumber;
 
-  /* this can be used to get the selectedrows 
-  console.log("value", table.getFilteredSelectedRowModel()); */
-
-  // Create query string
   const createQueryString = React.useCallback(
     (params: Record<string, string | number | null>) => {
       const newSearchParams = new URLSearchParams(searchParams?.toString());
@@ -87,7 +83,7 @@ export function EmployeeTable<TData, TValue>({
 
       return newSearchParams.toString();
     },
-    [searchParams],
+    [searchParams]
   );
 
   // Handle server-side pagination
@@ -105,7 +101,7 @@ export function EmployeeTable<TData, TValue>({
       })}`,
       {
         scroll: false,
-      },
+      }
     );
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -127,33 +123,7 @@ export function EmployeeTable<TData, TValue>({
   });
 
   const searchValue = table.getColumn(searchKey)?.getFilterValue() as string;
-
-  // React.useEffect(() => {
-  //   if (debounceValue.length > 0) {
-  //     router.push(
-  //       `${pathname}?${createQueryString({
-  //         [selectedOption.value]: `${debounceValue}${
-  //           debounceValue.length > 0 ? `.${filterVariety}` : ""
-  //         }`,
-  //       })}`,
-  //       {
-  //         scroll: false,
-  //       }
-  //     )
-  //   }
-
-  //   if (debounceValue.length === 0) {
-  //     router.push(
-  //       `${pathname}?${createQueryString({
-  //         [selectedOption.value]: null,
-  //       })}`,
-  //       {
-  //         scroll: false,
-  //       }
-  //     )
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [debounceValue, filterVariety, selectedOption.value])
+  console.log(table.getColumn(searchKey), "Search Value");
 
   React.useEffect(() => {
     if (searchValue?.length > 0) {
@@ -165,7 +135,7 @@ export function EmployeeTable<TData, TValue>({
         })}`,
         {
           scroll: false,
-        },
+        }
       );
     }
     if (searchValue?.length === 0 || searchValue === undefined) {
@@ -177,7 +147,7 @@ export function EmployeeTable<TData, TValue>({
         })}`,
         {
           scroll: false,
-        },
+        }
       );
     }
 
@@ -208,7 +178,7 @@ export function EmployeeTable<TData, TValue>({
                         ? null
                         : flexRender(
                             header.column.columnDef.header,
-                            header.getContext(),
+                            header.getContext()
                           )}
                     </TableHead>
                   );
@@ -227,7 +197,7 @@ export function EmployeeTable<TData, TValue>({
                     <TableCell key={cell.id}>
                       {flexRender(
                         cell.column.columnDef.cell,
-                        cell.getContext(),
+                        cell.getContext()
                       )}
                     </TableCell>
                   ))}
