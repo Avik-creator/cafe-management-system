@@ -1,10 +1,10 @@
 import BreadCrumb from "@/components/breadcrumb";
 import { columns } from "@/components/tables/employee-tables/columns";
-import { EmployeeTable } from "@/components/tables/employee-tables/employee-table";
+import { ComputerTable } from "@/components/tables/employee-tables/computer-table";
 import { buttonVariants } from "@/components/ui/button";
 import { Heading } from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
-import { Employee } from "@/constants/data";
+import { Computers } from "@/constants/data";
 import { cn } from "@/lib/utils";
 import { Plus } from "lucide-react";
 import Link from "next/link";
@@ -20,17 +20,39 @@ type paramsProps = {
 export default async function page({ searchParams }: paramsProps) {
   const page = Number(searchParams.page) || 1;
   const pageLimit = Number(searchParams.limit) || 10;
-  const country = searchParams.search || null;
-  const offset = (page - 1) * pageLimit;
+  const Computers: Computers[] = [
+    {
+      model_no: "1",
+      isOccupied: "true",
+      cafe: 1,
+    },
+    {
+      model_no: "2",
+      isOccupied: "true",
+      cafe: 1,
+    },
+    {
+      model_no: "2",
+      isOccupied: "true",
+      cafe: 1,
+    },
+    {
+      model_no: "2",
+      isOccupied: "true",
+      cafe: 1,
+    },
+    {
+      model_no: "2",
+      isOccupied: "true",
+      cafe: 1,
+    },
+    {
+      model_no: "2",
+      isOccupied: "true",
+      cafe: 1,
+    },
+  ];
 
-  const res = await fetch(
-    `https://api.slingacademy.com/v1/sample-data/users?offset=${offset}&limit=${pageLimit}` +
-      (country ? `&search=${country}` : ""),
-  );
-  const employeeRes = await res.json();
-  const totalUsers = employeeRes.total_users; //1000
-  const pageCount = Math.ceil(totalUsers / pageLimit);
-  const employee: Employee[] = employeeRes.users;
   return (
     <>
       <div className="flex-1 space-y-4  p-4 md:p-8 pt-6">
@@ -38,8 +60,8 @@ export default async function page({ searchParams }: paramsProps) {
 
         <div className="flex items-start justify-between">
           <Heading
-            title={`Employee (${totalUsers})`}
-            description="Manage employees (Server side table functionalities.)"
+            title={`Employee (${Computers.length})`}
+            description="Manage Computers"
           />
 
           <Link
@@ -51,13 +73,13 @@ export default async function page({ searchParams }: paramsProps) {
         </div>
         <Separator />
 
-        <EmployeeTable
-          searchKey="country"
+        <ComputerTable
+          searchKey="model_no"
           pageNo={page}
           columns={columns}
-          totalUsers={totalUsers}
-          data={employee}
-          pageCount={pageCount}
+          totalUsers={Computers.length}
+          data={Computers}
+          pageCount={1}
         />
       </div>
     </>
