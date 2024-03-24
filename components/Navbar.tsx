@@ -16,7 +16,7 @@ export const Navbar = () => {
         >
           CCMS
         </a>
-        <div className="hidden lg:block">
+        <div className="w-full md:w-auto">
           <ul className="flex flex-col gap-2 mt-2 mb-4 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
             <li className="flex items-center p-1 font-sans text-sm antialiase font-medium leading-normal gap-x-2 text-blue-gray-900">
               <a
