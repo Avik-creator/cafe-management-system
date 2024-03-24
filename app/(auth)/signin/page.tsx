@@ -30,6 +30,7 @@ const World = dynamic(
 );
 import { colors, globeConfig, sampleArcs } from "@/contants";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 
 const formSchema = z.object({
   email: z.string().email({
@@ -55,7 +56,7 @@ export default function Signin() {
   return (
     <div className="min-h-screen mt-56 bottom-0 bg-inherit">
       <div className="flex p-3 flex-row md:items-center gap-5">
-        <div className="flex flex-row ml-10 w-2/5">
+        <div className="flex flex-row ml-10 w-full md:w-2/5">
           <Card className="flex-1">
             <CardHeader>
               <CardTitle className="flex justify-center">Sign In</CardTitle>
@@ -101,12 +102,20 @@ export default function Signin() {
                   <div className="flex flex-row justify-center items-center">
                     <Button type="submit">Submit</Button>
                   </div>
+
+                  <FormDescription className="flex flex-row justify-center items-center">
+                    <span>Don't Have an Account? </span>
+
+                    <a href="/signup" className="text-blue-500 ml-1">
+                      Sign Up
+                    </a>
+                  </FormDescription>
                 </form>
               </Form>
             </CardContent>
           </Card>
         </div>
-        <div className="absolute left-1/2 w-3/5 inset-x-0 h-2/3 bg-gradient-to-b pointer-events-none select-none from-transparent dark:to-black to-white z-40">
+        <div className="md:absolute hidden md:flex left-1/2 md:w-2/3 inset-x-0 h-2/3 bg-gradient-to-b pointer-events-none select-none from-transparent dark:to-black to-white z-40">
           <div className="absolute w-3/5 -bottom-20 h-72 md:h-full z-10">
             <World data={sampleArcs} globeConfig={globeConfig} />
           </div>

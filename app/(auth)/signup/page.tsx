@@ -69,13 +69,12 @@ export default function SignUp() {
   return (
     <div className="min-h-screen mt-56 bg-inherit bottom-0">
       <div className="flex p-3 flex-row md:items-center gap-5">
-        <div className="flex flex-row ml-10 w-2/5">
+        <div className="flex flex-row ml-10 w-full md:w-2/5">
           <Card className="flex-1" color="dark">
             <CardHeader>
               <CardTitle className="flex justify-center">Sign Up</CardTitle>
               <CardDescription className="flex justify-center">
-                {" "}
-                Sign Up to See you Dashboard
+                Sign Up to See Your Dashboard
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -145,12 +144,20 @@ export default function SignUp() {
                   <div className="flex flex-row justify-center items-center">
                     <Button type="submit">Submit</Button>
                   </div>
+
+                  <FormDescription className="flex flex-row justify-center items-center">
+                    <span>Already Have an Account? </span>
+                    <a href="/signin" className="text-blue-500 ml-1">
+                      Sign In
+                    </a>
+                  </FormDescription>
                 </form>
               </Form>
             </CardContent>
           </Card>
         </div>
-        <div className="absolute left-1/2 w-2/3 inset-x-0 h-2/3 bg-gradient-to-b pointer-events-none select-none from-transparent dark:to-black to-white z-40">
+
+        <div className="md:absolute hidden md:flex left-1/2 md:w-2/3 inset-x-0 h-2/3 bg-gradient-to-b pointer-events-none select-none from-transparent dark:to-black to-white z-40">
           <div className="absolute w-3/5 -bottom-20 h-72 md:h-full z-10">
             <World data={sampleArcs} globeConfig={globeConfig} />
           </div>
