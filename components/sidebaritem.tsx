@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 
 type Props = {
   label: string;
-
   href: string;
 };
 
