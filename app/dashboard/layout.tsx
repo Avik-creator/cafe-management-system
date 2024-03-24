@@ -10,7 +10,7 @@ const Layout = ({ children }: Props) => {
     <>
       <Sidebar className="hidden lg:flex" />
       <Navbar />
-      <main className="lg:pl-[256px] h-full pt-[50px] lg:pt-0">
+      <main className="lg:pl-[256px] h-full pt-[50px] lg:pt-0 mt-11">
         <div className="max-w-[1056px] mx-auto pt-6 h-full">{children}</div>
       </main>
     </>
