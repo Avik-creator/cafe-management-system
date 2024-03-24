@@ -1,47 +1,62 @@
 "use client";
 import React, { useState } from "react";
 import { useTheme } from "next-themes";
+import { BiHomeAlt2 } from "react-icons/bi";
+import { AnimatePresence, motion } from "framer-motion";
+import { GiHamburgerMenu, GiMoon, GiSun } from "react-icons/gi";
+import { AiOutlineClose } from "react-icons/ai";
+import { PiChatCircleBold } from "react-icons/pi";
+import { IoContract } from "react-icons/io5";
 import Link from "next/link";
+
+export const routes = [
+  {
+    title: "Home",
+    href: "#",
+    Icon: BiHomeAlt2,
+  },
+
+  {
+    title: "Contact",
+    href: "#",
+    Icon: IoContract,
+  },
+  {
+    title: "About",
+    href: "#",
+    Icon: PiChatCircleBold,
+  },
+];
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
   const { setTheme, theme } = useTheme();
   return (
-    <nav className="block w-full max-w-screen-xl px-4 py-2 mx-auto text-white bg-white dark:bg-black shadow-md rounded-xl  bg-opacity-80 backdrop-blur-2xl backdrop-saturate-200 lg:px-8 lg:py-4">
+    <nav className="w-full max-w-screen-xl px-4 py-2 mx-auto text-white bg-white dark:bg-black shadow-md rounded-xl bg-opacity-80 backdrop-blur-2xl backdrop-saturate-200 lg:px-8 lg:py-4">
       <div className="container flex items-center justify-between mx-auto text-blue-gray-900">
         <a
           href="/"
-          className="mr-4  text-black dark:text-white block cursor-pointer py-1.5 font-sans text-base font-medium leading-relaxed text-inherit antialiased"
+          className="mr-4 text-black dark:text-white block cursor-pointer py-1.5 font-sans text-base font-medium leading-relaxed text-inherit antialiased"
         >
           CCMS
         </a>
         <div className="w-full md:w-auto">
-          <ul className="flex flex-col gap-2 mt-2 mb-4 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
-            <li className="flex items-center p-1 font-sans text-sm antialiase font-medium leading-normal gap-x-2 text-blue-gray-900">
-              <a
-                href="/"
-                className="flex  text-black dark:text-white items-center"
-              >
-                Home
-              </a>
-            </li>
-            <li className="flex items-center p-1 font-sans text-sm antialiased font-medium leading-normal gap-x-2 text-blue-gray-900">
-              <a
-                href="/about"
-                className="flex items-center  text-black dark:text-white hover:from-blue-500 to-gray-600"
-              >
-                About
-              </a>
-            </li>
-            <li className="flex items-center p-1 font-sans text-sm antialiased font-medium leading-normal gap-x-2 text-blue-gray-900">
-              <a
-                href="/contact"
-                className="flex  text-black dark:text-white items-center"
-              >
-                Contact
-              </a>
-            </li>
+          <ul className="hidden lg:flex lg:items-center gap-5 text-sm">
+            {routes.map((route, index) => {
+              const { Icon, href, title } = route;
+              return (
+                <li key={index}>
+                  <a
+                    href={href}
+                    className="flex items-center gap-1 text-black dark:text-white hover:dark:text-blue-400 hover:text-amber-300 transition-all"
+                  >
+                    <Icon />
+                    {title}
+                  </a>
+                </li>
+              );
+            })}
           </ul>
         </div>
         <div className="flex items-center gap-x-4">
@@ -55,34 +70,19 @@ export const Navbar = () => {
             className="hidden select-none rounded-lg bg-gradient-to-tr from-blue-600 to-gray-600 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none lg:inline-block"
             type="button"
           >
-            {/* <span>Sign in</span> */}
             <Link href="/signin">Sign In</Link>
           </button>
 
-          {theme == "dark" ? (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              className="bi bi-toggle-on"
-              viewBox="0 0 16 16"
+          {theme === "dark" ? (
+            <GiSun
               onClick={() => setTheme("light")}
-            >
-              <path d="M5 3a5 5 0 0 0 0 10h6a5 5 0 0 0 0-10zm6 9a4 4 0 1 1 0-8 4 4 0 0 1 0 8" />
-            </svg>
+              className="cursor-pointer text-2xl bg-white dark:bg-black rounded-full p-1"
+            />
           ) : (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="dark"
-              className="bi bi-toggle-off"
-              viewBox="0 0 16 16"
+            <GiMoon
               onClick={() => setTheme("dark")}
-            >
-              <path d="M11 4a4 4 0 0 1 0 8H8a5 5 0 0 0 2-4 5 5 0 0 0-2-4zm-6 8a4 4 0 1 1 0-8 4 4 0 0 1 0 8M0 8a5 5 0 0 0 5 5h6a5 5 0 0 0 0-10H5a5 5 0 0 0-5 5" />
-            </svg>
+              className="cursor-pointer text-2xl bg-black dark:bg-white rounded-full p-1"
+            />
           )}
         </div>
         <div className="flex items-center gap-x-4 lg:hidden">
@@ -91,23 +91,63 @@ export const Navbar = () => {
             type="button"
             onClick={toggle}
           >
-            <span className="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M4 6h16M4 12h16M4 18h16"
-                ></path>
-              </svg>
-            </span>
+            {isOpen ? (
+              <span className="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+                <AiOutlineClose />
+              </span>
+            ) : (
+              <span className="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+                <GiHamburgerMenu />
+              </span>
+            )}
           </button>
         </div>
+
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed left-0 shadow-4xl right-0 top-[3.5rem] p-5 pt-0 bg-neutral-950 border-b border-b-white/20"
+            >
+              <ul className="grid gap-2">
+                {routes.map((route, idx) => {
+                  const { Icon } = route;
+
+                  return (
+                    <motion.li
+                      initial={{ scale: 0, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 260,
+                        damping: 20,
+                        delay: 0.1 + idx / 10,
+                      }}
+                      key={route.title}
+                      className="w-full p-[0.08rem] rounded-xl bg-gradient-to-tr text-sm from-neutral-800 via-neutral-950 to-neutral-700"
+                    >
+                      <a
+                        onClick={() => setIsOpen((prev) => !prev)}
+                        className={
+                          "flex items-center justify-between w-full p-5 rounded-md bg-neutral-950"
+                        }
+                        href={route.href}
+                      >
+                        <span className="flex gap-1 text-lg">
+                          {route.title}
+                        </span>
+                        <Icon className="text-sm" />
+                      </a>
+                    </motion.li>
+                  );
+                })}
+              </ul>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </nav>
   );
