@@ -8,6 +8,7 @@ export type User = {
   role: string;
   verified: boolean;
   status: string;
+  email: string;
 };
 export const users: User[] = [
   {
@@ -17,6 +18,7 @@ export const users: User[] = [
     role: "Frontend Developer",
     verified: false,
     status: "Active",
+    email: "schiner.candice@hotmail.com"
   },
   {
     id: 2,
@@ -25,6 +27,7 @@ export const users: User[] = [
     role: "Backend Developer",
     verified: true,
     status: "Active",
+    email: "doe.john@hotmail.com"
   },
   {
     id: 3,
@@ -33,6 +36,7 @@ export const users: User[] = [
     role: "UI Designer",
     verified: true,
     status: "Active",
+    email: "johnson.alice@hotmail.com"
   },
   {
     id: 4,
@@ -41,6 +45,7 @@ export const users: User[] = [
     role: "Fullstack Developer",
     verified: false,
     status: "Inactive",
+    email: "smith.david@hotmail.com"
   },
   {
     id: 5,
@@ -49,6 +54,7 @@ export const users: User[] = [
     role: "Product Manager",
     verified: true,
     status: "Active",
+    email: "wilson.emma@hotmail.com"
   },
   {
     id: 6,
@@ -57,6 +63,7 @@ export const users: User[] = [
     role: "QA Engineer",
     verified: false,
     status: "Active",
+    email: "brown.james@hotmail.com"
   },
   {
     id: 7,
@@ -65,6 +72,7 @@ export const users: User[] = [
     role: "UX Designer",
     verified: true,
     status: "Active",
+    email: "white.laura@hotmail.com"
   },
   {
     id: 8,
@@ -73,6 +81,7 @@ export const users: User[] = [
     role: "DevOps Engineer",
     verified: false,
     status: "Active",
+    email: "lee.michael@hotmail.com"
   },
   {
     id: 9,
@@ -81,6 +90,7 @@ export const users: User[] = [
     role: "Frontend Developer",
     verified: true,
     status: "Active",
+    email: "green.olivia@hotmail.com"
   },
   {
     id: 10,
@@ -89,6 +99,7 @@ export const users: User[] = [
     role: "Data Analyst",
     verified: false,
     status: "Active",
+    email: "taylor.robert@hotmail.com"
   },
 ];
 

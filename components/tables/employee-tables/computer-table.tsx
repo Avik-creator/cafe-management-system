@@ -123,7 +123,7 @@ export function ComputerTable<TData, TValue>({
   });
 
   const searchValue = table.getColumn(searchKey)?.getFilterValue() as string;
-  console.log(table.getColumn(searchKey), "Search Value");
+  // console.log(table.getColumn(searchKey), "Search Value");
 
   React.useEffect(() => {
     if (searchValue?.length > 0) {
