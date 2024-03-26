@@ -4,6 +4,7 @@ import UserAuthForm from "@/components/forms/user-auth-form";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import UserSignupForm from "@/components/forms/user-signup-form";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 export const metadata: Metadata = {
   title: "Authentication",
@@ -11,7 +12,9 @@ export const metadata: Metadata = {
 };
 
 export default function SignUpPage() {
+
   return (
+    <ScrollArea>
     <div className="relative h-screen flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
       <Link
         href="/signin"
@@ -92,5 +95,6 @@ export default function SignUpPage() {
         </div>
       </div>
     </div>
+    </ScrollArea>
   );
 }

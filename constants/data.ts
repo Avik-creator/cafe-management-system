@@ -10,6 +10,17 @@ export type User = {
   status: string;
   email: string;
 };
+
+export type Cafe = {
+  id: number;
+  name: string;
+  address: string;
+  license: string;
+  gst_number: string;
+  contact_number: string;
+};
+
+
 export const users: User[] = [
   {
     id: 1,
@@ -135,4 +146,72 @@ export const navItems: NavItem[] = [
     icon: "logo",
     label: "logout",
   },
+];
+
+
+export const CafeList: Cafe[] = [
+  {
+    id: 1,
+    name: "Cafe 1",
+    address: "123, 4th Street",
+    license: "1234567890",
+    gst_number: "1234567890",
+    contact_number: "1234567890",
+  },
+  {
+    id: 2,
+    name: "Cafe 2",
+    address: "123, 4th Street",
+    license: "1234567890",
+    gst_number: "1234567890",
+    contact_number: "1234567890",
+  },
+  {
+    id: 3,
+    name: "Cafe 1",
+    address: "123, 4th Street",
+    license: "1234567890",
+    gst_number: "1234567890",
+    contact_number: "1234567890",
+  },
+  {
+    id: 4,
+    name: "Cafe 1",
+    address: "123, 4th Street",
+    license: "1234567890",
+    gst_number: "1234567890",
+    contact_number: "1234567890",
+  },
+  {
+    id: 5,
+    name: "Cafe 1",
+    address: "123, 4th Street",
+    license: "1234567890",
+    gst_number: "1234567890",
+    contact_number: "1234567890",
+  },
+  {
+    id: 6,
+    name: "Cafe 1",
+    address: "123, 4th Street",
+    license: "1234567890",
+    gst_number: "1234567890",
+    contact_number: "1234567890",
+  },
+  {
+    id: 7,
+    name: "Cafe 1",
+    address: "123, 4th Street",
+    license: "1234567890",
+    gst_number: "1234567890",
+    contact_number: "1234567890",
+  },
+  {
+    id: 8,
+    name: "Cafe 1",
+    address: "123, 4th Street",
+    license: "1234567890",
+    gst_number: "1234567890",
+    contact_number: "1234567890",
+  }
 ];
