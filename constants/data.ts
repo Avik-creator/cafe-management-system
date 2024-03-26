@@ -93,6 +93,7 @@ export const users: User[] = [
 ];
 
 export type Computers = {
+  id: string;
   model_no: string;
   isOccupied: string;
   cafe: Number;
