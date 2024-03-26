@@ -10,13 +10,6 @@ import {
 } from "@/components/ui/form";
 import { Heading } from "@/components/ui/heading";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Trash } from "lucide-react";
@@ -24,64 +17,56 @@ import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import FileUpload from "../file-upload";
+
 import { useToast } from "../ui/use-toast";
-const ImgSchema = z.object({
-  fileName: z.string(),
-  name: z.string(),
-  fileSize: z.number(),
-  size: z.number(),
-  fileKey: z.string(),
-  key: z.string(),
-  fileUrl: z.string(),
-  url: z.string(),
-});
+
 export const IMG_MAX_LIMIT = 3;
 const formSchema = z.object({
   name: z
     .string()
-    .min(3, { message: "Product Name must be at least 3 characters" }),
-  imgUrl: z
-    .array(ImgSchema)
-    .max(IMG_MAX_LIMIT, { message: "You can only add up to 3 images" })
-    .min(1, { message: "At least one image must be added." }),
-  description: z
+    .min(3, { message: "User Name must be at least 3 characters" }),
+  address: z
     .string()
-    .min(3, { message: "Product description must be at least 3 characters" }),
-  price: z.coerce.number(),
-  category: z.string().min(1, { message: "Please select a category" }),
+    .min(10, { message: "User address must be at least 3 characters" }),
+  email: z.string().email({ message: "Please enter a valid email address" }),
+  phone: z.string().min(10, { message: "Please enter a valid phone number" }),
 });
 
 type ProductFormValues = z.infer<typeof formSchema>;
 
-interface ProductFormProps {
+interface UserFormProps {
   initialData: any | null;
   categories: any;
 }
 
-export const EmployeeForm: React.FC<ProductFormProps> = ({
+export const UserForm: React.FC<UserFormProps> = ({
   initialData,
   categories,
 }) => {
   const params = useParams();
+
   const router = useRouter();
   const { toast } = useToast();
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const title = initialData ? "Edit product" : "Create product";
-  const description = initialData ? "Edit a product." : "Add a new product";
-  const toastMessage = initialData ? "Product updated." : "Product created.";
-  const action = initialData ? "Save changes" : "Create";
+  const title =
+    initialData && params.userId !== "new" ? "Edit User" : "Create User";
+  const description =
+    initialData && params.userId !== "new" ? "Edit a User." : "Add a new User";
+  const toastMessage =
+    initialData && params.userId !== "new" ? "User updated." : "User created.";
+  const action =
+    initialData && params.userId !== "new" ? "Save changes" : "Create";
 
-  const defaultValues = initialData
-    ? initialData
-    : {
-        name: "",
-        description: "",
-        price: 0,
-        imgUrl: [],
-        category: "",
-      };
+  const defaultValues =
+    initialData && params.userId !== "new"
+      ? initialData
+      : {
+          name: "",
+          email: "",
+          address: "",
+          phone: "",
+        };
 
   const form = useForm<ProductFormValues>({
     resolver: zodResolver(formSchema),
@@ -92,13 +77,10 @@ export const EmployeeForm: React.FC<ProductFormProps> = ({
     try {
       setLoading(true);
       if (initialData) {
-        // await axios.post(`/api/products/edit-product/${initialData._id}`, data);
       } else {
-        // const res = await axios.post(`/api/products/create-product`, data);
-        // console.log("product", res);
       }
       router.refresh();
-      router.push(`/dashboard/products`);
+      router.push(`/dashboard/user`);
       toast({
         variant: "destructive",
         title: "Uh oh! Something went wrong.",
@@ -128,16 +110,8 @@ export const EmployeeForm: React.FC<ProductFormProps> = ({
     }
   };
 
-  const triggerImgUrlValidation = () => form.trigger("imgUrl");
-
   return (
     <>
-      {/* <AlertModal
-        isOpen={open}
-        onClose={() => setOpen(false)}
-        onConfirm={onDelete}
-        loading={loading}
-      /> */}
       <div className="flex items-center justify-between">
         <Heading title={title} description={description} />
         {initialData && (
@@ -157,23 +131,6 @@ export const EmployeeForm: React.FC<ProductFormProps> = ({
           onSubmit={form.handleSubmit(onSubmit)}
           className="space-y-8 w-full"
         >
-          <FormField
-            control={form.control}
-            name="imgUrl"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Images</FormLabel>
-                <FormControl>
-                  <FileUpload
-                    onChange={field.onChange}
-                    value={field.value}
-                    onRemove={field.onChange}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
           <div className="md:grid md:grid-cols-3 gap-8">
             <FormField
               control={form.control}
@@ -184,7 +141,7 @@ export const EmployeeForm: React.FC<ProductFormProps> = ({
                   <FormControl>
                     <Input
                       disabled={loading}
-                      placeholder="Product name"
+                      placeholder="User name"
                       {...field}
                     />
                   </FormControl>
@@ -194,14 +151,14 @@ export const EmployeeForm: React.FC<ProductFormProps> = ({
             />
             <FormField
               control={form.control}
-              name="description"
+              name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Description</FormLabel>
+                  <FormLabel>Email</FormLabel>
                   <FormControl>
                     <Input
                       disabled={loading}
-                      placeholder="Product description"
+                      placeholder="User Email"
                       {...field}
                     />
                   </FormControl>
@@ -211,12 +168,17 @@ export const EmployeeForm: React.FC<ProductFormProps> = ({
             />
             <FormField
               control={form.control}
-              name="price"
+              name="address"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Price</FormLabel>
+                  <FormLabel>Address</FormLabel>
                   <FormControl>
-                    <Input type="number" disabled={loading} {...field} />
+                    <Input
+                      placeholder="123, 4th Strrt"
+                      type="text"
+                      disabled={loading}
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -224,33 +186,20 @@ export const EmployeeForm: React.FC<ProductFormProps> = ({
             />
             <FormField
               control={form.control}
-              name="category"
+              name="phone"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Category</FormLabel>
-                  <Select
-                    disabled={loading}
-                    onValueChange={field.onChange}
-                    value={field.value}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue
-                          defaultValue={field.value}
-                          placeholder="Select a category"
-                        />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {/* @ts-ignore  */}
-                      {categories.map((category) => (
-                        <SelectItem key={category._id} value={category._id}>
-                          {category.name}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                  <FormLabel>Mobile Number</FormLabel>
+
+                  <FormControl>
+                    <Input
+                      type="number"
+                      placeholder="123456789"
+                      disabled={loading}
+                      {...field}
+                    />
+                  </FormControl>
+
                   <FormMessage />
                 </FormItem>
               )}

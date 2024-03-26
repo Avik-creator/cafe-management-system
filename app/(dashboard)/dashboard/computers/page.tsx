@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 import { Plus } from "lucide-react";
 import Link from "next/link";
 
-const breadcrumbItems = [{ title: "Employee", link: "/dashboard/employee" }];
+const breadcrumbItems = [{ title: "Computer", link: "/dashboard/computers" }];
 
 type paramsProps = {
   searchParams: {
@@ -22,31 +22,37 @@ export default async function page({ searchParams }: paramsProps) {
   const pageLimit = Number(searchParams.limit) || 10;
   const Computers: Computers[] = [
     {
+      id: "1",
       model_no: "1",
       isOccupied: "true",
       cafe: 1,
     },
     {
+      id: "2",
       model_no: "2",
       isOccupied: "true",
       cafe: 1,
     },
     {
+      id: "3",
       model_no: "2",
       isOccupied: "true",
       cafe: 1,
     },
     {
+      id: "4",
       model_no: "2",
       isOccupied: "true",
       cafe: 1,
     },
     {
+      id: "5",
       model_no: "2",
       isOccupied: "true",
       cafe: 1,
     },
     {
+      id: "6",
       model_no: "2",
       isOccupied: "true",
       cafe: 1,
@@ -60,12 +66,12 @@ export default async function page({ searchParams }: paramsProps) {
 
         <div className="flex items-start justify-between">
           <Heading
-            title={`Employee (${Computers.length})`}
+            title={`Computers (${Computers.length})`}
             description="Manage Computers"
           />
 
           <Link
-            href={"/dashboard/employee/new"}
+            href={"/dashboard/computers/new"}
             className={cn(buttonVariants({ variant: "default" }))}
           >
             <Plus className="mr-2 h-4 w-4" /> Add New
