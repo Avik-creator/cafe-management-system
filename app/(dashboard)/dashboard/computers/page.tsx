@@ -2,6 +2,7 @@ import BreadCrumb from "@/components/breadcrumb";
 import { columns } from "@/components/tables/employee-tables/columns";
 import { ComputerTable } from "@/components/tables/employee-tables/computer-table";
 import { buttonVariants } from "@/components/ui/button";
+import { DataTable } from "@/components/ui/data-table";
 import { Heading } from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
 import { Computers } from "@/constants/data";
@@ -20,44 +21,6 @@ type paramsProps = {
 export default async function page({ searchParams }: paramsProps) {
   const page = Number(searchParams.page) || 1;
   const pageLimit = Number(searchParams.limit) || 10;
-  const Computers: Computers[] = [
-    {
-      id: "1",
-      model_no: "1",
-      isOccupied: "true",
-      cafe: 1,
-    },
-    {
-      id: "2",
-      model_no: "2",
-      isOccupied: "true",
-      cafe: 1,
-    },
-    {
-      id: "3",
-      model_no: "2",
-      isOccupied: "true",
-      cafe: 1,
-    },
-    {
-      id: "4",
-      model_no: "2",
-      isOccupied: "true",
-      cafe: 1,
-    },
-    {
-      id: "5",
-      model_no: "2",
-      isOccupied: "true",
-      cafe: 1,
-    },
-    {
-      id: "6",
-      model_no: "2",
-      isOccupied: "true",
-      cafe: 1,
-    },
-  ];
 
   return (
     <>
@@ -79,11 +42,11 @@ export default async function page({ searchParams }: paramsProps) {
         </div>
         <Separator />
 
+        <DataTable searchValue="model_no" columns={columns} data={Computers}/>
+
         <ComputerTable
           searchKey="model_no"
-          pageNo={page}
           columns={columns}
-          totalUsers={Computers.length}
           data={Computers}
           pageCount={1}
         />
