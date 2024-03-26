@@ -39,8 +39,6 @@ interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   searchKey: string;
-  pageNo: number;
-  totalUsers: number;
   pageSizeOptions?: number[];
   pageCount: number;
   searchParams?: {
@@ -51,9 +49,7 @@ interface DataTableProps<TData, TValue> {
 export function ComputerTable<TData, TValue>({
   columns,
   data,
-  pageNo,
   searchKey,
-  totalUsers,
   pageCount,
   pageSizeOptions = [10, 20, 30, 40, 50],
 }: DataTableProps<TData, TValue>) {
@@ -227,7 +223,7 @@ export function ComputerTable<TData, TValue>({
           <div className="flex flex-col items-center gap-4 sm:flex-row sm:gap-6 lg:gap-8">
             <div className="flex items-center space-x-2">
               <p className="whitespace-nowrap text-sm font-medium">
-                Rows per page
+                Rows per pageee
               </p>
               <Select
                 value={`${table.getState().pagination.pageSize}`}
@@ -253,7 +249,7 @@ export function ComputerTable<TData, TValue>({
         </div>
         <div className="flex items-center justify-between sm:justify-end gap-2 w-full">
           <div className="flex w-[100px] items-center justify-center text-sm font-medium">
-            Page {table.getState().pagination.pageIndex + 1} of{" "}
+            Pag {table.getState().pagination.pageIndex + 1} of{" "}
             {table.getPageCount()}
           </div>
           <div className="flex items-center space-x-2">
