@@ -11,7 +11,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function hasDraggableData<T extends Active | Over>(
-  entry: T | null | undefined,
+  entry: T | null | undefined
 ): entry is T & {
   data: DataRef<DraggableData>;
 } {

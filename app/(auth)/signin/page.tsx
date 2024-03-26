@@ -9,17 +9,17 @@ export const metadata: Metadata = {
   description: "Authentication forms built using the components.",
 };
 
-export default function AuthenticationPage() {
+export default function LoginPage() {
   return (
     <div className="relative h-screen flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
       <Link
-        href="/examples/authentication"
+        href="/"
         className={cn(
           buttonVariants({ variant: "ghost" }),
-          "absolute right-4 hidden top-4 md:right-8 md:top-8",
+          "absolute right-4 hidden top-4 md:right-8 md:top-8"
         )}
       >
-        Login
+        Sign Up
       </Link>
       <div className="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
         <div className="absolute inset-0 bg-zinc-900" />
@@ -41,11 +41,12 @@ export default function AuthenticationPage() {
         <div className="relative z-20 mt-auto">
           <blockquote className="space-y-2">
             <p className="text-lg">
-              &ldquo;This library has saved me countless hours of work and
-              helped me deliver stunning designs to my clients faster than ever
-              before.&rdquo;
+              Welcome to our Cyber Cafe Management System (CCMS). Our system
+              provides a comprehensive platform to manage all the aspects of a
+              cyber cafe, including user sessions, billing, and inventory
+              management. Enjoy a seamless digital experience with us.
             </p>
-            <footer className="text-sm">Sofia Davis</footer>
+            <footer className="text-sm">CCMS</footer>
           </blockquote>
         </div>
       </div>
@@ -76,6 +77,16 @@ export default function AuthenticationPage() {
               Privacy Policy
             </Link>
             .
+          </p>
+
+          <p className="text-center">
+            Don't Have an Account?{" "}
+            <Link
+              href="/"
+              className="underline underline-offset-4 hover:text-green-500 text-blue-600"
+            >
+              Sign Up
+            </Link>
           </p>
         </div>
       </div>
