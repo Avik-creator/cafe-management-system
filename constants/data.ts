@@ -521,9 +521,83 @@ export const navItems: NavItem[] = [
     label: "computer",
   },
   {
+    title: "Profile",
+    href: "/dashboard/profile",
+    icon: "profile",
+    label: "profile",
+  },
+  {
     title: "Logout",
     href: "/",
     icon: "logo",
     label: "logout",
   },
+];
+
+
+export const CafeList: Cafe[] = [
+  {
+    id: 1,
+    name: "Cafe 1",
+    address: "123, 4th Street",
+    license: "1234567890",
+    gst_number: "1234567890",
+    contact_number: "1234567890",
+  },
+  {
+    id: 2,
+    name: "Cafe 2",
+    address: "123, 4th Street",
+    license: "1234567890",
+    gst_number: "1234567890",
+    contact_number: "1234567890",
+  },
+  {
+    id: 3,
+    name: "Cafe 1",
+    address: "123, 4th Street",
+    license: "1234567890",
+    gst_number: "1234567890",
+    contact_number: "1234567890",
+  },
+  {
+    id: 4,
+    name: "Cafe 1",
+    address: "123, 4th Street",
+    license: "1234567890",
+    gst_number: "1234567890",
+    contact_number: "1234567890",
+  },
+  {
+    id: 5,
+    name: "Cafe 1",
+    address: "123, 4th Street",
+    license: "1234567890",
+    gst_number: "1234567890",
+    contact_number: "1234567890",
+  },
+  {
+    id: 6,
+    name: "Cafe 1",
+    address: "123, 4th Street",
+    license: "1234567890",
+    gst_number: "1234567890",
+    contact_number: "1234567890",
+  },
+  {
+    id: 7,
+    name: "Cafe 1",
+    address: "123, 4th Street",
+    license: "1234567890",
+    gst_number: "1234567890",
+    contact_number: "1234567890",
+  },
+  {
+    id: 8,
+    name: "Cafe 1",
+    address: "123, 4th Street",
+    license: "1234567890",
+    gst_number: "1234567890",
+    contact_number: "1234567890",
+  }
 ];
