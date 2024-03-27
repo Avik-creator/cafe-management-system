@@ -1,15 +1,6 @@
 import { Icons } from "@/components/icons";
-import { NavItem, SidebarNavItem } from "@/types";
+import { NavItem, SidebarNavItem, User, Computers, Cafe } from "@/types";
 
-export type User = {
-  id: number;
-  email: string;
-  name: string;
-  phone: string,
-  address: string,
-  cafe: number,
-  dob: string
-};
 export const users: User[] = [
   {
     "id": 1,
@@ -238,84 +229,277 @@ export const users: User[] = [
   }
 ]
 
-
-
-
-export type Computers = {
-  id: string;
-  model_no: string;
-  isOccupied: string;
-  cafe: Number;
-};
-
-export const Computers: Computers[] = [
+export const computers: Computers[] = [
   {
-    id: "1",
+    id: 1,
     model_no: "1",
     isOccupied: "true",
     cafe: 1,
   },
   {
-    id: "2",
+    id: 2,
     model_no: "2",
     isOccupied: "true",
     cafe: 1,
   },
   {
-    id: "3",
+    id: 3,
     model_no: "3",
     isOccupied: "true",
     cafe: 1,
   },
   {
-    id: "4",
+    id: 4,
     model_no: "34",
     isOccupied: "true",
     cafe: 1,
   },
   {
-    id: "5",
+    id: 5,
     model_no: "25",
     isOccupied: "true",
     cafe: 1,
   },
   {
-    id: "6",
+    id: 6,
     model_no: "6",
     isOccupied: "true",
     cafe: 1,
   },
   {
-    id: "7",
+    id: 7,
     model_no: "7",
     isOccupied: "true",
     cafe: 1,
   },
   {
-    id: "8",
+    id: 8,
     model_no: "8",
     isOccupied: "true",
     cafe: 1,
   },
   {
-    id: "9",
+    id: 9,
     model_no: "9",
     isOccupied: "true",
     cafe: 2,
   },
   {
-    id: "10",
+    id: 10,
     model_no: "10",
     isOccupied: "true",
     cafe: 1,
   },
   {
-    id: "11",
+    id: 11,
     model_no: "2",
     isOccupied: "true",
     cafe: 1,
   },
 ];
+
+export const cafe: Cafe[] = [
+  {
+    id: 1,
+    name: "Cafe A",
+    image: "cafe_a.jpg",
+    address: "123 Main Street",
+    map_url: "https://maps.google.com/cafe_a",
+    opens_at: "08:00 AM",
+    closes_at: "10:00 PM",
+    phone: "+1234567890",
+    cgst: 5,
+    sgst: 5,
+    gst_number: "GST123456789",
+    license: "ABC123",
+    price: 10
+  },
+  {
+    id: 2,
+    name: "Cafe B",
+    image: "cafe_b.jpg",
+    address: "456 Elm Street",
+    map_url: "https://maps.google.com/cafe_b",
+    opens_at: "07:30 AM",
+    closes_at: "09:30 PM",
+    phone: "+1987654321",
+    cgst: 6,
+    sgst: 6,
+    gst_number: "GST987654321",
+    license: "DEF456",
+    price: 12
+  },
+  {
+    id: 3,
+    name: "Cafe C",
+    image: "cafe_c.jpg",
+    address: "789 Oak Street",
+    map_url: "https://maps.google.com/cafe_c",
+    opens_at: "09:00 AM",
+    closes_at: "11:00 PM",
+    phone: "+1122334455",
+    cgst: 7,
+    sgst: 7,
+    gst_number: "GST1122334455",
+    license: "GHI789",
+    price: 15
+  },
+  {
+    id: 4,
+    name: "Cafe D",
+    image: "cafe_d.jpg",
+    address: "321 Pine Street",
+    map_url: "https://maps.google.com/cafe_d",
+    opens_at: "08:30 AM",
+    closes_at: "10:30 PM",
+    phone: "+9988776655",
+    cgst: 8,
+    sgst: 8,
+    gst_number: "GST9988776655",
+    license: "JKL012",
+    price: 18
+  },
+  {
+    id: 5,
+    name: "Cafe E",
+    image: "cafe_e.jpg",
+    address: "567 Maple Street",
+    map_url: "https://maps.google.com/cafe_e",
+    opens_at: "07:00 AM",
+    closes_at: "09:00 PM",
+    phone: "+5544332211",
+    cgst: 9,
+    sgst: 9,
+    gst_number: "GST5544332211",
+    license: "MNO345",
+    price: 20
+  },
+  {
+    id: 6,
+    name: "Cafe F",
+    image: "cafe_f.jpg",
+    address: "987 Cedar Street",
+    map_url: "https://maps.google.com/cafe_f",
+    opens_at: "08:00 AM",
+    closes_at: "10:00 PM",
+    phone: "+6677889900",
+    cgst: 10,
+    sgst: 10,
+    gst_number: "GST6677889900",
+    license: "PQR678",
+    price: 22
+  },
+  {
+    id: 7,
+    name: "Cafe G",
+    image: "cafe_g.jpg",
+    address: "654 Walnut Street",
+    map_url: "https://maps.google.com/cafe_g",
+    opens_at: "07:30 AM",
+    closes_at: "09:30 PM",
+    phone: "+1122334455",
+    cgst: 11,
+    sgst: 11,
+    gst_number: "GST1122334455",
+    license: "STU901",
+    price: 25
+  },
+  {
+    id: 8,
+    name: "Cafe H",
+    image: "cafe_h.jpg",
+    address: "234 Oak Street",
+    map_url: "https://maps.google.com/cafe_h",
+    opens_at: "09:00 AM",
+    closes_at: "11:00 PM",
+    phone: "+9988776655",
+    cgst: 12,
+    sgst: 12,
+    gst_number: "GST9988776655",
+    license: "VWX234",
+    price: 28
+  },
+  {
+    id: 9,
+    name: "Cafe I",
+    image: "cafe_i.jpg",
+    address: "345 Pine Street",
+    map_url: "https://maps.google.com/cafe_i",
+    opens_at: "08:30 AM",
+    closes_at: "10:30 PM",
+    phone: "+5544332211",
+    cgst: 13,
+    sgst: 13,
+    gst_number: "GST5544332211",
+    license: "YZA567",
+    price: 30
+  },
+  {
+    id: 10,
+    name: "Cafe J",
+    image: "cafe_j.jpg",
+    address: "876 Elm Street",
+    map_url: "https://maps.google.com/cafe_j",
+    opens_at: "07:00 AM",
+    closes_at: "09:00 PM",
+    phone: "+6677889900",
+    cgst: 14,
+    sgst: 14,
+    gst_number: "GST6677889900",
+    license: "BCD345",
+    price: 35
+  },
+  {
+    id: 11,
+    name: "Cafe K",
+    image: "cafe_k.jpg",
+    address: "567 Walnut Street",
+    map_url: "https://maps.google.com/cafe_k",
+    opens_at: "08:00 AM",
+    closes_at: "10:00 PM",
+    phone: "+1122334455",
+    cgst: 15,
+    sgst: 15,
+    gst_number: "GST1122334455",
+    license: "EFG678",
+    price: 40
+  },
+  {
+    id: 12,
+    name: "Cafe L",
+    image: "cafe_l.jpg",
+    address: "234 Maple Street",
+    map_url: "https://maps.google.com/cafe_l",
+    opens_at: "07:30 AM",
+    closes_at: "09:30 PM",
+    phone: "+9988776655",
+    cgst: 16,
+    sgst: 16,
+    gst_number: "GST9988776655",
+    license: "HIJ901",
+    price: 45
+  },
+  {
+    id: 13,
+    name: "Cafe M",
+    image: "cafe_m.jpg",
+    address: "123 Cedar Street",
+    map_url: "https://maps.google.com/cafe_m",
+    opens_at: "09:00 AM",
+    closes_at: "11:00 PM",
+    phone: "+1122334455",
+    cgst: 17,
+    sgst: 17,
+    gst_number: "GST1122334455",
+    license: "KLM012",
+    price: 50
+  }
+
+]
+
+
+
+
 
 export const navItems: NavItem[] = [
   {

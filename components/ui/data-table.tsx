@@ -88,7 +88,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <>
-      <div className="flex items-center py-4">
+      <div className="flex items-center pt-2">
         <Input
           placeholder={`Search by ${searchValue}`}
           value={
@@ -156,7 +156,7 @@ export function DataTable<TData, TValue>({
                   data-state={row.getIsSelected() && "selected"}
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
+                    <TableCell key={cell.id} className="truncate ...">
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
@@ -180,15 +180,15 @@ export function DataTable<TData, TValue>({
         <ScrollBar orientation="horizontal" />
       </ScrollArea>
 
-      <div className="flex flex-col gap-2 sm:flex-row items-center justify-end space-x-2 py-4">
+      <div className="flex flex-col gap-2 sm:flex-row items-center justify-end space-x-2 pt-0 md:pt-2">
         <div className="flex items-center justify-between w-full">
           <div className="flex-1 text-sm text-muted-foreground">
             {table.getFilteredSelectedRowModel().rows.length} of{" "}
-            {table.getFilteredRowModel().rows.length} row(s) selected.
+            {table.getFilteredRowModel().rows.length} row(s) selected
           </div>
           <div className="flex flex-col items-center gap-4 sm:flex-row sm:gap-6 lg:gap-8">
             <div className="flex items-center space-x-2">
-              <p className="whitespace-nowrap text-sm font-medium">
+              <p className="whitespace-nowrap text-xs break-words md:text-sm font-medium">
                 Rows per page
               </p>
               <Select
