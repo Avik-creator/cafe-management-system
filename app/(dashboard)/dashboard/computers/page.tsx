@@ -1,11 +1,10 @@
 import BreadCrumb from "@/components/breadcrumb";
 import { columns } from "@/components/tables/employee-tables/columns";
-import { ComputerTable } from "@/components/tables/employee-tables/computer-table";
 import { buttonVariants } from "@/components/ui/button";
 import { DataTable } from "@/components/ui/data-table";
 import { Heading } from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
-import { Computers } from "@/constants/data";
+import { computers } from "@/constants/data";
 import { cn } from "@/lib/utils";
 import { Plus } from "lucide-react";
 import Link from "next/link";
@@ -24,12 +23,12 @@ export default async function page({ searchParams }: paramsProps) {
 
   return (
     <>
-      <div className="flex-1 space-y-4  p-4 md:p-8 pt-6">
+      <div className="flex-1 space-y-4  p-4 md:p-8 pt-1">
         <BreadCrumb items={breadcrumbItems} />
 
         <div className="flex items-start justify-between">
           <Heading
-            title={`Computers (${Computers.length})`}
+            title={`Computers (${computers.length})`}
             description="Manage Computers"
           />
 
@@ -42,14 +41,7 @@ export default async function page({ searchParams }: paramsProps) {
         </div>
         <Separator />
 
-        <DataTable searchValue="model_no" columns={columns} data={Computers}/>
-
-        <ComputerTable
-          searchKey="model_no"
-          columns={columns}
-          data={Computers}
-          pageCount={1}
-        />
+        <DataTable searchValue="model_no" columns={columns} data={computers}/>
       </div>
     </>
   );
