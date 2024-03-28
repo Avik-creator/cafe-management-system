@@ -7,8 +7,8 @@ import UserSignupForm from "@/components/forms/user-signup-form";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 export const metadata: Metadata = {
-  title: "Authentication",
-  description: "Authentication forms built using the components.",
+  title: "Create an account",
+  description: "Create an Account using CCMS.",
 };
 
 export default function SignUpPage() {

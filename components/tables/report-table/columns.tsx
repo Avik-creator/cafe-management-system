@@ -5,9 +5,10 @@ import { ColumnDef } from "@tanstack/react-table";
 import { CellAction } from "./cell-action";
 import { ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Computers } from "@/types";
+import { Report } from "@/types";
 
-export const columns: ColumnDef<Computers>[] = [
+
+export const columns: ColumnDef<Report>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -28,37 +29,55 @@ export const columns: ColumnDef<Computers>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: "model_no",
+    accessorKey: "userId",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          {"Model"}
+          {"User ID"}
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
     },
   },
   {
-    accessorKey: "isOccupied",
-    header: "IsOccupied",
+    accessorKey:"title",
+    header:"Title"
+  },
+  {
+    accessorKey: "description",
+    header: "Description",
   },
 
   {
-    accessorKey: "cafe",
+    accessorKey: "date_of_submit",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          {"CAFE"}
+          {"Date of Submission"}
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
     },
+  },
+  {
+    accessorKey: "status",
+    header:({column}) => {
+      return(
+        <Button
+          variant={"ghost"}
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            {"Status"}
+            <ArrowUpDown className="ml-2 h-4 w-4"/>
+          </Button>
+      )
+    }
   },
   {
     id: "actions",

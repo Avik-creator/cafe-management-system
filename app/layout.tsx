@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Cyber Cafe Management System",
-  description: "Basic dashboard with Next.js and Shadcn",
+  description: "Cyber Cafe Management System",
 };
 
 export default async function RootLayout({

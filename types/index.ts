@@ -50,6 +50,15 @@ export type Computers = {
   cafe: Number;
 };
 
+export type Report = {
+  id: number;
+  userId: number;
+  title: string;
+  description: string;
+  date_of_submit: string;
+  status: string;
+}
+
 export type Cafe = {
   id: number;
   name: string;
