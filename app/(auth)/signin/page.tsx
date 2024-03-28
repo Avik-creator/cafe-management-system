@@ -6,8 +6,8 @@ import { cn } from "@/lib/utils";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 export const metadata: Metadata = {
-  title: "Authentication",
-  description: "Authentication forms built using the components.",
+  title: "Sign In",
+  description: "Sign In to Your Account",
 };
 
 export default function LoginPage() {

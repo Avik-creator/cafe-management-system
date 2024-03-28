@@ -27,7 +27,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { CafeList, Cafe } from "@/constants/data";
+import { CafeList, cafe } from "@/constants/data";
 
 // UserName, Password, Email, Cafe Id, Role.
 

@@ -1,5 +1,5 @@
 import { Icons } from "@/components/icons";
-import { NavItem, SidebarNavItem, User, Computers, Cafe } from "@/types";
+import { NavItem, SidebarNavItem, User, Computers, Cafe, Report } from "@/types";
 
 export const users: User[] = [
   {
@@ -497,6 +497,29 @@ export const cafe: Cafe[] = [
 
 ]
 
+export const Reports: Report[] = [{
+  id: 1,
+    userId: 1234,
+    title: "Lorem Ipsum",
+    description: "Lorem Ipsum",
+    date_of_submit: "1984-02-14",
+    status: "Pending"
+},{
+  id: 2,
+  userId: 1235,
+  title: "Lorem Ipsum",
+  description: "Lorem Ipsum",
+  date_of_submit: "1984-02-13",
+  status: "Submitted"
+}, {
+  id: 3,
+  userId: 1236,
+  title: "Lorem Ipsum",
+  description: "Lorem Ipsum",
+  date_of_submit: "1984-02-12",
+  status: "Working"
+}]
+
 
 
 
@@ -527,12 +550,26 @@ export const navItems: NavItem[] = [
     label: "profile",
   },
   {
+    title: "Report",
+    href: "/dashboard/reports",
+    icon: "help",
+    label: "report",
+  },
+  {
     title: "Logout",
     href: "/",
     icon: "logo",
     label: "logout",
   },
 ];
+
+export const ReportList = [
+  // "PENDING",
+  // "SOLVED",
+  // "WORKING"
+  {id:1, status:"PENDING"},
+  {id:2, status:"SOLVED"},
+  {id:3, status:"WORKING"}]
 
 
 export const CafeList: Cafe[] = [
@@ -542,7 +579,11 @@ export const CafeList: Cafe[] = [
     address: "123, 4th Street",
     license: "1234567890",
     gst_number: "1234567890",
-    contact_number: "1234567890",
+    phone: "1234567890",
+    cgst:12,
+    sgst:12,
+    price: 10,
+    image:"dfjsdlfj", map_url:"sljglsdjkf", opens_at:"2023-16-15", closes_at:"2023-16-15"
   },
   {
     id: 2,
@@ -550,7 +591,11 @@ export const CafeList: Cafe[] = [
     address: "123, 4th Street",
     license: "1234567890",
     gst_number: "1234567890",
-    contact_number: "1234567890",
+    phone: "1234567890",
+    cgst:12,
+    sgst:12,
+    price: 10,
+    image:"dfjsdlfj", map_url:"sljglsdjkf", opens_at:"2023-16-15", closes_at:"2023-16-15"
   },
   {
     id: 3,
@@ -558,7 +603,11 @@ export const CafeList: Cafe[] = [
     address: "123, 4th Street",
     license: "1234567890",
     gst_number: "1234567890",
-    contact_number: "1234567890",
+    phone: "1234567890",
+    cgst:12,
+    sgst:12,
+    price: 10,
+    image:"dfjsdlfj", map_url:"sljglsdjkf", opens_at:"2023-16-15", closes_at:"2023-16-15"
   },
   {
     id: 4,
@@ -566,7 +615,11 @@ export const CafeList: Cafe[] = [
     address: "123, 4th Street",
     license: "1234567890",
     gst_number: "1234567890",
-    contact_number: "1234567890",
+    phone: "1234567890",
+    cgst:12,
+    sgst:12,
+    price: 10,
+    image:"dfjsdlfj", map_url:"sljglsdjkf", opens_at:"2023-16-15", closes_at:"2023-16-15"
   },
   {
     id: 5,
@@ -574,7 +627,11 @@ export const CafeList: Cafe[] = [
     address: "123, 4th Street",
     license: "1234567890",
     gst_number: "1234567890",
-    contact_number: "1234567890",
+    phone: "1234567890",
+    cgst:12,
+    sgst:12,
+    price: 10,
+    image:"dfjsdlfj", map_url:"sljglsdjkf", opens_at:"2023-16-15", closes_at:"2023-16-15"
   },
   {
     id: 6,
@@ -582,7 +639,11 @@ export const CafeList: Cafe[] = [
     address: "123, 4th Street",
     license: "1234567890",
     gst_number: "1234567890",
-    contact_number: "1234567890",
+    phone: "1234567890",
+    cgst:12,
+    sgst:12,
+    price: 10,
+    image:"dfjsdlfj", map_url:"sljglsdjkf", opens_at:"2023-16-15", closes_at:"2023-16-15"
   },
   {
     id: 7,
@@ -590,7 +651,11 @@ export const CafeList: Cafe[] = [
     address: "123, 4th Street",
     license: "1234567890",
     gst_number: "1234567890",
-    contact_number: "1234567890",
+    phone: "1234567890",
+    cgst:12,
+    sgst:12,
+    price: 10,
+    image:"dfjsdlfj", map_url:"sljglsdjkf", opens_at:"2023-16-15", closes_at:"2023-16-15"
   },
   {
     id: 8,
@@ -598,6 +663,10 @@ export const CafeList: Cafe[] = [
     address: "123, 4th Street",
     license: "1234567890",
     gst_number: "1234567890",
-    contact_number: "1234567890",
+    phone: "1234567890",
+    cgst:12,
+    sgst:12,
+    price: 10,
+    image:"dfjsdlfj", map_url:"sljglsdjkf", opens_at:"2023-16-15", closes_at:"2023-16-15"
   }
 ];
