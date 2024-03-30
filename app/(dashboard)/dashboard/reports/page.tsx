@@ -1,9 +1,8 @@
 import BreadCrumb from "@/components/breadcrumb";
-import {columns} from "@/components/tables/report-table/columns"
+import { columns } from "@/components/tables/report-table/columns";
 import { DataTable } from "@/components/ui/data-table";
 import { Heading } from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
-
 
 import { Reports as reports } from "@/constants/data";
 
@@ -29,17 +28,10 @@ export default async function page({ searchParams }: paramsProps) {
             title={`Report (${reports.length})`}
             description="Manage Computers"
           />
-
-          {/* <Link
-            href={"/dashboard/computers/new"}
-            className={cn(buttonVariants({ variant: "default" }))}
-          >
-            <Plus className="mr-2 h-4 w-4" /> Add New
-          </Link> */}
         </div>
         <Separator />
 
-        <DataTable searchValue="model_no" columns={columns} data={reports}/>
+        <DataTable searchValue="model_no" columns={columns} data={reports} />
       </div>
     </>
   );
