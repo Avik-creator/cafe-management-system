@@ -18,6 +18,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 import { Separator } from "@/components/ui/separator";
 import { profileSchema, type ProfileFormValues } from "@/lib/form-schema";
@@ -81,7 +82,7 @@ export const CreateProfileOne: React.FC<ProfileFormType> = ({
 
   return (
     <>
-      <div className="flex items-center justify-between">
+      <div className="w-full flex items-center justify-between">
         <Heading title={title} description={description} />
         {initialData && (
           <Button
@@ -97,14 +98,9 @@ export const CreateProfileOne: React.FC<ProfileFormType> = ({
       <Separator />
 
       <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-8 w-full"
-        >
-          <div
-            className={cn("md:flex md:flex-col w-full md:w-3/4 lg:w-2/3 gap-8")}
-          >
-            <div className="flex flex-col ml-60 gap-8 w-full">
+        <form onSubmit={form.handleSubmit(onSubmit)}>
+          <div className={cn("md:flex md:flex-col lg:w-2/3 gap-8")}>
+            <div className="flex flex-col lg:ml-40 gap-8 w-full">
               <FormField
                 control={form.control}
                 name="name"
@@ -260,7 +256,7 @@ export const CreateProfileOne: React.FC<ProfileFormType> = ({
           <div className="w-full flex justify-center">
             <Button
               disabled={loading}
-              className="flex flex-row item-center justify-center"
+              className="flex flex-row item-center justify-center mt-5 mb-20"
               type="submit"
             >
               {action}

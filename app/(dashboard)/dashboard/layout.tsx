@@ -16,12 +16,10 @@ export default function DashboardLayout({
   return (
     <>
       <Header />
-      <div className="flex h-screen overflow-hidden">
+      <div className="flex overflow-hidden">
         <Sidebar />
-        <main className="w-full pt-2 md:pt-16 h-screen">
-          <ScrollArea>
+        <main className="w-full pt-2 md:pt-16">
           {children}
-          </ScrollArea>
           </main>
       </div>
     </>
