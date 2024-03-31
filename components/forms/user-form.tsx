@@ -140,7 +140,7 @@ export const UserForm: React.FC<UserFormProps> = ({
                   <FormLabel>Email</FormLabel>
                   <FormControl>
                     <Input
-                      disabled={loading}
+                      disabled={true}
                       placeholder="User Email"
                       {...field}
                     />
