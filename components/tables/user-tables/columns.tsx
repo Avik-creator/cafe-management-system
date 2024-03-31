@@ -1,7 +1,7 @@
 "use client";
 import { ColumnDef } from "@tanstack/react-table";
 import { CellAction } from "./cell-action";
-import { User } from "@/constants/data";
+import { User } from "@/types/index";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -41,6 +41,10 @@ export const columns: ColumnDef<User>[] = [
     },
   },
   {
+    accessorKey: "userName",
+    header: "User Name",
+  },
+  {
     accessorKey: "email",
     header: ({ column }) => {
       return (
@@ -57,10 +61,6 @@ export const columns: ColumnDef<User>[] = [
   {
     accessorKey: "phone",
     header: "Phone",
-  },
-  {
-    accessorKey: "cafe",
-    header: "CAFE",
   },
   {
     accessorKey: "address",

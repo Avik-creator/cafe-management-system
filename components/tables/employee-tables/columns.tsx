@@ -46,19 +46,35 @@ export const columns: ColumnDef<Computers>[] = [
     header: "IsOccupied",
   },
 
+  // {
+  //   accessorKey: "cafe",
+  //   header: ({ column }) => {
+  //     return (
+  //       <Button
+  //         variant="ghost"
+  //         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+  //       >
+  //         {"CAFE"}
+  //         <ArrowUpDown className="ml-2 h-4 w-4" />
+  //       </Button>
+  //     );
+  //   },
+  // },
   {
-    accessorKey: "cafe",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          {"CAFE"}
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
+    accessorKey: "OS",
+    header: "OS",
+  },
+  {
+    accessorKey: "Status",
+    header: "Status",
+  },
+  {
+    accessorKey: "IP_Address",
+    header: "IP_Address",
+  },
+  {
+    accessorKey: "Last_used_by",
+    header: "Last Used By",
   },
   {
     id: "actions",

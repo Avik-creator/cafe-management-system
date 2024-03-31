@@ -20,8 +20,6 @@ export interface NavItemWithOptionalChildren extends NavItem {
 }
 export type MainNavItem = NavItemWithOptionalChildren;
 
-
-
 export interface FooterItem {
   title: string;
   items: {
@@ -39,7 +37,7 @@ export type User = {
   name: string;
   phone: string;
   address: string;
-  cafe: number;
+  userName: string;
   dob: string;
 };
 
@@ -47,7 +45,10 @@ export type Computers = {
   id: number;
   model_no: string;
   isOccupied: string;
-  cafe: Number;
+  OS: string;
+  IP_Address: string;
+  Status: string;
+  Last_used_by: string;
 };
 
 export type Report = {
@@ -57,7 +58,7 @@ export type Report = {
   description: string;
   date_of_submit: string;
   status: string;
-}
+};
 
 export type Cafe = {
   id: number;
@@ -73,7 +74,7 @@ export type Cafe = {
   gst_number: string;
   license: string;
   price: number;
-}
+};
 
 export type Session = {
   is_ongoing: boolean;
@@ -81,12 +82,10 @@ export type Session = {
   user: number;
   end: string;
   cafe: number;
-}
+};
 
 export type report = {
   title: string;
   description: string;
   session: number;
-}
-
-
+};

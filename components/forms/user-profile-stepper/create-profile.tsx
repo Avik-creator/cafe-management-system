@@ -18,9 +18,9 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { ScrollArea } from "@/components/ui/scroll-area";
 
 import { Separator } from "@/components/ui/separator";
+import { toast, useToast } from "@/components/ui/use-toast";
 import { profileSchema, type ProfileFormValues } from "@/lib/form-schema";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -41,6 +41,7 @@ export const CreateProfileOne: React.FC<ProfileFormType> = ({
   const { data: session } = useSession();
   const params = useParams();
   const router = useRouter();
+  const { toast } = useToast();
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const title = "Edit Your Profile";
@@ -64,7 +65,20 @@ export const CreateProfileOne: React.FC<ProfileFormType> = ({
   } = form;
 
   const onSubmit = async (data: ProfileFormValues) => {
-    console.log(data);
+    try {
+      console.log(data);
+      toast({
+        variant: "success",
+        title: "Profile Updated",
+        description: "Profile Information has been updated successfully.",
+      });
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Profile Update Failed",
+        description: "Profile Information has not been updated successfully.",
+      });
+    }
   };
 
   const onDelete = async () => {
@@ -168,7 +182,7 @@ export const CreateProfileOne: React.FC<ProfileFormType> = ({
                 name="confirmPassword"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Contact Number</FormLabel>
+                    <FormLabel>Confirm Password</FormLabel>
                     <FormControl>
                       <Input
                         type="password"

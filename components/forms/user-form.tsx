@@ -12,27 +12,16 @@ import { Heading } from "@/components/ui/heading";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Trash } from "lucide-react";
+import { CalendarIcon, Trash } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import * as z from "zod";
-
+import { UserFormSchema, type UserFormValues } from "@/lib/form-schema";
 import { useToast } from "../ui/use-toast";
-
-export const IMG_MAX_LIMIT = 3;
-const formSchema = z.object({
-  name: z
-    .string()
-    .min(3, { message: "User Name must be at least 3 characters" }),
-  address: z
-    .string()
-    .min(10, { message: "User address must be at least 3 characters" }),
-  email: z.string().email({ message: "Please enter a valid email address" }),
-  phone: z.string().min(10, { message: "Please enter a valid phone number" }),
-});
-
-type ProductFormValues = z.infer<typeof formSchema>;
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { format } from "date-fns";
+import { Calendar } from "../ui/calendar";
+import { cn } from "@/lib/utils";
 
 interface UserFormProps {
   initialData: any | null;
@@ -59,32 +48,26 @@ export const UserForm: React.FC<UserFormProps> = ({
     initialData && params.userId !== "new" ? "Save changes" : "Create";
 
   const defaultValues =
-    initialData && params.userId !== "new"
-      ? initialData
-      : {
-          name: "",
-          email: "",
-          address: "",
-          phone: "",
-        };
+    initialData && params.userId !== "new" ? initialData : null;
 
-  const form = useForm<ProductFormValues>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<UserFormValues>({
+    resolver: zodResolver(UserFormSchema),
     defaultValues,
   });
 
-  const onSubmit = async (data: ProductFormValues) => {
+  const onSubmit = async (data: UserFormValues) => {
+    console.log(data);
     try {
       setLoading(true);
       if (initialData) {
       } else {
       }
-      router.refresh();
-      router.push(`/dashboard/user`);
+      // router.refresh();
+      // router.push(`/dashboard/user`);
       toast({
-        variant: "destructive",
-        title: "Uh oh! Something went wrong.",
-        description: "There was a problem with your request.",
+        variant: "success",
+        title: "Success",
+        description: "User Added Successfully.",
       });
     } catch (error: any) {
       toast({
@@ -129,9 +112,9 @@ export const UserForm: React.FC<UserFormProps> = ({
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-8 w-full"
+          className="md:flex md:flex-col lg:w-2/3 gap-8"
         >
-          <div className="md:grid md:grid-cols-3 gap-8">
+          <div className="flex flex-col lg:ml-40 gap-8 w-full">
             <FormField
               control={form.control}
               name="name"
@@ -168,13 +151,13 @@ export const UserForm: React.FC<UserFormProps> = ({
             />
             <FormField
               control={form.control}
-              name="address"
+              name="userName"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Address</FormLabel>
+                  <FormLabel>User Name of the User</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="123, 4th Strrt"
+                      placeholder="UserName 1"
                       type="text"
                       disabled={loading}
                       {...field}
@@ -186,15 +169,15 @@ export const UserForm: React.FC<UserFormProps> = ({
             />
             <FormField
               control={form.control}
-              name="phone"
+              name="address"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Mobile Number</FormLabel>
+                  <FormLabel>Address of the User</FormLabel>
 
                   <FormControl>
                     <Input
-                      type="number"
-                      placeholder="123456789"
+                      type="text"
+                      placeholder="User Address"
                       disabled={loading}
                       {...field}
                     />
@@ -204,10 +187,80 @@ export const UserForm: React.FC<UserFormProps> = ({
                 </FormItem>
               )}
             />
+
+            <FormField
+              control={form.control}
+              name="phone"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Phone Number of the User</FormLabel>
+
+                  <FormControl>
+                    <Input
+                      type="number"
+                      placeholder="+91 1234567890"
+                      disabled={loading}
+                      {...field}
+                    />
+                  </FormControl>
+
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="dob"
+              render={({ field }) => (
+                <FormItem className="flex flex-col">
+                  <FormLabel>Date of Birth</FormLabel>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <FormControl>
+                        <Button
+                          variant={"outline"}
+                          className={cn(
+                            "pl-3 text-left font-normal",
+                            !field.value && "text-muted-foreground"
+                          )}
+                        >
+                          {field.value ? (
+                            format(field.value, "PPP")
+                          ) : (
+                            <span>Pick a date</span>
+                          )}
+                          <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                        </Button>
+                      </FormControl>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0" align="start">
+                      <Calendar
+                        mode="single"
+                        selected={field.value}
+                        onSelect={field.onChange}
+                        disabled={(date) =>
+                          date > new Date() || date < new Date("1900-01-01")
+                        }
+                        initialFocus
+                      />
+                    </PopoverContent>
+                  </Popover>
+
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
           </div>
-          <Button disabled={loading} className="ml-auto" type="submit">
-            {action}
-          </Button>
+          <div className="w-full flex justify-center">
+            <Button
+              disabled={loading}
+              className="flex flex-row item-center justify-center mt-5 mb-20"
+              type="submit"
+            >
+              {action}
+            </Button>
+          </div>
         </form>
       </Form>
     </>
