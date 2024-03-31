@@ -39,6 +39,7 @@ export type User = {
   address: string;
   userName: string;
   dob: string;
+  userCreationDate: string;
 };
 
 export type Computers = {

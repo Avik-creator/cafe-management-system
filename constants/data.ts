@@ -17,6 +17,7 @@ export const users: User[] = [
     address: "Address 1",
     userName: "UserName1",
     dob: "1990-01-05",
+    userCreationDate: "2021-01-05",
   },
   {
     id: 2,
@@ -26,6 +27,7 @@ export const users: User[] = [
     address: "Address 2",
     userName: "UserName1",
     dob: "1985-09-23",
+    userCreationDate: "2021-01-05",
   },
   {
     id: 3,
@@ -35,6 +37,7 @@ export const users: User[] = [
     address: "Address 3",
     userName: "UserName1",
     dob: "1992-11-11",
+    userCreationDate: "2021-01-05",
   },
   {
     id: 4,
@@ -44,6 +47,7 @@ export const users: User[] = [
     address: "Address 4",
     userName: "UserName1",
     dob: "1983-06-15",
+    userCreationDate: "2021-01-05",
   },
   {
     id: 5,
@@ -53,6 +57,7 @@ export const users: User[] = [
     address: "Address 5",
     userName: "UserName1",
     dob: "1989-07-28",
+    userCreationDate: "2021-01-05",
   },
   {
     id: 6,
@@ -62,6 +67,7 @@ export const users: User[] = [
     address: "Address 6",
     userName: "UserName1",
     dob: "1994-03-19",
+    userCreationDate: "2021-01-05",
   },
   {
     id: 7,
@@ -71,6 +77,7 @@ export const users: User[] = [
     address: "Address 7",
     userName: "UserName1",
     dob: "1987-02-09",
+    userCreationDate: "2021-01-05",
   },
   {
     id: 8,
@@ -80,6 +87,7 @@ export const users: User[] = [
     address: "Address 8",
     userName: "UserName1",
     dob: "1991-10-31",
+    userCreationDate: "2021-01-05",
   },
   {
     id: 9,
@@ -89,6 +97,7 @@ export const users: User[] = [
     address: "Address 9",
     userName: "UserName1",
     dob: "1997-12-25",
+    userCreationDate: "2021-01-05",
   },
   {
     id: 10,
@@ -98,6 +107,7 @@ export const users: User[] = [
     address: "Address 10",
     userName: "UserName1",
     dob: "1986-05-04",
+    userCreationDate: "2021-01-05",
   },
   {
     id: 11,
@@ -107,6 +117,7 @@ export const users: User[] = [
     address: "Address 11",
     userName: "UserName1",
     dob: "1993-08-13",
+    userCreationDate: "2021-01-05",
   },
   {
     id: 12,
@@ -116,6 +127,7 @@ export const users: User[] = [
     address: "Address 12",
     userName: "UserName1",
     dob: "1984-04-17",
+    userCreationDate: "2021-01-05",
   },
   {
     id: 13,
@@ -125,6 +137,7 @@ export const users: User[] = [
     address: "Address 13",
     userName: "UserName1",
     dob: "1990-11-22",
+    userCreationDate: "2021-01-05",
   },
   {
     id: 14,
@@ -134,6 +147,7 @@ export const users: User[] = [
     address: "Address 14",
     userName: "UserName1",
     dob: "1985-02-07",
+    userCreationDate: "2021-01-05",
   },
   {
     id: 15,
@@ -143,6 +157,7 @@ export const users: User[] = [
     address: "Address 15",
     userName: "UserName1",
     dob: "1996-09-10",
+    userCreationDate: "2021-01-05",
   },
   {
     id: 16,
@@ -152,6 +167,7 @@ export const users: User[] = [
     address: "Address 16",
     userName: "UserName1",
     dob: "1988-07-26",
+    userCreationDate: "2021-01-05",
   },
   {
     id: 17,
@@ -161,6 +177,7 @@ export const users: User[] = [
     address: "Address 17",
     userName: "UserName1",
     dob: "1995-12-29",
+    userCreationDate: "2021-01-05",
   },
   {
     id: 18,
@@ -170,6 +187,7 @@ export const users: User[] = [
     address: "Address 18",
     userName: "UserName1",
     dob: "1983-03-14",
+    userCreationDate: "2021-01-05",
   },
   {
     id: 19,
@@ -179,6 +197,7 @@ export const users: User[] = [
     address: "Address 19",
     userName: "UserName1",
     dob: "1998-01-08",
+    userCreationDate: "2021-01-05",
   },
   {
     id: 20,
@@ -188,6 +207,7 @@ export const users: User[] = [
     address: "Address 20",
     userName: "UserName1",
     dob: "1987-04-20",
+    userCreationDate: "2021-01-05",
   },
   {
     id: 21,
@@ -197,6 +217,7 @@ export const users: User[] = [
     address: "Address 21",
     userName: "UserName1",
     dob: "1992-10-03",
+    userCreationDate: "2021-01-05",
   },
   {
     id: 22,
@@ -206,6 +227,7 @@ export const users: User[] = [
     address: "Address 22",
     userName: "UserName1",
     dob: "1989-06-16",
+    userCreationDate: "2021-01-05",
   },
   {
     id: 23,
@@ -215,6 +237,7 @@ export const users: User[] = [
     address: "Address 23",
     userName: "UserName1",
     dob: "1994-08-25",
+    userCreationDate: "2021-01-05",
   },
   {
     id: 24,
@@ -224,6 +247,7 @@ export const users: User[] = [
     address: "Address 24",
     userName: "UserName1",
     dob: "1984-02-12",
+    userCreationDate: "2021-01-05",
   },
   {
     id: 25,
@@ -233,6 +257,7 @@ export const users: User[] = [
     address: "Address 25",
     userName: "UserName1",
     dob: "1991-05-29",
+    userCreationDate: "2021-01-05",
   },
 ];
 
