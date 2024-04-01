@@ -6,16 +6,18 @@ import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import Link from "next/link";
 
 export default function SignUp() {
   return (
-    <ScrollArea className="h-full">
-      <div className="relative flex flex-col justify-center items-center min-h-screen overflow-hidden">
-        <div className="w-full m-auto bg-inherit lg:max-w-lg">
+    <ScrollArea className="h-screen">
+      <div className="flex flex-col justify-center items-center h-full mt-10 mb-10">
+        <div className="w-full bg-inherit lg:max-w-lg">
           <Card>
             <CardHeader className="space-y-1">
               <CardTitle className="text-2xl text-center">Sign Up</CardTitle>
@@ -23,9 +25,21 @@ export default function SignUp() {
                 Register Your Account
               </CardDescription>
             </CardHeader>
-            <CardContent className="grid gap-4">
+            <CardContent>
               <UserSignUpForm />
             </CardContent>
+            <CardFooter className="sm:mb-10">
+              <p className="text-xs text-center text-white">
+                {" "}
+                Don't have an account?{" "}
+                <Link
+                  href={"/user/signin"}
+                  className=" text-blue-600 hover:underline"
+                >
+                  Sign In
+                </Link>
+              </p>
+            </CardFooter>
           </Card>
         </div>
       </div>

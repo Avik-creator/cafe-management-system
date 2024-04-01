@@ -14,7 +14,7 @@ import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { type SignupFormValues, SignupFormSchema } from "@/lib/form-schema";
-import Link from "next/link";
+
 import {
   Popover,
   PopoverContent,
@@ -24,7 +24,6 @@ import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
-import { ScrollArea } from "@/components/ui/scroll-area";
 
 export default function UserSignUpForm() {
   const searchParams = useSearchParams();
@@ -234,14 +233,6 @@ export default function UserSignUpForm() {
           </Button>
         </form>
       </Form>
-
-      <p className="mt-2 text-xs text-center text-gray-700">
-        {" "}
-        Don't have an account?{" "}
-        <Link href={"/user/signin"} className=" text-blue-600 hover:underline">
-          Sign In
-        </Link>
-      </p>
     </>
   );
 }

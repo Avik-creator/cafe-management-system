@@ -86,14 +86,6 @@ export default function UserSigninForm() {
           </Button>
         </form>
       </Form>
-
-      <p className="mt-2 text-xs text-center text-gray-700">
-        {" "}
-        Don't have an account?{" "}
-        <Link href={"/user/signup"} className=" text-blue-600 hover:underline">
-          Sign up
-        </Link>
-      </p>
     </>
   );
 }

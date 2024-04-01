@@ -1,4 +1,5 @@
 import UserHeader from "@/components/layout/user-header";
+
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -13,9 +14,11 @@ export default function DashboardLayout({
 }) {
   return (
     <>
-      <UserHeader />
-      <div className="flex overflow-y-auto">
-        <main className="w-full pt-2 md:pt-16 h-full">{children}</main>
+      <div className="flex overflow-hidden">
+        <main className="w-full h-full">
+          <UserHeader />
+          {children}
+        </main>
       </div>
     </>
   );
