@@ -34,7 +34,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../ui/select";
+} from "../../ui/select";
 import { ReportList } from "@/constants/data";
 import { useToast } from "@/components/ui/use-toast";
 
@@ -133,7 +133,7 @@ export const ReportForm: React.FC<ProfileFormType> = ({ initialData }) => {
           className="space-y-8 w-full"
         >
           <div
-            className={cn("md:flex md:flex-col w-full md:w-3/4 lg:w-2/3 gap-8")}
+            className={cn("md:flex md:flex-col w-full md:w-3/5 lg:w-2/3 gap-8")}
           >
             <div className="flex flex-col ml-60 gap-8 w-full">
               <FormField

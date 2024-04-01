@@ -1,4 +1,4 @@
-import { UserForm } from "@/components/forms/user-form";
+import { UserForm } from "@/components/forms/Admin Forms/user-form";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import React from "react";
 

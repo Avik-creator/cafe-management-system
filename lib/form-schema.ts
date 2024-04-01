@@ -66,6 +66,41 @@ export const UserFormSchema = z.object({
   dob: z.date({ required_error: "Date of birth is required" }),
 });
 
+export const SigninFormSchema = z.object({
+  email: z
+    .string({ required_error: "Email is Required to Signin" })
+    .email({ message: "Enter a valid email address" }),
+  password: z
+    .string({ required_error: "Password is required" })
+    .min(6, { message: "Password must be at least 6 characters" }),
+});
+
+export const SignupFormSchema = z
+  .object({
+    email: z
+      .string({ required_error: "Email is Required to Signup" })
+      .email({ message: "Enter a valid email address" }),
+    password: z
+      .string({ required_error: "Password is required" })
+      .min(6, { message: "Password must be at least 6 characters" }),
+    confirmPassword: z
+      .string({ required_error: "Confirm Password is required" })
+      .min(6, { message: "Password must be at least 6 characters" }),
+    FirstName: z.string({ required_error: "First Name is required" }),
+    LastName: z.string({ required_error: "Last Name is required" }),
+    userName: z.string({ required_error: "Username is required" }),
+    dob: z.date({ required_error: "Date of birth is required" }),
+    address: z.string({ required_error: "Address is required" }),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Password and Confirm Password must be same",
+    path: ["confirmPassword"],
+  });
+
+export type SignupFormValues = z.infer<typeof SignupFormSchema>;
+
+export type UserSigninFormValues = z.infer<typeof SigninFormSchema>;
+
 export type UserFormValues = z.infer<typeof UserFormSchema>;
 
 export type ComputerFormValues = z.infer<typeof ComputerFormSchema>;

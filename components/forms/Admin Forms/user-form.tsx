@@ -17,10 +17,10 @@ import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { UserFormSchema, type UserFormValues } from "@/lib/form-schema";
-import { useToast } from "../ui/use-toast";
-import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { useToast } from "../../ui/use-toast";
+import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
 import { format } from "date-fns";
-import { Calendar } from "../ui/calendar";
+import { Calendar } from "../../ui/calendar";
 import { cn } from "@/lib/utils";
 
 interface UserFormProps {

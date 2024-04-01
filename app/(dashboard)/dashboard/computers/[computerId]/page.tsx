@@ -1,4 +1,4 @@
-import { ComputerForm } from "@/components/forms/computer-form";
+import { ComputerForm } from "@/components/forms/Admin Forms/computer-form";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 import React from "react";

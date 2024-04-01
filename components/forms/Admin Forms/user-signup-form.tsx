@@ -16,7 +16,7 @@ import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 
 import {
   Select,
@@ -26,31 +26,37 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
+} from "@/components/ui/select";
 import { CafeList, cafe } from "@/constants/data";
 
 // UserName, Password, Email, Cafe Id, Role.
 
-const formSchema = z.object({
-  name: z.string().min(3, { message: "Name must be at least 3 characters" }),
-  username: z
-    .string({required_error: "Username is required"})
-    .min(3, { message: "Username must be at least 3 characters" }),
-  password: z
-    .string({required_error: "Password is required"})
-    .min(6, { message: "Password must be at least 6 characters" }),
-  confirmPassword: z
-    .string({required_error: "Confirm password is required"})
-    .min(6, { message: "Password must be at least 6 characters" }),
-  cafeId: z.string({
-    required_error: "Cafe is required",}),
-  role: z.string({
-    required_error: "Role is required",}),
-  email: z.string({required_error: "Email is required"}).email({ message: "Enter a valid email address" }),
-}).refine((data) => data.password === data.confirmPassword, {
-  message: "Passwords do not match",
-  path: ["confirmPassword"],
-});
+const formSchema = z
+  .object({
+    name: z.string().min(3, { message: "Name must be at least 3 characters" }),
+    username: z
+      .string({ required_error: "Username is required" })
+      .min(3, { message: "Username must be at least 3 characters" }),
+    password: z
+      .string({ required_error: "Password is required" })
+      .min(6, { message: "Password must be at least 6 characters" }),
+    confirmPassword: z
+      .string({ required_error: "Confirm password is required" })
+      .min(6, { message: "Password must be at least 6 characters" }),
+    cafeId: z.string({
+      required_error: "Cafe is required",
+    }),
+    role: z.string({
+      required_error: "Role is required",
+    }),
+    email: z
+      .string({ required_error: "Email is required" })
+      .email({ message: "Enter a valid email address" }),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords do not match",
+    path: ["confirmPassword"],
+  });
 
 type UserFormValue = z.infer<typeof formSchema>;
 
@@ -60,12 +66,12 @@ export default function UserSignupForm() {
   const [loading, setLoading] = useState(false);
 
   const defaultValues = {
-    role: "Admin"
-  }
+    role: "Admin",
+  };
 
   const form = useForm<UserFormValue>({
     resolver: zodResolver(formSchema),
-    defaultValues
+    defaultValues,
   });
 
   const onSubmit = async (data: UserFormValue) => {
@@ -75,8 +81,8 @@ export default function UserSignupForm() {
     // });
     const datawithoutConfirmPassword = {
       ...data,
-      confirmPassword: data.confirmPassword
-    }
+      confirmPassword: data.confirmPassword,
+    };
     console.log(datawithoutConfirmPassword);
   };
 
@@ -197,33 +203,35 @@ export default function UserSignupForm() {
             )}
           /> */}
           <FormField
-          control={form.control}
-          name="cafeId"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>CafeId</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select a Cafe to Signup" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  
-                  {CafeList.map((cafe) => (
-                    <SelectItem key={cafe.id} value={String(cafe.id)}>
-                      {`${cafe.name} - ${cafe.gst_number}` }
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              <FormDescription>
-                Select Your Cafe Id From Here.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+            control={form.control}
+            name="cafeId"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>CafeId</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select a Cafe to Signup" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {CafeList.map((cafe) => (
+                      <SelectItem key={cafe.id} value={String(cafe.id)}>
+                        {`${cafe.name} - ${cafe.gst_number}`}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <FormDescription>
+                  Select Your Cafe Id From Here.
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
           <FormField
             control={form.control}
@@ -235,7 +243,6 @@ export default function UserSignupForm() {
                   <Input
                     type="text"
                     placeholder="Enter your Role..."
-                    
                     disabled={true}
                     {...field}
                   />
