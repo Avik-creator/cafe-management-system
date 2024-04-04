@@ -43,17 +43,19 @@ export function UserNav() {
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
-            <DropdownMenuItem onClick={()=>router.push("/dashboard/profile")}>
+            <DropdownMenuItem onClick={() => router.push("/dashboard/profile")}>
               Profile
               <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
             </DropdownMenuItem>
-           
-           
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={() => {signOut().then(() => {
-            router.push("/signin");
-          })}}>
+          <DropdownMenuItem
+            onClick={() => {
+              signOut().then(() => {
+                router.push("/");
+              });
+            }}
+          >
             Log out
             <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
           </DropdownMenuItem>
