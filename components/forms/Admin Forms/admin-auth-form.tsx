@@ -1,5 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 import {
   Form,
   FormControl,
@@ -10,15 +11,16 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { signIn } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import GoogleSignInButton from "../../github-auth-button";
+import { getUserAuth } from "@/server/Auth/authAPI";
+import { useToast } from "@/components/ui/use-toast";
 
 const formSchema = z.object({
-  email: z.string().email({ message: "Enter a valid email address" }),
+  username: z.string().min(4),
+  password: z.string().min(4),
 });
 
 type UserFormValue = z.infer<typeof formSchema>;
@@ -26,20 +28,30 @@ type UserFormValue = z.infer<typeof formSchema>;
 export default function UserAuthForm() {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl");
+  const router = useRouter();
+  const { toast } = useToast();
   const [loading, setLoading] = useState(false);
-  const defaultValues = {
-    email: "demo@gmail.com",
-  };
   const form = useForm<UserFormValue>({
     resolver: zodResolver(formSchema),
-    defaultValues,
   });
 
   const onSubmit = async (data: UserFormValue) => {
-    signIn("credentials", {
-      email: data.email,
-      callbackUrl: callbackUrl ?? "/dashboard",
-    });
+    const responseCode = await getUserAuth(data.username, data.password);
+    if (responseCode == 200) {
+      router.push("/dashboard");
+    } else if (responseCode == 401) {
+      toast({
+        variant: "destructive",
+        title: "Wrong Credentials",
+        description: "You entered wrong email or password.",
+      });
+    } else {
+      toast({
+        variant: "default",
+        title: "Uh oh! Something went wrong.",
+        description: "There was a problem in the server. Please try later.",
+      });
+    }
   };
 
   return (
@@ -51,14 +63,33 @@ export default function UserAuthForm() {
         >
           <FormField
             control={form.control}
-            name="email"
+            name="username"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email</FormLabel>
+                <FormLabel>UserName</FormLabel>
                 <FormControl>
                   <Input
-                    type="email"
-                    placeholder="Enter your email..."
+                    type="text"
+                    placeholder="Enter your username..."
+                    disabled={loading}
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Password</FormLabel>
+                <FormControl>
+                  <Input
+                    type="password"
+                    placeholder="Enter your Password..."
                     disabled={loading}
                     {...field}
                   />
@@ -69,21 +100,10 @@ export default function UserAuthForm() {
           />
 
           <Button disabled={loading} className="ml-auto w-full" type="submit">
-            Continue With Email
+            Sign In
           </Button>
         </form>
       </Form>
-      <div className="relative">
-        <div className="absolute inset-0 flex items-center">
-          <span className="w-full border-t" />
-        </div>
-        <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-background px-2 text-muted-foreground">
-            Or continue with
-          </span>
-        </div>
-      </div>
-      <GoogleSignInButton />
     </>
   );
 }
