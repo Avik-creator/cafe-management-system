@@ -32,24 +32,21 @@ export interface FooterItem {
 /* API data format */
 
 export type User = {
-  id: number;
+  username: string;
+  first_name: string;
+  last_name: string;
   email: string;
-  name: string;
   phone: string;
   address: string;
-  userName: string;
   dob: string;
-  userCreationDate: string;
 };
 
 export type Computers = {
-  id: number;
-  model_no: string;
-  isOccupied: string;
-  OS: string;
-  IP_Address: string;
-  Status: string;
-  Last_used_by: string;
+  computer_id: number;
+  Model_No: string;
+  is_occupied: string;
+  os: string;
+  status: string;
 };
 
 export type Report = {

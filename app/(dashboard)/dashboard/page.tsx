@@ -9,8 +9,18 @@ import {
 } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { getComputerList } from "@/server/DashboardList/getComputers";
+import { getUsersList } from "@/server/DashboardList/getUsers";
 
-export default function page() {
+export default async function page() {
+  const getUsers = await getUsersList();
+  const getComputers = await getComputerList();
+
+  const [usersList, computersList] = await Promise.all([
+    getUsers,
+    getComputers,
+  ]);
+
   return (
     <ScrollArea className="h-full">
       <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">
@@ -48,10 +58,10 @@ export default function page() {
                   </svg>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">10</div>
-                  <p className="text-xs text-muted-foreground">
+                  <div className="text-2xl font-bold">{usersList.length}</div>
+                  {/* <p className="text-xs text-muted-foreground">
                     +20.1% from last month
-                  </p>
+                  </p> */}
                 </CardContent>
               </Card>
               <Card>
@@ -75,8 +85,10 @@ export default function page() {
                   </svg>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">+10</div>
-                  <p className="text-xs text-muted-foreground">+10 Computers</p>
+                  <div className="text-2xl font-bold">
+                    {computersList.length}
+                  </div>
+                  {/* <p className="text-xs text-muted-foreground">+10 Computers</p> */}
                 </CardContent>
               </Card>
               <Card>

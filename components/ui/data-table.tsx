@@ -83,9 +83,6 @@ export function DataTable<TData, TValue>({
     },
   });
 
-  /* this can be used to get the selectedrows 
-  console.log("value", table.getFilteredSelectedRowModel()); */
-
   return (
     <>
       <div className="flex items-center pt-2">

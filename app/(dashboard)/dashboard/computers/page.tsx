@@ -4,8 +4,8 @@ import { buttonVariants } from "@/components/ui/button";
 import { DataTable } from "@/components/ui/data-table";
 import { Heading } from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
-import { computers } from "@/constants/data";
 import { cn } from "@/lib/utils";
+import { getComputerList } from "@/server/DashboardList/getComputers";
 import { Plus } from "lucide-react";
 import Link from "next/link";
 
@@ -20,6 +20,10 @@ type paramsProps = {
 export default async function page({ searchParams }: paramsProps) {
   const page = Number(searchParams.page) || 1;
   const pageLimit = Number(searchParams.limit) || 10;
+
+  const computerList = getComputerList();
+
+  const [computers] = await Promise.all([computerList]);
 
   return (
     <>
@@ -41,7 +45,7 @@ export default async function page({ searchParams }: paramsProps) {
         </div>
         <Separator />
 
-        <DataTable searchValue="model_no" columns={columns} data={computers}/>
+        <DataTable searchValue="model_no" columns={columns} data={computers} />
       </div>
     </>
   );

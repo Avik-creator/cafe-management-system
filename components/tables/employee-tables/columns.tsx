@@ -28,7 +28,7 @@ export const columns: ColumnDef<Computers>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: "model_no",
+    accessorKey: "Model_No",
     header: ({ column }) => {
       return (
         <Button
@@ -42,39 +42,16 @@ export const columns: ColumnDef<Computers>[] = [
     },
   },
   {
-    accessorKey: "isOccupied",
+    accessorKey: "is_occupied",
     header: "IsOccupied",
   },
-
-  // {
-  //   accessorKey: "cafe",
-  //   header: ({ column }) => {
-  //     return (
-  //       <Button
-  //         variant="ghost"
-  //         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-  //       >
-  //         {"CAFE"}
-  //         <ArrowUpDown className="ml-2 h-4 w-4" />
-  //       </Button>
-  //     );
-  //   },
-  // },
   {
-    accessorKey: "OS",
+    accessorKey: "os",
     header: "OS",
   },
   {
-    accessorKey: "Status",
+    accessorKey: "status",
     header: "Status",
-  },
-  {
-    accessorKey: "IP_Address",
-    header: "IP_Address",
-  },
-  {
-    accessorKey: "Last_used_by",
-    header: "Last Used By",
   },
   {
     id: "actions",

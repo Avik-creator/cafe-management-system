@@ -27,23 +27,23 @@ export const columns: ColumnDef<User>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: "name",
+    accessorKey: "username",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          {"Name"}
+          {"User Name"}
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
     },
   },
-  {
-    accessorKey: "userName",
-    header: "User Name",
-  },
+  // {
+  //   accessorKey: "userName",
+  //   header: "User Name",
+  // },
   {
     accessorKey: "email",
     header: ({ column }) => {
@@ -59,14 +59,28 @@ export const columns: ColumnDef<User>[] = [
     },
   },
   {
-    accessorKey: "userCreationDate",
+    accessorKey: "first_name",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          {"User Creation Date"}
+          {"First Name"}
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+  },
+  {
+    accessorKey: "last_name",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          {"Last Name"}
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
@@ -74,15 +88,15 @@ export const columns: ColumnDef<User>[] = [
   },
   {
     accessorKey: "phone",
-    header: "Phone",
-  },
-  {
-    accessorKey: "address",
-    header: "Address",
+    header: "Phone Number",
   },
   {
     accessorKey: "dob",
     header: "Date of Birth",
+  },
+  {
+    accessorKey: "address",
+    header: "User Address",
   },
   {
     id: "actions",
