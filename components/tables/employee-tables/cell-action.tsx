@@ -8,6 +8,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useToast } from "@/components/ui/use-toast";
+import { deleteComputers } from "@/server/DashboardList/computers";
 import { Computers } from "@/types";
 import { Edit, MoreHorizontal, Trash } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
@@ -20,9 +22,27 @@ interface CellActionProps {
 export const CellAction: React.FC<CellActionProps> = ({ data }) => {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
+  const { toast } = useToast();
   const router = useRouter();
 
-  const onConfirm = async () => {};
+  const onConfirm = async () => {
+    setLoading(true);
+    try {
+      const response = await deleteComputers(String(data.computer_id));
+      if (response == 204) {
+        toast({
+          variant: "success",
+          title: "Computer deleted",
+          description: "Computer has been successfully deleted.",
+        });
+      }
+      setLoading(false);
+      setOpen(false);
+    } catch (error) {
+      console.error("Error deleting computer:", error);
+      setLoading(false);
+    }
+  };
 
   return (
     <>

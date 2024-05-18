@@ -1,5 +1,4 @@
 import { Icons } from "@/components/icons";
-import { getComputerList } from "@/server/DashboardList/getComputers";
 
 import {
   NavItem,

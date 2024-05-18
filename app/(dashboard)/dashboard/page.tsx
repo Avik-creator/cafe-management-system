@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { getComputerList } from "@/server/DashboardList/getComputers";
+import { getComputerList } from "@/server/DashboardList/computers";
 import { getUsersList } from "@/server/DashboardList/getUsers";
 
 export default async function page() {

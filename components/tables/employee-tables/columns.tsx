@@ -27,6 +27,7 @@ export const columns: ColumnDef<Computers>[] = [
     enableSorting: false,
     enableHiding: false,
   },
+
   {
     accessorKey: "Model_No",
     header: ({ column }) => {

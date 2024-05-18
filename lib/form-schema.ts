@@ -42,13 +42,11 @@ export const ReportScheme = z.object({
 });
 
 export const ComputerFormSchema = z.object({
-  isOccupied: z.string({ required_error: "Is Occupied is Required" }),
-  model_no: z.string({ required_error: "Model Number is Required" }),
+  is_occupied: z.boolean({ required_error: "Is Occupied is Required" }),
+  modelno: z.string({ required_error: "Model Number is Required" }),
   os: z.string({ required_error: "OS is Required" }),
-  ip_address: z
-    .string({ required_error: "IP Address is Required" })
-    .ip({ message: "Please Enter correct IP Address." }),
-  status: z.string({ required_error: "Computer Working Status is Required" }),
+  current_session: z.number({ required_error: "Current Session is Required" }),
+  status: z.number({ required_error: "Computer Working Status is Required" }),
 });
 
 export const UserFormSchema = z.object({

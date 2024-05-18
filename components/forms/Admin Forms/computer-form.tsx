@@ -27,6 +27,7 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select";
+import { addComputers } from "@/server/DashboardList/computers";
 
 interface ProductFormProps {
   initialData: any | null;
@@ -65,40 +66,24 @@ export const ComputerForm: React.FC<ProductFormProps> = ({
   const form = useForm<ComputerFormValues>({
     resolver: zodResolver(ComputerFormSchema),
     defaultValues,
-    mode: "onChange",
   });
 
-  const {
-    control,
-    formState: { errors },
-  } = form;
+  const onSubmit = async (data: any) => {
+    const { current_session, ...submissionData } = data;
+    const response = await addComputers(submissionData);
 
-  const onSubmit = async (data: ComputerFormValues) => {
-    try {
-      setLoading(true);
-      console.log("Computer Submitted Values: ", data);
-      if (initialData) {
-        // await axios.post(`/api/products/edit-Computer/${initialData._id}`, data);
-      } else {
-        // const res = await axios.post(`/api/products/create-Computer`, data);
-        // console.log("Computer", res);
-      }
-      router.refresh();
-      // router.push(`/dashboard/products`);
-
+    if (response == 201) {
       toast({
         variant: "success",
-        title: "Computer Created",
-        description: "Computer has been created successfully.",
+        title: "Computer Added",
+        description: "Computer has been added successfully.",
       });
-    } catch (error: any) {
+    } else {
       toast({
         variant: "destructive",
-        title: "Uh oh! Something went wrong.",
-        description: "There was a problem with your request.",
+        title: "Computer Not Added",
+        description: "Computer has not been added successfully.",
       });
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -138,7 +123,7 @@ export const ComputerForm: React.FC<ProductFormProps> = ({
           <div className="flex flex-col lg:ml-40 gap-8 w-full">
             <FormField
               control={form.control}
-              name="model_no"
+              name="modelno"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Model Number</FormLabel>
@@ -155,26 +140,46 @@ export const ComputerForm: React.FC<ProductFormProps> = ({
             />
             <FormField
               control={form.control}
-              name="isOccupied"
+              name="is_occupied"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>isOccupied</FormLabel>
                   <FormControl>
-                    <Input type="text" disabled={loading} {...field} />
+                    <Select
+                      onValueChange={(value) =>
+                        field.onChange(value === "true" ? true : false)
+                      }
+                      defaultValue={String(field.value)}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select Occupied Status" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="true">True</SelectItem>
+                        <SelectItem value="false">False</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-
             <FormField
               control={form.control}
-              name="ip_address"
+              name="current_session"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>IP Address</FormLabel>
+                  <FormLabel>Current Session</FormLabel>
                   <FormControl>
-                    <Input type="text" disabled={loading} {...field} />
+                    <Input
+                      type="number"
+                      disabled={loading}
+                      placeholder="Current Session"
+                      value={field.value}
+                      onChange={(e) => field.onChange(Number(e.target.value))}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -219,8 +224,8 @@ export const ComputerForm: React.FC<ProductFormProps> = ({
                   <FormLabel>Working Status of Computer</FormLabel>
                   <FormControl>
                     <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
+                      onValueChange={(value) => field.onChange(Number(value))}
+                      defaultValue={String(field.value)}
                     >
                       <FormControl>
                         <SelectTrigger>
@@ -229,7 +234,10 @@ export const ComputerForm: React.FC<ProductFormProps> = ({
                       </FormControl>
                       <SelectContent>
                         {ComputerWorkingStatus.map((computer) => (
-                          <SelectItem value={computer.status} key={computer.id}>
+                          <SelectItem
+                            value={String(computer.id)}
+                            key={computer.id}
+                          >
                             {computer.status}
                           </SelectItem>
                         ))}

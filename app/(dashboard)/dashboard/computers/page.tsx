@@ -5,7 +5,7 @@ import { DataTable } from "@/components/ui/data-table";
 import { Heading } from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
-import { getComputerList } from "@/server/DashboardList/getComputers";
+import { getComputerList } from "@/server/DashboardList/computers";
 import { Plus } from "lucide-react";
 import Link from "next/link";
 
@@ -45,7 +45,7 @@ export default async function page({ searchParams }: paramsProps) {
         </div>
         <Separator />
 
-        <DataTable searchValue="model_no" columns={columns} data={computers} />
+        <DataTable searchValue="Model_No" columns={columns} data={computers} />
       </div>
     </>
   );
