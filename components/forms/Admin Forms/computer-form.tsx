@@ -76,8 +76,6 @@ export const ComputerForm: React.FC<ProductFormProps> = ({
     mode: "onChange",
   });
 
-  console.log(initialData.os);
-
   const onSubmit = async (data: any) => {
     const { current_session, ...submissionData } = data;
     if (initialData && params.computerId !== "new") {
