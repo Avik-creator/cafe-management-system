@@ -17,7 +17,6 @@ import {
 } from "@/components/ui/form";
 import { Separator } from "@/components/ui/separator";
 import { Heading } from "@/components/ui/heading";
-
 import { useToast } from "@/components/ui/use-toast";
 import { ComputerWorkingStatus, OSList } from "@/constants/data";
 import {
@@ -27,24 +26,24 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select";
-import { addComputers } from "@/server/DashboardList/computers";
+import { addComputers, updateComputer } from "@/server/DashboardList/computers";
 
 interface ProductFormProps {
   initialData: any | null;
-  categories: any;
+  computerId: string;
 }
 
 export const ComputerForm: React.FC<ProductFormProps> = ({
   initialData,
-  categories,
+  computerId,
 }) => {
   const params = useParams();
-
   const router = useRouter();
   const { toast } = useToast();
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [imgLoading, setImgLoading] = useState(false);
+
   const title =
     initialData && params.computerId !== "new"
       ? "Edit Computer"
@@ -60,30 +59,60 @@ export const ComputerForm: React.FC<ProductFormProps> = ({
   const action =
     initialData && params.computerId !== "new" ? "Save changes" : "Create";
 
-  const defaultValues =
-    initialData && params.computerId !== "new" ? initialData : null;
-
   const form = useForm<ComputerFormValues>({
     resolver: zodResolver(ComputerFormSchema),
-    defaultValues,
+    defaultValues: {
+      modelno: initialData?.Model_No,
+      is_occupied: initialData?.is_occupied,
+      os:
+        initialData?.os == "Windows"
+          ? "Windows"
+          : initialData?.os == "Linux"
+          ? "Linux"
+          : "MACOSx",
+      status: initialData?.status == "WORKING" ? 1 : 2,
+      current_session: initialData?.session == null ? 0 : initialData?.session,
+    },
+    mode: "onChange",
   });
+
+  console.log(initialData.os);
 
   const onSubmit = async (data: any) => {
     const { current_session, ...submissionData } = data;
-    const response = await addComputers(submissionData);
+    if (initialData && params.computerId !== "new") {
+      const responseStatus = await updateComputer(computerId, submissionData);
+      console.log(responseStatus);
 
-    if (response == 201) {
-      toast({
-        variant: "success",
-        title: "Computer Added",
-        description: "Computer has been added successfully.",
-      });
+      if (responseStatus == 200) {
+        toast({
+          variant: "success",
+          title: "Computer Updated",
+          description: "Computer has been updated successfully.",
+        });
+      } else {
+        toast({
+          variant: "destructive",
+          title: "Computer Not Updated",
+          description: "Computer has not been updated successfully.",
+        });
+      }
     } else {
-      toast({
-        variant: "destructive",
-        title: "Computer Not Added",
-        description: "Computer has not been added successfully.",
-      });
+      const response = await addComputers(submissionData);
+
+      if (response == 201) {
+        toast({
+          variant: "success",
+          title: "Computer Added",
+          description: "Computer has been added successfully.",
+        });
+      } else {
+        toast({
+          variant: "destructive",
+          title: "Computer Not Added",
+          description: "Computer has not been added successfully.",
+        });
+      }
     }
   };
 
@@ -91,7 +120,6 @@ export const ComputerForm: React.FC<ProductFormProps> = ({
     try {
       setLoading(true);
       router.refresh();
-      // router.push(`/${params.storeId}/products`);
     } catch (error: any) {
     } finally {
       setLoading(false);
@@ -149,7 +177,7 @@ export const ComputerForm: React.FC<ProductFormProps> = ({
                       onValueChange={(value) =>
                         field.onChange(value === "true" ? true : false)
                       }
-                      defaultValue={String(field.value)}
+                      value={String(field.value)}
                     >
                       <FormControl>
                         <SelectTrigger>
@@ -175,17 +203,16 @@ export const ComputerForm: React.FC<ProductFormProps> = ({
                   <FormControl>
                     <Input
                       type="number"
+                      defaultValue={field.value}
                       disabled={loading}
                       placeholder="Current Session"
-                      value={field.value}
-                      onChange={(e) => field.onChange(Number(e.target.value))}
+                      {...field}
                     />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-
             <FormField
               control={form.control}
               name="os"
@@ -193,10 +220,7 @@ export const ComputerForm: React.FC<ProductFormProps> = ({
                 <FormItem>
                   <FormLabel>Operating System</FormLabel>
                   <FormControl>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
+                    <Select onValueChange={field.onChange} value={field.value}>
                       <FormControl>
                         <SelectTrigger>
                           <SelectValue placeholder="Select a Computer Operating System" />
@@ -215,7 +239,6 @@ export const ComputerForm: React.FC<ProductFormProps> = ({
                 </FormItem>
               )}
             />
-
             <FormField
               control={form.control}
               name="status"
@@ -225,7 +248,7 @@ export const ComputerForm: React.FC<ProductFormProps> = ({
                   <FormControl>
                     <Select
                       onValueChange={(value) => field.onChange(Number(value))}
-                      defaultValue={String(field.value)}
+                      value={String(field.value)}
                     >
                       <FormControl>
                         <SelectTrigger>
