@@ -22,7 +22,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
 import { format } from "date-fns";
 import { Calendar } from "../../ui/calendar";
 import { cn } from "@/lib/utils";
-import { addUser } from "@/server/DashboardList/users";
+import { addUser, updateUser } from "@/server/DashboardList/users";
 
 interface UserFormProps {
   initialData: any | null;
@@ -64,25 +64,33 @@ export const UserForm: React.FC<UserFormProps> = ({
     const formattedDate = `${year}-${month}-${day}`;
     //@ts-ignore
     data.dob = formattedDate.toString();
-    setLoading(true);
     try {
-      if (initialData) {
-        // Update User
+      setLoading(true);
+      if (initialData && params.userId !== "new") {
+        // await updateUser(data, params.userId); - TODO: Add updateUser function
       } else {
         const response = await addUser(data);
-        if (response == 201) {
+        if (response !== 201) {
           toast({
-            variant: "success",
+            title: "Error",
+            description: "User Not Created",
+            variant: "destructive",
+          });
+        } else if (response == 201) {
+          toast({
             title: "Success",
-            description: "User Added Successfully.",
+            description: "User Created",
+            variant: "success",
           });
         }
       }
+      // router.refresh();
+      router.push("/dashboard/user");
     } catch (error: any) {
       toast({
+        title: "Error",
+        description: error.message,
         variant: "destructive",
-        title: "Uh oh! Something went wrong.",
-        description: "There was a problem with your request.",
       });
     }
   };
@@ -91,7 +99,6 @@ export const UserForm: React.FC<UserFormProps> = ({
     try {
       setLoading(true);
       router.refresh();
-      router.push(`/${params.storeId}/products`);
     } catch (error: any) {
     } finally {
       setLoading(false);
@@ -266,7 +273,7 @@ export const UserForm: React.FC<UserFormProps> = ({
                   <FormControl>
                     <Input
                       disabled={loading}
-                      type="tel"
+                      type="number"
                       placeholder="Phone Number"
                       {...field}
                     />

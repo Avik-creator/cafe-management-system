@@ -36,21 +36,32 @@ export default function UserAuthForm() {
   });
 
   const onSubmit = async (data: UserFormValue) => {
-    const responseCode = await getUserAuth(data.username, data.password);
-    if (responseCode == 200) {
-      router.push("/dashboard");
-    } else if (responseCode == 401) {
+    setLoading(true);
+    try {
+      const responseCode = await getUserAuth(data.username, data.password);
+      if (responseCode == 200) {
+        router.push("/dashboard");
+      } else if (responseCode == 401) {
+        toast({
+          variant: "destructive",
+          title: "Wrong Credentials",
+          description: "You entered wrong email or password.",
+        });
+      } else {
+        toast({
+          variant: "default",
+          title: "Uh oh! Something went wrong.",
+          description: "There was a problem in the server. Please try later.",
+        });
+      }
+    } catch (error: any) {
       toast({
+        title: "Error",
+        description: error.message,
         variant: "destructive",
-        title: "Wrong Credentials",
-        description: "You entered wrong email or password.",
       });
-    } else {
-      toast({
-        variant: "default",
-        title: "Uh oh! Something went wrong.",
-        description: "There was a problem in the server. Please try later.",
-      });
+    } finally {
+      setLoading(false);
     }
   };
 

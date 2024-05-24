@@ -52,8 +52,6 @@ export async function addUser(user: User) {
     const cookieStore = cookies();
     const accessToken = cookieStore.get("access")?.value;
 
-    console.log("accessToken", accessToken);
-
     if (!accessToken) {
       throw new Error("No access token available");
     }

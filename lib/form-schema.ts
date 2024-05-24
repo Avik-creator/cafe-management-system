@@ -61,8 +61,13 @@ export const UserFormSchema = z.object({
   password: z.string({ required_error: "Password is required" }),
   first_name: z.string({ required_error: "First Name is required" }),
   last_name: z.string({ required_error: "Last Name is required" }),
-  email: z.string({ required_error: "Email is required" }),
-  phone: z.string({ required_error: "Phone is required" }),
+  email: z
+    .string({ required_error: "Email is required" })
+    .email({ message: "Enter a valid email address" }),
+  phone: z
+    .string({ required_error: "Phone is required" })
+    .max(10, { message: "Number must be 10 digits" })
+    .min(10, { message: "Number must be 10 digits" }),
   address: z.string({ required_error: "Address is required" }),
   dob: z.date({ required_error: "Date of birth is required" }),
 });
