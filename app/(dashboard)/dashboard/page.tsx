@@ -10,7 +10,7 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getComputerList } from "@/server/DashboardList/computers";
-import { getUsersList } from "@/server/DashboardList/getUsers";
+import { getUsersList } from "@/server/DashboardList/users";
 
 export default async function page() {
   const getUsers = await getUsersList();

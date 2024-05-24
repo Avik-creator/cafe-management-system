@@ -1,9 +1,7 @@
 "use server";
 
 import { cookies } from "next/headers";
-import { revalidatePath, revalidateTag } from "next/cache";
-import next from "next";
-import { cache } from "react";
+import { revalidatePath } from "next/cache";
 
 interface addComputers {
   modelno: string;

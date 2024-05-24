@@ -4,18 +4,9 @@ import React from "react";
 
 export default function Page() {
   return (
-    <ScrollArea className="h-full">
-      <div className="flex-1 space-y-4 p-5">
-        <UserForm
-          categories={[]}
-          initialData={{
-            address: "123, 4th Street",
-            name: "John Doe",
-            email: "john@g.com",
-            phone: "1234567890",
-          }}
-          key={null}
-        />
+    <ScrollArea className="relative h-screen">
+      <div className="flex-1 space-y-4 p-8">
+        <UserForm categories={[]} initialData={{}} />
       </div>
     </ScrollArea>
   );

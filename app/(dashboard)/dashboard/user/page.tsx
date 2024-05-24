@@ -1,7 +1,7 @@
 import BreadCrumb from "@/components/breadcrumb";
 import { UserClient } from "@/components/tables/user-tables/client";
 import { users } from "@/constants/data";
-import { getUsersList } from "@/server/DashboardList/getUsers";
+import { getUsersList } from "@/server/DashboardList/users";
 
 const breadcrumbItems = [{ title: "User", link: "/dashboard/user" }];
 

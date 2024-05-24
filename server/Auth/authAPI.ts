@@ -25,6 +25,7 @@ export async function getUserAuth(username: string, password: string) {
     const data = await response.json();
     cookies().set("access", data.access, { httpOnly: true, path: "/" });
     cookies().set("refresh", data.refresh, { httpOnly: true, path: "/" });
+
     return 200;
   } catch (error) {
     console.error("Error fetching user auth:", error);

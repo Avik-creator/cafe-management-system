@@ -7,7 +7,6 @@ import { User } from "@/types";
 import { Plus } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { columns } from "./columns";
-import { getUsersList } from "@/server/DashboardList/getUsers";
 
 interface ProductsClientProps {
   data: User[];
@@ -28,7 +27,7 @@ export const UserClient: React.FC<ProductsClientProps> = ({ data }) => {
         </Button>
       </div>
       <Separator />
-      <DataTable searchValue="name" columns={columns} data={data} />
+      <DataTable searchValue="username" columns={columns} data={data} />
     </>
   );
 };

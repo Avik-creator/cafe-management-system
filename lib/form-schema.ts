@@ -48,19 +48,22 @@ export const ComputerFormSchema = z.object({
   current_session: z.number({ required_error: "Current Session is Required" }),
   status: z.number({ required_error: "Computer Working Status is Required" }),
 });
-
+// "username": "BFtRbbg6Wv642abind5TFheDdwewKrHQ0w@RZxx6q1GP@ck5WlCpr--EnOXMByZgBX",
+// "password": "string",
+// "first_name": "string",
+// "last_name": "string",
+// "email": "string",
+// "phone": "string",
+// "address": "string",
+// "dob": "2024-05-24"
 export const UserFormSchema = z.object({
-  name: z
-    .string()
-    .min(3, { message: "User Name must be at least 3 characters" }),
-  address: z
-    .string()
-    .min(10, { message: "User address must be at least 3 characters" }),
-  email: z.string().email({ message: "Please enter a valid email address" }),
-  phone: z.string().min(10, { message: "Please enter a valid phone number" }),
-  userName: z
-    .string()
-    .min(3, { message: "Username must be at least 3 characters" }),
+  username: z.string({ required_error: "Username is required" }),
+  password: z.string({ required_error: "Password is required" }),
+  first_name: z.string({ required_error: "First Name is required" }),
+  last_name: z.string({ required_error: "Last Name is required" }),
+  email: z.string({ required_error: "Email is required" }),
+  phone: z.string({ required_error: "Phone is required" }),
+  address: z.string({ required_error: "Address is required" }),
   dob: z.date({ required_error: "Date of birth is required" }),
 });
 

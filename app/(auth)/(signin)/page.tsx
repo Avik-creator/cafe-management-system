@@ -56,10 +56,10 @@ export default function LoginPage() {
           <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
             <div className="flex flex-col space-y-2 text-center">
               <h1 className="text-2xl font-semibold tracking-tight">
-                Create an account
+                Sign In to your Account.
               </h1>
               <p className="text-sm text-muted-foreground">
-                Enter your email below to create your account
+                Enter your username and password to continue.
               </p>
             </div>
             <UserAuthForm />
@@ -79,16 +79,6 @@ export default function LoginPage() {
                 Privacy Policy
               </Link>
               .
-            </p>
-
-            <p className="text-center">
-              Don&apos;t Have an Account?{" "}
-              <Link
-                href="/"
-                className="underline underline-offset-4 hover:text-green-500 text-blue-600"
-              >
-                Sign Up
-              </Link>
             </p>
           </div>
         </div>

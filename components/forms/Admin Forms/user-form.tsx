@@ -22,6 +22,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
 import { format } from "date-fns";
 import { Calendar } from "../../ui/calendar";
 import { cn } from "@/lib/utils";
+import { addUser } from "@/server/DashboardList/users";
 
 interface UserFormProps {
   initialData: any | null;
@@ -56,34 +57,39 @@ export const UserForm: React.FC<UserFormProps> = ({
   });
 
   const onSubmit = async (data: UserFormValues) => {
-    console.log(data);
+    const dobObject = new Date(data.dob);
+    const year = dobObject.getFullYear();
+    const month = String(dobObject.getMonth() + 1).padStart(2, "0");
+    const day = String(dobObject.getDate()).padStart(2, "0");
+    const formattedDate = `${year}-${month}-${day}`;
+    //@ts-ignore
+    data.dob = formattedDate.toString();
+    setLoading(true);
     try {
-      setLoading(true);
       if (initialData) {
+        // Update User
       } else {
+        const response = await addUser(data);
+        if (response == 201) {
+          toast({
+            variant: "success",
+            title: "Success",
+            description: "User Added Successfully.",
+          });
+        }
       }
-      // router.refresh();
-      // router.push(`/dashboard/user`);
-      toast({
-        variant: "success",
-        title: "Success",
-        description: "User Added Successfully.",
-      });
     } catch (error: any) {
       toast({
         variant: "destructive",
         title: "Uh oh! Something went wrong.",
         description: "There was a problem with your request.",
       });
-    } finally {
-      setLoading(false);
     }
   };
 
   const onDelete = async () => {
     try {
       setLoading(true);
-      //   await axios.delete(`/api/${params.storeId}/products/${params.productId}`);
       router.refresh();
       router.push(`/${params.storeId}/products`);
     } catch (error: any) {
@@ -117,10 +123,49 @@ export const UserForm: React.FC<UserFormProps> = ({
           <div className="flex flex-col lg:ml-40 gap-8 w-full">
             <FormField
               control={form.control}
-              name="name"
+              name="first_name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Name</FormLabel>
+                  <FormLabel>First Name</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="John"
+                      type="text"
+                      disabled={loading}
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="last_name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Last Name</FormLabel>
+
+                  <FormControl>
+                    <Input
+                      type="text"
+                      placeholder="Doe"
+                      disabled={loading}
+                      {...field}
+                    />
+                  </FormControl>
+
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="username"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>UserName</FormLabel>
                   <FormControl>
                     <Input
                       disabled={loading}
@@ -140,7 +185,8 @@ export const UserForm: React.FC<UserFormProps> = ({
                   <FormLabel>Email</FormLabel>
                   <FormControl>
                     <Input
-                      disabled={true}
+                      disabled={loading}
+                      type="email"
                       placeholder="User Email"
                       {...field}
                     />
@@ -149,56 +195,18 @@ export const UserForm: React.FC<UserFormProps> = ({
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="userName"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>User Name of the User</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="UserName 1"
-                      type="text"
-                      disabled={loading}
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="address"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Address of the User</FormLabel>
-
-                  <FormControl>
-                    <Input
-                      type="text"
-                      placeholder="User Address"
-                      disabled={loading}
-                      {...field}
-                    />
-                  </FormControl>
-
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
 
             <FormField
               control={form.control}
-              name="phone"
+              name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Phone Number of the User</FormLabel>
+                  <FormLabel>Password</FormLabel>
 
                   <FormControl>
                     <Input
-                      type="number"
-                      placeholder="+91 1234567890"
+                      type="password"
+                      placeholder="***********"
                       disabled={loading}
                       {...field}
                     />
@@ -215,37 +223,73 @@ export const UserForm: React.FC<UserFormProps> = ({
               render={({ field }) => (
                 <FormItem className="flex flex-col">
                   <FormLabel>Date of Birth</FormLabel>
+
                   <Popover>
                     <PopoverTrigger asChild>
-                      <FormControl>
-                        <Button
-                          variant={"outline"}
-                          className={cn(
-                            "pl-3 text-left font-normal",
-                            !field.value && "text-muted-foreground"
-                          )}
-                        >
-                          {field.value ? (
-                            format(field.value, "PPP")
-                          ) : (
-                            <span>Pick a date</span>
-                          )}
-                          <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                        </Button>
-                      </FormControl>
+                      <Button
+                        variant={"outline"}
+                        className={cn(
+                          "w-[240px] justify-start text-left font-normal",
+                          !field.value && "text-muted-foreground"
+                        )}
+                      >
+                        <CalendarIcon className="mr-2 h-4 w-4" />
+                        {field.value ? (
+                          format(field.value, "yyyy-MM-dd")
+                        ) : (
+                          <span>Pick a date</span>
+                        )}
+                      </Button>
                     </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0" align="start">
+                    <PopoverContent align="start" className=" w-auto p-0">
                       <Calendar
                         mode="single"
+                        captionLayout="dropdown-buttons"
                         selected={field.value}
                         onSelect={field.onChange}
-                        disabled={(date) =>
-                          date > new Date() || date < new Date("1900-01-01")
-                        }
-                        initialFocus
+                        fromYear={1960}
+                        toYear={2030}
                       />
                     </PopoverContent>
                   </Popover>
+
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="phone"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Phone Number</FormLabel>
+                  <FormControl>
+                    <Input
+                      disabled={loading}
+                      type="tel"
+                      placeholder="Phone Number"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="address"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Address</FormLabel>
+
+                  <FormControl>
+                    <Input
+                      type="text"
+                      placeholder="Address of the User"
+                      disabled={loading}
+                      {...field}
+                    />
+                  </FormControl>
 
                   <FormMessage />
                 </FormItem>
