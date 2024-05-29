@@ -26,7 +26,12 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select";
-import { addComputers, updateComputer } from "@/server/DashboardList/computers";
+import {
+  addComputers,
+  deleteComputers,
+  updateComputer,
+} from "@/server/DashboardList/computers";
+import { AlertModal } from "@/components/modal/alert-modal";
 
 interface ProductFormProps {
   initialData: any | null;
@@ -115,18 +120,50 @@ export const ComputerForm: React.FC<ProductFormProps> = ({
   };
 
   const onDelete = async () => {
+    // try {
+    //   setLoading(true);
+    //   router.refresh();
+    // } catch (error: any) {
+    // } finally {
+    //   setLoading(false);
+    //   setOpen(false);
+    // }
     try {
       setLoading(true);
-      router.refresh();
-    } catch (error: any) {
-    } finally {
+      const response = await deleteComputers(computerId);
+      if (response == 204) {
+        toast({
+          variant: "success",
+          title: "Computer Deleted",
+          description: "Computer has been deleted successfully.",
+        });
+        router.push("/dashboard/computers");
+      } else {
+        toast({
+          variant: "destructive",
+          title: "Computer Not Deleted",
+          description: "Computer has not been deleted successfully.",
+        });
+      }
+    } catch (error) {
+      console.error("Error deleting computer:", error);
       setLoading(false);
-      setOpen(false);
+      toast({
+        variant: "destructive",
+        title: "Computer Not Deleted",
+        description: "Computer has not been deleted successfully.",
+      });
     }
   };
 
   return (
     <>
+      <AlertModal
+        isOpen={open}
+        onClose={() => setOpen(false)}
+        onConfirm={onDelete}
+        loading={loading}
+      />
       <div className="flex items-center justify-between">
         <Heading title={title} description={description} />
         {initialData && (

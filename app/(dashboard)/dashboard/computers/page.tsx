@@ -1,5 +1,5 @@
 import BreadCrumb from "@/components/breadcrumb";
-import { columns } from "@/components/tables/employee-tables/columns";
+import { columns } from "@/components/tables/computer-table/columns";
 import { buttonVariants } from "@/components/ui/button";
 import { DataTable } from "@/components/ui/data-table";
 import { Heading } from "@/components/ui/heading";
@@ -11,16 +11,7 @@ import Link from "next/link";
 
 const breadcrumbItems = [{ title: "Computer", link: "/dashboard/computers" }];
 
-type paramsProps = {
-  searchParams: {
-    [key: string]: string | string[] | undefined;
-  };
-};
-
-export default async function page({ searchParams }: paramsProps) {
-  const page = Number(searchParams.page) || 1;
-  const pageLimit = Number(searchParams.limit) || 10;
-
+export default async function page() {
   const computerList = getComputerList();
 
   const [computers] = await Promise.all([computerList]);
