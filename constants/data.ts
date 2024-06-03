@@ -319,12 +319,12 @@ export const navItems: NavItem[] = [
     icon: "laptop",
     label: "computer",
   },
-  {
-    title: "Profile",
-    href: "/dashboard/profile",
-    icon: "profile",
-    label: "profile",
-  },
+  // {
+  //   title: "Profile",
+  //   href: "/dashboard/profile",
+  //   icon: "profile",
+  //   label: "profile",
+  // },
   {
     title: "Report",
     href: "/dashboard/reports",

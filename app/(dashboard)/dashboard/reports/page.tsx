@@ -4,7 +4,6 @@ import { DataTable } from "@/components/ui/data-table";
 import { Heading } from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
 
-import { Reports as reports } from "@/constants/data";
 import { getReportList } from "@/server/DashboardList/reports";
 
 const breadcrumbItems = [{ title: "Report", link: "/dashboard/reports" }];
