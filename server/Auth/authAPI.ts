@@ -1,6 +1,7 @@
 "use server";
 
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 const AUTH_URL = "http://4.227.136.16:8080/v1/user/token";
 
@@ -31,4 +32,13 @@ export async function getUserAuth(username: string, password: string) {
     console.error("Error fetching user auth:", error);
     return 500; // Internal Server Error
   }
+}
+
+export async function signout() {
+  cookies().delete("access");
+  cookies().delete("refresh");
+  cookies().delete("csrftoken");
+  cookies().delete("next-auth.callback-url");
+  cookies().delete("next-auth.csrf-token");
+  redirect("/");
 }

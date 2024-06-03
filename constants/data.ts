@@ -331,12 +331,12 @@ export const navItems: NavItem[] = [
     icon: "help",
     label: "report",
   },
-  {
-    title: "Logout",
-    href: "/",
-    icon: "logo",
-    label: "logout",
-  },
+  // {
+  //   title: "Logout",
+  //   href: "/",
+  //   icon: "logo",
+  //   label: "logout",
+  // },
 ];
 
 export const ReportList = [

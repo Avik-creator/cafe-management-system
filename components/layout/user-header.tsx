@@ -1,6 +1,6 @@
 import ThemeToggle from "@/components/layout/ThemeToggle/theme-toggle";
 import { cn } from "@/lib/utils";
-import { UserNav } from "./user-nav";
+// import { UserNav } from "./user-nav";
 import Link from "next/link";
 import { UserMobileSidebar } from "./user-mobile-sidebar";
 
@@ -29,7 +29,7 @@ export default function UserHeader() {
         </div>
 
         <div className="flex items-center gap-2">
-          <UserNav />
+          {/* <UserNav /> */}
           <ThemeToggle />
         </div>
       </nav>
