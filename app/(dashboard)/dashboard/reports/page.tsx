@@ -5,6 +5,7 @@ import { Heading } from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
 
 import { Reports as reports } from "@/constants/data";
+import { getReportList } from "@/server/DashboardList/reports";
 
 const breadcrumbItems = [{ title: "Report", link: "/dashboard/reports" }];
 
@@ -17,6 +18,10 @@ type paramsProps = {
 export default async function page({ searchParams }: paramsProps) {
   const page = Number(searchParams.page) || 1;
   const pageLimit = Number(searchParams.limit) || 10;
+
+  const reports = await getReportList();
+
+  const [reportList] = await Promise.all([reports]);
 
   return (
     <>
@@ -31,7 +36,11 @@ export default async function page({ searchParams }: paramsProps) {
         </div>
         <Separator />
 
-        <DataTable searchValue="model_no" columns={columns} data={reports} />
+        <DataTable
+          searchValue="report_id"
+          columns={columns}
+          data={reportList}
+        />
       </div>
     </>
   );

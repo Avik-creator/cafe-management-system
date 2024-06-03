@@ -11,8 +11,8 @@ interface addComputers {
   current_session: string;
 }
 
-const COMPUTER_URL = "http://localhost:8000/v1/computer/list";
-const ADD_COMPUTERS = "http://localhost:8000/v1/computer/add";
+const COMPUTER_URL = "http://4.227.136.16:8080/v1/computer/list";
+const ADD_COMPUTERS = "http://4.227.136.16:8080/v1/computer/add";
 
 export async function getComputerList() {
   try {
@@ -85,7 +85,7 @@ export async function deleteComputers(computerId: string) {
     }
 
     const response = await fetch(
-      `http://localhost:8000/v1/computer/manage/${computerId}`,
+      `http://4.227.136.16:8080/v1/computer/manage/${computerId}`,
       {
         method: "DELETE",
         headers: {
@@ -121,7 +121,7 @@ export async function updateComputer(
     }
 
     const response = await fetch(
-      `http://localhost:8000/v1/computer/manage/${computerId}`,
+      `http://4.227.136.16:8080/v1/computer/manage/${computerId}`,
       {
         method: "PUT",
         headers: {
@@ -155,7 +155,7 @@ export async function getComputer(computerId: string) {
     }
 
     const response = await fetch(
-      `http://localhost:8000/v1/computer/manage/${computerId}`,
+      `http://4.227.136.16:8080/v1/computer/manage/${computerId}`,
       {
         method: "GET",
         headers: {

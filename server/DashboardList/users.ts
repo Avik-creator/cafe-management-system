@@ -3,9 +3,9 @@
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 
-const USER_LISTURL = "http://localhost:8000/v1/user/listCafeUsers";
-const ADD_USER = "http://localhost:8000/v1/user/addCafeUser";
-const MANAGE_USER = "http://localhost:8000/v1/user/manageUser";
+const USER_LISTURL = "http://4.227.136.16:8080/v1/user/listCafeUsers";
+const ADD_USER = "http://4.227.136.16:8080/v1/user/addCafeUser";
+const MANAGE_USER = "http://4.227.136.16:8080/v1/user/manageUser";
 
 interface User {
   username: string;

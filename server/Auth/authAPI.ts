@@ -2,7 +2,7 @@
 
 import { cookies } from "next/headers";
 
-const AUTH_URL = "http://localhost:8000/v1/user/token";
+const AUTH_URL = "http://4.227.136.16:8080/v1/user/token";
 
 export async function getUserAuth(username: string, password: string) {
   try {

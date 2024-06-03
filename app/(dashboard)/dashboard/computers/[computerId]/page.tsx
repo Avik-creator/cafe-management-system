@@ -1,8 +1,6 @@
 import { ComputerForm } from "@/components/forms/Admin Forms/computer-form";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { getComputer } from "@/server/DashboardList/computers";
-import { useParams } from "next/navigation";
-import { useRouter } from "next/router";
 
 import React from "react";
 

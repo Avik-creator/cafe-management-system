@@ -37,6 +37,7 @@ import {
 } from "../../ui/select";
 import { ReportList } from "@/constants/data";
 import { useToast } from "@/components/ui/use-toast";
+import { updateReport } from "@/server/DashboardList/reports";
 
 interface ProfileFormType {
   initialData: any | null;
@@ -55,13 +56,19 @@ export const ReportForm: React.FC<ProfileFormType> = ({ initialData }) => {
   const defaultValues = {
     title: initialData.title,
     description: initialData.description,
-    date_of_submit: parseISO(initialData.date_of_submit),
-    status: initialData.status,
+    report_date: parseISO(initialData.report_date),
+    // status: initialData.status,
+    status:
+      initialData?.status == "PENDING"
+        ? 1
+        : initialData?.status == "SOLVED"
+        ? 2
+        : 3,
   };
 
   const form = useForm<ReportFormValues>({
     resolver: zodResolver(ReportScheme),
-    defaultValues: defaultValues,
+    defaultValues,
     mode: "onChange",
   });
 
@@ -71,42 +78,37 @@ export const ReportForm: React.FC<ProfileFormType> = ({ initialData }) => {
   } = form;
 
   const onSubmit = async (data: ReportFormValues) => {
+    setLoading(true);
     try {
-      console.log(data);
-      toast({
-        variant: "success",
-        title: "Success",
-        description: "Report Edited Successfully.",
-      });
+      const response = await updateReport(
+        initialData.report_id,
+        Number(data.status)
+      );
+
+      if (response?.status !== 200) {
+        toast({
+          variant: "destructive",
+          title: "Uh oh! Something went wrong.",
+          description:
+            "There was a problem with your request. Please Try Again.",
+        });
+      } else {
+        toast({
+          variant: "success",
+          title: "Success",
+          description: "Report Edited Successfully.",
+        });
+
+        router.push("/dashboard/reports");
+      }
     } catch (error) {
       toast({
         variant: "destructive",
         title: "Uh oh! Something went wrong.",
         description: "There was a problem with your request.",
       });
-    }
-  };
-
-  const onDelete = async () => {
-    try {
-      setLoading(true);
-      //   await axios.delete(`/api/${params.storeId}/products/${params.productId}`);
-      router.refresh();
-      // router.push(`/${params.storeId}/products`);
-      toast({
-        variant: "success",
-        title: "Success",
-        description: "Report Edited Successfully.",
-      });
-    } catch (error: any) {
     } finally {
       setLoading(false);
-      setOpen(false);
-      toast({
-        variant: "destructive",
-        title: "Uh oh! Something went wrong.",
-        description: "There was a problem with your request.",
-      });
     }
   };
 
@@ -114,16 +116,6 @@ export const ReportForm: React.FC<ProfileFormType> = ({ initialData }) => {
     <>
       <div className="flex items-center justify-between">
         <Heading title={title} description={description} />
-        {initialData && (
-          <Button
-            disabled={loading}
-            variant="destructive"
-            size="sm"
-            onClick={() => setOpen(true)}
-          >
-            <Trash className="h-4 w-4" />
-          </Button>
-        )}
       </div>
       <Separator />
 
@@ -144,7 +136,7 @@ export const ReportForm: React.FC<ProfileFormType> = ({ initialData }) => {
                     <FormLabel>Title</FormLabel>
                     <FormControl>
                       <Input
-                        disabled={loading}
+                        disabled={true}
                         placeholder="Lorem Ipsum"
                         {...field}
                       />
@@ -161,7 +153,7 @@ export const ReportForm: React.FC<ProfileFormType> = ({ initialData }) => {
                     <FormLabel>Description</FormLabel>
                     <FormControl>
                       <Input
-                        disabled={loading}
+                        disabled={true}
                         placeholder="123 Lorem Street"
                         {...field}
                       />
@@ -173,7 +165,7 @@ export const ReportForm: React.FC<ProfileFormType> = ({ initialData }) => {
 
               <FormField
                 control={form.control}
-                name="date_of_submit"
+                name="report_date"
                 render={({ field }) => (
                   <FormItem className="flex flex-col">
                     <FormLabel>Date of Submitted</FormLabel>
@@ -186,6 +178,7 @@ export const ReportForm: React.FC<ProfileFormType> = ({ initialData }) => {
                               "pl-3 text-left font-normal",
                               !field.value && "text-muted-foreground"
                             )}
+                            disabled={true}
                           >
                             {field.value ? (
                               format(field.value, "PPP")
@@ -204,6 +197,7 @@ export const ReportForm: React.FC<ProfileFormType> = ({ initialData }) => {
                           disabled={(date) =>
                             date > new Date() || date < new Date("1900-01-01")
                           }
+                          // disabled={true}
                           initialFocus
                         />
                       </PopoverContent>
@@ -222,8 +216,10 @@ export const ReportForm: React.FC<ProfileFormType> = ({ initialData }) => {
                     <FormLabel>Status</FormLabel>
                     <FormControl>
                       <Select
-                        onValueChange={field.onChange}
-                        defaultValue={field.value}
+                        // onValueChange={field.onChange}
+                        // defaultValue={field.value}
+                        onValueChange={(value) => field.onChange(Number(value))}
+                        value={String(field.value)}
                       >
                         <FormControl>
                           <SelectTrigger>
@@ -232,7 +228,10 @@ export const ReportForm: React.FC<ProfileFormType> = ({ initialData }) => {
                         </FormControl>
                         <SelectContent>
                           {ReportList.map((report) => (
-                            <SelectItem value={report.status} key={report.id}>
+                            <SelectItem
+                              value={String(report.id)}
+                              key={report.id}
+                            >
                               {report.status}
                             </SelectItem>
                           ))}

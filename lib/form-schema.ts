@@ -37,15 +37,17 @@ export const ReportScheme = z.object({
   description: z
     .string({ required_error: "Description is required" })
     .min(3, { message: "Description must be at least 3 characters" }),
-  date_of_submit: z.date({ required_error: "Date of submit is required" }),
-  status: z.string({ required_error: "Status is required" }),
+  report_date: z.date({ required_error: "Date of submit is required" }),
+  status: z.coerce.number({ required_error: "Status is required" }),
 });
 
 export const ComputerFormSchema = z.object({
   is_occupied: z.boolean({ required_error: "Is Occupied is Required" }),
   modelno: z.string({ required_error: "Model Number is Required" }),
   os: z.string({ required_error: "OS is Required" }),
-  current_session: z.number({ required_error: "Current Session is Required" }),
+  current_session: z.coerce.number({
+    required_error: "Current Session is Required",
+  }),
   status: z.number({ required_error: "Computer Working Status is Required" }),
 });
 // "username": "BFtRbbg6Wv642abind5TFheDdwewKrHQ0w@RZxx6q1GP@ck5WlCpr--EnOXMByZgBX",

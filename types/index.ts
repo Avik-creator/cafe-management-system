@@ -50,12 +50,13 @@ export type Computers = {
 };
 
 export type Report = {
-  id: number;
-  userId: number;
+  report_id: number;
   title: string;
   description: string;
-  date_of_submit: string;
-  status: string;
+  user: {
+    id: number;
+    user_name: string;
+  };
 };
 
 export type Cafe = {
@@ -87,3 +88,9 @@ export type report = {
   description: string;
   session: number;
 };
+
+export type ReportStatusEnum = [
+  { id: 1; name: "Pending" },
+  { id: 2; name: "Approved" },
+  { id: 3; name: "Rejected" }
+];

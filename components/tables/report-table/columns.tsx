@@ -7,7 +7,6 @@ import { ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Report } from "@/types";
 
-
 export const columns: ColumnDef<Report>[] = [
   {
     id: "select",
@@ -29,22 +28,22 @@ export const columns: ColumnDef<Report>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: "userId",
+    accessorKey: "report_id",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          {"User ID"}
+          {"Report ID"}
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
     },
   },
   {
-    accessorKey:"title",
-    header:"Title"
+    accessorKey: "title",
+    header: "Title",
   },
   {
     accessorKey: "description",
@@ -52,32 +51,23 @@ export const columns: ColumnDef<Report>[] = [
   },
 
   {
-    accessorKey: "date_of_submit",
+    accessorKey: "user.user_name",
+    header: "User",
+  },
+
+  {
+    accessorKey: "status",
     header: ({ column }) => {
       return (
         <Button
-          variant="ghost"
+          variant={"ghost"}
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          {"Date of Submission"}
+          {"Status"}
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
     },
-  },
-  {
-    accessorKey: "status",
-    header:({column}) => {
-      return(
-        <Button
-          variant={"ghost"}
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          >
-            {"Status"}
-            <ArrowUpDown className="ml-2 h-4 w-4"/>
-          </Button>
-      )
-    }
   },
   {
     id: "actions",
