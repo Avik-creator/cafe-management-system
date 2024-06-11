@@ -2,8 +2,40 @@
 
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { JwtPayload as DefaultJwtPayload, jwtDecode } from "jwt-decode";
 
+
+const REGISTER_URL = "http://4.227.136.16:8080/v1/user/addCafeUser";
 const AUTH_URL = "http://4.227.136.16:8080/v1/user/token";
+const MANAGE_PROFILE_URL = "http://4.227.136.16:8080/v1/user/manageUser"
+
+interface JwtPayload extends DefaultJwtPayload {
+  user_id: string;
+}
+
+const cookieDecoding = (token: string): JwtPayload => {
+  const decodedToken = jwtDecode<JwtPayload>(token);
+  return decodedToken;
+}
+
+export const getUserId = () => {
+  try {
+    const cookieStore = cookies();
+    const accessToken = cookieStore.get("access")?.value;
+
+    if (!accessToken) {
+      throw new Error("No access token available");
+    }
+
+    const jwtDecoded = cookieDecoding(accessToken as string)
+    console.log(jwtDecoded.user_id);
+
+    return jwtDecoded.user_id
+  } catch (error) {
+    console.error("Error retrieving user ID:", error);
+    return null;
+  }
+}
 
 export async function getUserAuth(username: string, password: string) {
   try {
@@ -17,9 +49,8 @@ export async function getUserAuth(username: string, password: string) {
 
     if (!response.ok) {
       if (response.status === 401) {
-        return 401;
+        return {status: 401};
       }
-
       throw new Error(`Error: ${response.statusText}`);
     }
 
@@ -27,7 +58,9 @@ export async function getUserAuth(username: string, password: string) {
     cookies().set("access", data.access, { httpOnly: true, path: "/" });
     cookies().set("refresh", data.refresh, { httpOnly: true, path: "/" });
 
-    return 200;
+    const retrievedUserId = await getUserId()
+
+    return { status: 200, user_id: retrievedUserId };
   } catch (error) {
     console.error("Error fetching user auth:", error);
     return 500; // Internal Server Error
@@ -41,4 +74,99 @@ export async function signout() {
   cookies().delete("next-auth.callback-url");
   cookies().delete("next-auth.csrf-token");
   redirect("/");
+}
+
+export async function signUpCafeUser(data: any) {
+  try {
+    const response = await fetch(REGISTER_URL,
+      {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      }
+    );
+
+    if (!response.ok) {
+      if (response.status === 401) {
+        return 401;
+      }
+      throw new Error(`Error: ${response.statusText}`);
+    }
+
+    const resData = response.json()
+    return resData
+
+  } catch (error) {
+    console.log("Server Error in sign up cafe user.");
+    return 500; // Internal Server Error
+  }
+}
+
+
+export async function getCafeUserProfile() {
+  try {
+    const cookieStore = cookies();
+    const accessToken = cookieStore.get("access")?.value;
+
+    const user_id = await getUserId()
+
+    
+    const response = await fetch(`${MANAGE_PROFILE_URL}/${user_id}`,
+    {
+      method: "GET",
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`
+      }
+    }
+  );
+  
+    if (!response.ok) {
+      throw new Error(`Error: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    const {id, ...userData} = data
+    
+    return userData;
+
+  } catch (error) {
+    console.error("Error fetching user profile details:", error);
+    return null;
+  }
+}
+
+export async function editCafeUserProfile(data: any) {
+  try {
+    const cookieStore = cookies();
+    const accessToken = cookieStore.get("access")?.value;
+
+    const user_id = await getUserId()
+
+    const response = await fetch(`${MANAGE_PROFILE_URL}/${user_id}`,
+    {
+      method: "PATCH",
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`
+      },
+      body: JSON.stringify(data)
+    }
+  );
+  
+    if (!response.ok) {
+      throw new Error(`Error: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    const {id, ...userData} = data
+    
+    return userData;
+
+  } catch (error) {
+    console.error("Error fetching user profile details:", error);
+    return null;
+  }
 }

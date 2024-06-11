@@ -75,9 +75,8 @@ export const UserFormSchema = z.object({
 });
 
 export const SigninFormSchema = z.object({
-  email: z
-    .string({ required_error: "Email is Required to Signin" })
-    .email({ message: "Enter a valid email address" }),
+  username: z
+    .string({ required_error: "Username is Required to Signin" }),
   password: z
     .string({ required_error: "Password is required" })
     .min(6, { message: "Password must be at least 6 characters" }),
@@ -94,11 +93,12 @@ export const SignupFormSchema = z
     confirmPassword: z
       .string({ required_error: "Confirm Password is required" })
       .min(6, { message: "Password must be at least 6 characters" }),
-    FirstName: z.string({ required_error: "First Name is required" }),
-    LastName: z.string({ required_error: "Last Name is required" }),
-    userName: z.string({ required_error: "Username is required" }),
+    first_name: z.string({ required_error: "First Name is required" }),
+    last_name: z.string({ required_error: "Last Name is required" }),
+    username: z.string({ required_error: "Username is required" }),
     dob: z.date({ required_error: "Date of birth is required" }),
     address: z.string({ required_error: "Address is required" }),
+    phone: z.string({ required_error: "Phone is required" }),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Password and Confirm Password must be same",

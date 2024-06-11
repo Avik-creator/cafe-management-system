@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { type SignupFormValues, SignupFormSchema } from "@/lib/form-schema";
@@ -24,8 +24,13 @@ import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
+import { signUpCafeUser } from "@/server/Auth/authAPI";
+import { useToast } from "@/components/ui/use-toast";
 
 export default function UserSignUpForm() {
+  const router = useRouter()
+  const { toast } = useToast()
+
   const searchParams = useSearchParams();
   const [loading, setLoading] = useState(false);
 
@@ -34,11 +39,21 @@ export default function UserSignUpForm() {
   });
 
   const onSubmit = async (data: SignupFormValues) => {
-    // signIn("credentials", {
-    //   email: data.email,
-    //   callbackUrl: callbackUrl ?? "/dashboard",
-    // });
-    console.log(data);
+    const {confirmPassword, ...newData} = data
+
+    const formattedDate = data.dob ? format(new Date(data.dob), "yyyy-MM-dd") : '';
+    console.log('Submitted date as string:', formattedDate);
+
+    newData.dob = formattedDate as string;
+    
+    console.log("NEW DATA: ", newData);
+    
+    const signupData = await signUpCafeUser(newData)
+    console.log("SIGN UP DATA:", signupData)
+
+    if(signupData!= 401) {
+      router.push("/user/sigin")
+    }
   };
 
   return (
@@ -50,7 +65,7 @@ export default function UserSignUpForm() {
         >
           <FormField
             control={form.control}
-            name="FirstName"
+            name="first_name"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>First Name</FormLabel>
@@ -69,7 +84,7 @@ export default function UserSignUpForm() {
 
           <FormField
             control={form.control}
-            name="LastName"
+            name="last_name"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Last Name</FormLabel>
@@ -88,7 +103,7 @@ export default function UserSignUpForm() {
 
           <FormField
             control={form.control}
-            name="userName"
+            name="username"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Username</FormLabel>
@@ -148,7 +163,7 @@ export default function UserSignUpForm() {
             name="confirmPassword"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Password</FormLabel>
+                <FormLabel>Confirm Password</FormLabel>
                 <FormControl>
                   <Input
                     type="password"
@@ -172,6 +187,24 @@ export default function UserSignUpForm() {
                   <Input
                     type="text"
                     placeholder="Enter your Address..."
+                    disabled={loading}
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="phone"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Phone Number</FormLabel>
+                <FormControl>
+                  <Input
+                    type="number"
+                    placeholder="Enter your Phone Number"
                     disabled={loading}
                     {...field}
                   />
@@ -228,6 +261,12 @@ export default function UserSignUpForm() {
             disabled={loading}
             className="ml-auto w-full mt-6"
             type="submit"
+            onClick={() => {
+              toast({
+                title: "Account Successfully Created",
+                description: "Please login with newly created username and password.",
+              })
+            }}
           >
             Sign Up
           </Button>

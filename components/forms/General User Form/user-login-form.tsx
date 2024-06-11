@@ -11,15 +11,17 @@ import {
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { type UserSigninFormValues, SigninFormSchema } from "@/lib/form-schema";
 
 import Link from "next/link";
+import { getUserAuth } from "@/server/Auth/authAPI";
 
 export default function UserSigninForm() {
+  const router = useRouter()
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl");
   const [loading, setLoading] = useState(false);
@@ -28,12 +30,15 @@ export default function UserSigninForm() {
     resolver: zodResolver(SigninFormSchema),
   });
 
+
   const onSubmit = async (data: UserSigninFormValues) => {
-    // signIn("credentials", {
-    //   email: data.email,
-    //   callbackUrl: callbackUrl ?? "/dashboard",
-    // });
-    console.log(data);
+    const signinData = await getUserAuth(data.username, data.password)
+    console.log("SIGN UP DATA:", data)
+    console.log("SIGN IN RESPONSE DATA:", signinData.user_id);
+
+    if(signinData.status === 200 && typeof signinData.user_id == "number") {
+      router.push("/user/profile")
+    }
   };
 
   return (
@@ -45,14 +50,14 @@ export default function UserSigninForm() {
         >
           <FormField
             control={form.control}
-            name="email"
+            name="username"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email</FormLabel>
+                <FormLabel>Username</FormLabel>
                 <FormControl>
                   <Input
-                    type="email"
-                    placeholder="Enter your email..."
+                    type="text"
+                    placeholder="Enter your username..."
                     disabled={loading}
                     {...field}
                   />
