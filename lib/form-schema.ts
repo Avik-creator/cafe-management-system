@@ -45,9 +45,7 @@ export const ComputerFormSchema = z.object({
   is_occupied: z.boolean({ required_error: "Is Occupied is Required" }),
   modelno: z.string({ required_error: "Model Number is Required" }),
   os: z.string({ required_error: "OS is Required" }),
-  current_session: z.coerce.number({
-    required_error: "Current Session is Required",
-  }),
+  current_session: z.union([z.string(), z.null(), z.number()]),
   status: z.number({ required_error: "Computer Working Status is Required" }),
 });
 // "username": "BFtRbbg6Wv642abind5TFheDdwewKrHQ0w@RZxx6q1GP@ck5WlCpr--EnOXMByZgBX",
