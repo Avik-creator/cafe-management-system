@@ -47,7 +47,6 @@ export const ComputerForm: React.FC<ProductFormProps> = ({
   const { toast } = useToast();
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [imgLoading, setImgLoading] = useState(false);
 
   const title =
     initialData && params.computerId !== "new"
@@ -73,8 +72,8 @@ export const ComputerForm: React.FC<ProductFormProps> = ({
         initialData?.os == "Windows"
           ? "Windows"
           : initialData?.os == "Linux"
-          ? "Linux"
-          : "MACOSx",
+            ? "Linux"
+            : "MACOSx",
       status: initialData?.status == "WORKING" ? 1 : 2,
       current_session: initialData?.session == null ? 0 : initialData?.session,
     },
@@ -82,10 +81,10 @@ export const ComputerForm: React.FC<ProductFormProps> = ({
   });
 
   const onSubmit = async (data: any) => {
-    const { current_session, ...submissionData } = data;
     if (initialData && params.computerId !== "new") {
-      const responseStatus = await updateComputer(computerId, submissionData);
-      console.log(responseStatus);
+      data.current_session =
+        data.current_session == 0 ? null : data.current_session;
+      const responseStatus = await updateComputer(computerId, data);
 
       if (responseStatus == 200) {
         toast({
@@ -101,6 +100,7 @@ export const ComputerForm: React.FC<ProductFormProps> = ({
         });
       }
     } else {
+      const { current_session, ...submissionData } = data;
       const response = await addComputers(submissionData);
 
       if (response == 201) {
@@ -229,6 +229,26 @@ export const ComputerForm: React.FC<ProductFormProps> = ({
                 </FormItem>
               )}
             />
+            {/* <FormField
+              control={form.control}
+              name="current_session"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Current Session</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="string"
+                      defaultValue={String(field.value)}
+                      disabled={loading}
+                      placeholder="Current Session"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            /> */}
+
             <FormField
               control={form.control}
               name="current_session"
@@ -237,11 +257,14 @@ export const ComputerForm: React.FC<ProductFormProps> = ({
                   <FormLabel>Current Session</FormLabel>
                   <FormControl>
                     <Input
-                      type="number"
-                      defaultValue={field.value}
+                      type="text"
+                      value={field.value === null ? "" : String(field.value)}
                       disabled={loading}
                       placeholder="Current Session"
-                      {...field}
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        field.onChange(value === "" ? null : value);
+                      }}
                     />
                   </FormControl>
                   <FormMessage />

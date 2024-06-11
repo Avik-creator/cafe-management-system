@@ -1,14 +1,19 @@
-import { Metadata } from "next";
+"use client";
+
 import Link from "next/link";
 import UserAuthForm from "@/components/forms/Admin Forms/admin-auth-form";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import dynamic from "next/dynamic";
+import { globeConfig, sampleArcs } from "@/contants";
 
-export const metadata: Metadata = {
-  title: "Sign In",
-  description: "Sign In to Your Account",
-};
+const World = dynamic(
+  () => import("../../../components/globe").then((m) => m.World),
+  {
+    ssr: false,
+  }
+);
 
 export default function LoginPage() {
   return (
@@ -24,7 +29,11 @@ export default function LoginPage() {
           Sign Up
         </Link>
         <div className="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
-          <div className="absolute inset-0 bg-zinc-900" />
+          <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black) dark:bg-grid-white/[0.2] bg-grid-black/[0.2]">
+            <div className="h-[60%] w-full">
+              <World data={sampleArcs} globeConfig={globeConfig} />
+            </div>
+          </div>
           <div className="relative z-20 flex items-center text-lg font-medium">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -38,7 +47,7 @@ export default function LoginPage() {
             >
               <path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3" />
             </svg>
-            Logo
+            CCMS
           </div>
           <div className="relative z-20 mt-auto">
             <blockquote className="space-y-2">

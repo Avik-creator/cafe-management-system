@@ -1,37 +1,30 @@
-import { CalendarDateRangePicker } from "@/components/date-range-picker";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardFooter,
-} from "@/components/ui/card";
+import { DataCharts } from "@/components/Data-charts";
+
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getComputerList } from "@/server/DashboardList/computers";
+import { getReportList } from "@/server/DashboardList/reports";
 import { getUsersList } from "@/server/DashboardList/users";
 
 export default async function page() {
   const getUsers = await getUsersList();
   const getComputers = await getComputerList();
+  const getReports = await getReportList();
 
-  const [usersList, computersList] = await Promise.all([
+  const [usersList, computersList, reportsList] = await Promise.all([
     getUsers,
     getComputers,
+    getReports,
   ]);
 
   return (
-    <ScrollArea className="h-full">
+    <ScrollArea className="h-screen max-h-full bottom-4 md:bottom-0">
       <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">
         <div className="flex items-center justify-between space-y-2">
           <h2 className="text-3xl font-bold tracking-tight">
             Hi, Welcome back 👋
           </h2>
-          <div className="hidden md:flex items-center space-x-2">
-            <CalendarDateRangePicker />
-            <Button>Download</Button>
-          </div>
         </div>
         <Tabs defaultValue="overview" className="space-y-4">
           <TabsList>
@@ -54,14 +47,13 @@ export default async function page() {
                     strokeWidth="2"
                     className="h-4 w-4 text-muted-foreground"
                   >
-                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
                   </svg>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">{usersList.length}</div>
-                  {/* <p className="text-xs text-muted-foreground">
-                    +20.1% from last month
-                  </p> */}
+                  <div className="text-2xl font-bold">{usersList?.length}</div>
                 </CardContent>
               </Card>
               <Card>
@@ -79,14 +71,15 @@ export default async function page() {
                     strokeWidth="2"
                     className="h-4 w-4 text-muted-foreground"
                   >
-                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                    <circle cx="9" cy="7" r="4" />
-                    <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+                    <rect x="2" y="2" width="20" height="15" rx="2" />
+                    <rect x="2" y="19" width="20" height="3" rx="1.5" />
+                    <circle cx="7" cy="7" r="1" />
+                    <circle cx="17" cy="7" r="1" />
                   </svg>
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold">
-                    {computersList.length}
+                    {computersList?.length}
                   </div>
                   {/* <p className="text-xs text-muted-foreground">+10 Computers</p> */}
                 </CardContent>
@@ -106,20 +99,20 @@ export default async function page() {
                     strokeWidth="2"
                     className="h-4 w-4 text-muted-foreground"
                   >
-                    <rect width="20" height="14" x="2" y="5" rx="2" />
-                    <path d="M2 10h20" />
+                    <rect x="2" y="5" width="20" height="14" rx="2" />
+                    <line x1="2" y1="10" x2="22" y2="10" />
                   </svg>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">+2</div>
-                  <p className="text-xs text-muted-foreground">
-                    +2 from last month
-                  </p>
+                  <div className="text-2xl font-bold">{reportsList.length}</div>
+                  <p className="text-xs text-muted-foreground"></p>
                 </CardContent>
               </Card>
             </div>
           </TabsContent>
         </Tabs>
+
+        <DataCharts />
       </div>
     </ScrollArea>
   );

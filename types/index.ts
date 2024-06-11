@@ -38,7 +38,7 @@ export type User = {
   email: string;
   phone: string;
   address: string;
-  dob: string;
+  dob: string | Date;
 };
 
 export type Computers = {

@@ -63,7 +63,7 @@ export async function getUserAuth(username: string, password: string) {
     return { status: 200, user_id: retrievedUserId };
   } catch (error) {
     console.error("Error fetching user auth:", error);
-    return 500; // Internal Server Error
+    return 500;
   }
 }
 
