@@ -23,7 +23,7 @@ export default async function page() {
 
         <div className="flex items-start justify-between">
           <Heading
-            title={`Computers (${computers.length})`}
+            title={`Computers (${computers?.length})`}
             description="Manage Computers"
           />
 
@@ -36,7 +36,11 @@ export default async function page() {
         </div>
         <Separator />
 
-        <DataTable searchValue="Model_No" columns={columns} data={computers} />
+        <DataTable
+          searchValue="Model_No"
+          columns={columns}
+          data={computers ?? []}
+        />
       </div>
     </>
   );
