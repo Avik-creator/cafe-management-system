@@ -73,8 +73,8 @@ export const ComputerForm: React.FC<ProductFormProps> = ({
         initialData?.os == "Windows"
           ? "Windows"
           : initialData?.os == "Linux"
-          ? "Linux"
-          : "MACOSx",
+            ? "Linux"
+            : "MACOSx",
       status: initialData?.status == "WORKING" ? 1 : 2,
       current_session: initialData?.session == null ? 0 : initialData?.session,
     },
@@ -84,8 +84,7 @@ export const ComputerForm: React.FC<ProductFormProps> = ({
   const onSubmit = async (data: any) => {
     const { current_session, ...submissionData } = data;
     if (initialData && params.computerId !== "new") {
-      const responseStatus = await updateComputer(computerId, submissionData);
-      console.log(responseStatus);
+      const responseStatus = await updateComputer(computerId, data);
 
       if (responseStatus == 200) {
         toast({
