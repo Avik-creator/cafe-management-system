@@ -27,7 +27,6 @@ import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
 import { CalendarIcon, Trash } from "lucide-react";
-import { useSession } from "next-auth/react";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -41,7 +40,6 @@ export const CreateProfileOne: React.FC<ProfileFormType> = ({
   initialData,
   disabled,
 }) => {
-  const { data: session } = useSession();
   const params = useParams();
   const router = useRouter();
   const [open, setOpen] = useState(false);
@@ -50,14 +48,9 @@ export const CreateProfileOne: React.FC<ProfileFormType> = ({
   const description = "Edit Your Profile Description";
   const action = "Save changes";
 
-  const defaultValues = {
-    name: session?.user?.name as string,
-    email: session?.user?.email as string,
-  };
-
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileSchema),
-    defaultValues: defaultValues,
+    defaultValues: {},
     mode: "onChange",
   });
 
@@ -112,7 +105,12 @@ export const CreateProfileOne: React.FC<ProfileFormType> = ({
                   <FormItem>
                     <FormLabel>Name</FormLabel>
                     <FormControl>
-                      <Input disabled={loading} placeholder="John" {...field} type="text"/>
+                      <Input
+                        disabled={loading}
+                        placeholder="John"
+                        {...field}
+                        type="text"
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -146,7 +144,12 @@ export const CreateProfileOne: React.FC<ProfileFormType> = ({
                   <FormItem aria-disabled>
                     <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <Input disabled={true} placeholder="John" {...field} type="email"/>
+                      <Input
+                        disabled={true}
+                        placeholder="John"
+                        {...field}
+                        type="email"
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

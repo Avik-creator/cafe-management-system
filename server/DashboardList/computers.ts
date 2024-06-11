@@ -2,6 +2,7 @@
 
 import { cookies } from "next/headers";
 import { revalidatePath } from "next/cache";
+import { Computers } from "@/types";
 
 interface addComputers {
   modelno: string;
@@ -14,7 +15,7 @@ interface addComputers {
 const COMPUTER_URL = "http://4.227.136.16:8080/v1/computer/list";
 const ADD_COMPUTERS = "http://4.227.136.16:8080/v1/computer/add";
 
-export async function getComputerList() {
+export async function getComputerList(): Promise<Computers[] | null> {
   try {
     const cookieStore = cookies();
     const accessToken = cookieStore.get("access")?.value;

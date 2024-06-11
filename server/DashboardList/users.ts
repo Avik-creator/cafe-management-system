@@ -18,7 +18,7 @@ interface User {
   dob: Date;
 }
 
-export async function getUsersList() {
+export async function getUsersList(): Promise<User[] | null> {
   try {
     const cookieStore = cookies();
     const accessToken = cookieStore.get("access")?.value;

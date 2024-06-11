@@ -26,7 +26,7 @@ import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
 import { CalendarIcon, Trash } from "lucide-react";
-import { useSession } from "next-auth/react";
+
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -38,7 +38,6 @@ interface ProfileFormType {
 export const CreateProfileOne: React.FC<ProfileFormType> = ({
   initialData,
 }) => {
-  const { data: session } = useSession();
   const params = useParams();
   const router = useRouter();
   const { toast } = useToast();
@@ -48,14 +47,9 @@ export const CreateProfileOne: React.FC<ProfileFormType> = ({
   const description = "Edit Your Profile Description";
   const action = "Save changes";
 
-  const defaultValues = {
-    name: session?.user?.name as string,
-    email: session?.user?.email as string,
-  };
-
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileSchema),
-    defaultValues: defaultValues,
+    defaultValues: {},
     mode: "onChange",
   });
 

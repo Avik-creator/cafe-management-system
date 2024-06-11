@@ -30,7 +30,7 @@ export async function getUserAuth(username: string, password: string) {
     return 200;
   } catch (error) {
     console.error("Error fetching user auth:", error);
-    return 500; // Internal Server Error
+    return 500;
   }
 }
 
