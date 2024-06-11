@@ -8,6 +8,11 @@ import {
   CartesianGrid,
   YAxis,
   Legend,
+  Radar,
+  RadarChart,
+  PolarGrid,
+  PolarAngleAxis,
+  PolarRadiusAxis,
 } from "recharts";
 
 type Props = {
@@ -46,6 +51,21 @@ export const AreaVarient = ({ users, computers, reports }: Props) => {
       userValue: 0,
       computerValue: 0,
       reportValue: 0,
+    },
+  ];
+
+  const radarData = [
+    {
+      category: "Users",
+      value: users.length,
+    },
+    {
+      category: "Computers",
+      value: computers.length,
+    },
+    {
+      category: "Reports",
+      value: reports.length,
     },
   ];
 

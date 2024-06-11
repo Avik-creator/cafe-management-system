@@ -1,6 +1,5 @@
 "use client";
 
-import { Metadata } from "next";
 import Link from "next/link";
 import UserAuthForm from "@/components/forms/Admin Forms/admin-auth-form";
 import { buttonVariants } from "@/components/ui/button";

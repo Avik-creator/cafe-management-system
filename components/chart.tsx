@@ -17,13 +17,13 @@ export const Chart = ({ users, computers, reports }: Props) => {
         <CardTitle className="text-xl line-clamp-1">Total Overview</CardTitle>
       </CardHeader>
 
-      <CardContent className="h-full">
+      <CardContent className="h-full justify-between flex flex-1">
         {users.length === 0 || computers.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full">
             <p className="text-muted-foreground text-sm">No Data Found</p>
           </div>
         ) : (
-          <div className="h-full min-h-full">
+          <div className="flex flex-1 justify-between gap-40">
             <AreaVarient
               users={users}
               computers={computers}

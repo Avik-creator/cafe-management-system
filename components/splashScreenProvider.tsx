@@ -1,11 +1,15 @@
 "use client";
 import { useEffect, useState } from "react";
 import SplashScreen from "./splashScreen";
+import { usePathname } from "next/navigation";
 
 const SplashScreenProvider = ({
   children,
 }: Readonly<{ children: React.ReactNode }>) => {
-  const [isLoading, setIsLoading] = useState(true);
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+
+  const [isLoading, setIsLoading] = useState(isHome);
 
   useEffect(() => {
     const timer = setTimeout(() => {
