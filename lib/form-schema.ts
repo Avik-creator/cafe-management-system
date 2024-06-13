@@ -103,6 +103,31 @@ export const SignupFormSchema = z
     path: ["confirmPassword"],
   });
 
+export const editUserConfirmFormSchema = z.object({
+  username: z
+    .string({ required_error: "Username is Required" }),
+  password: z
+    .string({ required_error: "Password is required" })
+});
+
+export const editUserFormSchema = z
+  .object({
+    email: z
+      .string()
+      .email({ message: "Enter a valid email address" }),
+    password: z
+      .string({ required_error: "Password is required" })
+      .min(6, { message: "Password must be at least 6 characters" }),
+    first_name: z.string(),
+    last_name: z.string(),
+    username: z.string({ required_error: "Username is required" }),
+    dob: z.date(),
+    address: z.string(),
+    phone: z.string(),
+  });
+
+
+
 export type SignupFormValues = z.infer<typeof SignupFormSchema>;
 
 export type UserSigninFormValues = z.infer<typeof SigninFormSchema>;
