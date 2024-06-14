@@ -73,8 +73,7 @@ export const UserFormSchema = z.object({
 });
 
 export const SigninFormSchema = z.object({
-  username: z
-    .string({ required_error: "Username is Required to Signin" }),
+  username: z.string({ required_error: "Username is Required to Signin" }),
   password: z
     .string({ required_error: "Password is required" })
     .min(6, { message: "Password must be at least 6 characters" }),
@@ -94,7 +93,7 @@ export const SignupFormSchema = z
     first_name: z.string({ required_error: "First Name is required" }),
     last_name: z.string({ required_error: "Last Name is required" }),
     username: z.string({ required_error: "Username is required" }),
-    dob: z.date({ required_error: "Date of birth is required" }),
+    dob: z.date().pipe(z.coerce.string()),
     address: z.string({ required_error: "Address is required" }),
     phone: z.string({ required_error: "Phone is required" }),
   })
@@ -104,29 +103,22 @@ export const SignupFormSchema = z
   });
 
 export const editUserConfirmFormSchema = z.object({
-  username: z
-    .string({ required_error: "Username is Required" }),
-  password: z
-    .string({ required_error: "Password is required" })
+  username: z.string({ required_error: "Username is Required" }),
+  password: z.string({ required_error: "Password is required" }),
 });
 
-export const editUserFormSchema = z
-  .object({
-    email: z
-      .string()
-      .email({ message: "Enter a valid email address" }),
-    password: z
-      .string({ required_error: "Password is required" })
-      .min(6, { message: "Password must be at least 6 characters" }),
-    first_name: z.string(),
-    last_name: z.string(),
-    username: z.string({ required_error: "Username is required" }),
-    dob: z.date(),
-    address: z.string(),
-    phone: z.string(),
-  });
-
-
+export const editUserFormSchema = z.object({
+  email: z.string().email({ message: "Enter a valid email address" }),
+  password: z
+    .string({ required_error: "Password is required" })
+    .min(6, { message: "Password must be at least 6 characters" }),
+  first_name: z.string(),
+  last_name: z.string(),
+  username: z.string({ required_error: "Username is required" }),
+  dob: z.date(),
+  address: z.string(),
+  phone: z.string(),
+});
 
 export type SignupFormValues = z.infer<typeof SignupFormSchema>;
 

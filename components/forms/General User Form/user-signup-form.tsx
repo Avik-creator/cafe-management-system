@@ -28,8 +28,8 @@ import { signUpCafeUser } from "@/server/Auth/authAPI";
 import { useToast } from "@/components/ui/use-toast";
 
 export default function UserSignUpForm() {
-  const router = useRouter()
-  const { toast } = useToast()
+  const router = useRouter();
+  const { toast } = useToast();
 
   const searchParams = useSearchParams();
   const [loading, setLoading] = useState(false);
@@ -39,20 +39,19 @@ export default function UserSignUpForm() {
   });
 
   const onSubmit = async (data: SignupFormValues) => {
-    const {confirmPassword, ...newData} = data
+    const { confirmPassword, ...newData } = data;
 
-    const formattedDate = data.dob ? format(new Date(data.dob), "yyyy-MM-dd") : '';
-    console.log('Submitted date as string:', formattedDate);
+    const formattedDate = data.dob
+      ? format(new Date(data.dob), "yyyy-MM-dd")
+      : "";
 
-    newData.dob = formattedDate as string;
-    
-    console.log("NEW DATA: ", newData);
-    
-    const signupData = await signUpCafeUser(newData)
-    console.log("SIGN UP DATA:", signupData)
+    newData.dob = formattedDate;
 
-    if(signupData!= 401) {
-      router.push("/user/sigin")
+    const signupData = await signUpCafeUser(newData);
+    console.log("SIGN UP DATA:", signupData);
+
+    if (signupData != 401) {
+      router.push("/user/sigin");
     }
   };
 
@@ -231,7 +230,7 @@ export default function UserSignUpForm() {
                         )}
                       >
                         {field.value ? (
-                          format(field.value, "PPP")
+                          format(Number(field.value), "PPP")
                         ) : (
                           <span>Pick a date</span>
                         )}
@@ -242,7 +241,7 @@ export default function UserSignUpForm() {
                   <PopoverContent className="w-auto p-0" align="start">
                     <Calendar
                       mode="single"
-                      selected={field.value}
+                      selected={field.value ? new Date(field.value) : undefined}
                       onSelect={field.onChange}
                       disabled={(date) =>
                         date > new Date() || date < new Date("1900-01-01")
@@ -264,8 +263,9 @@ export default function UserSignUpForm() {
             onClick={() => {
               toast({
                 title: "Account Successfully Created",
-                description: "Please login with newly created username and password.",
-              })
+                description:
+                  "Please login with newly created username and password.",
+              });
             }}
           >
             Sign Up
