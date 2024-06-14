@@ -3,8 +3,6 @@
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 
-const BASE_URL = "http://4.227.136.16:8080";
-
 interface Report {
   report_id: number;
   title: string;
@@ -26,13 +24,16 @@ export async function getReportList(): Promise<Report[]> {
       throw new Error("No access token available");
     }
 
-    const response = await fetch(`${BASE_URL}/v1/report/list`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
+    const response = await fetch(
+      `${process.env.SERVER_API_BASE_URL}/report/list`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
 
     if (!response.ok) {
       throw new Error(`Error: ${response.statusText}`);
@@ -57,13 +58,16 @@ export async function getReportById(reportId: string): Promise<Report | null> {
       throw new Error("No access token available");
     }
 
-    const response = await fetch(`${BASE_URL}/v1/report/manage/${reportId}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
+    const response = await fetch(
+      `${process.env.SERVER_API_BASE_URL}/report/manage/${reportId}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
 
     if (!response.ok) {
       throw new Error(`Error: ${response.statusText}`);
@@ -86,14 +90,17 @@ export async function updateReport(reportId: string, statusId: Number) {
       throw new Error("No access token available");
     }
 
-    const response = await fetch(`${BASE_URL}/v1/report/manage/${reportId}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
-      },
-      body: JSON.stringify({ status: statusId }),
-    });
+    const response = await fetch(
+      `${process.env.SERVER_API_BASE_URL}/report/manage/${reportId}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify({ status: statusId }),
+      }
+    );
 
     if (!response.ok) {
       throw new Error(`Error: ${response.statusText}`);

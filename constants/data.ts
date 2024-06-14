@@ -9,36 +9,6 @@ import {
   Report,
 } from "@/types";
 
-export const users: User[] = [
-  {
-    username: "user1",
-    first_name: "John",
-    last_name: "Doe",
-    email: "user1@example.com",
-    phone: "+1-800-555-1234",
-    address: "123 Main St, Anytown, USA",
-    dob: "1980-01-01",
-  },
-  {
-    username: "user2",
-    first_name: "Jane",
-    last_name: "Smith",
-    email: "user2@example.com",
-    phone: "+1-123-335-2345",
-    address: "456 Elm St, Othertown, USA",
-    dob: "1985-09-23",
-  },
-  {
-    username: "user3",
-    first_name: "Alice",
-    last_name: "Johnson",
-    email: "user3@example.com",
-    phone: "+1-899-756-4123",
-    address: "789 Oak St, Anothertown, USA",
-    dob: "1992-11-11",
-  },
-];
-
 export const computers: Computers[] = [
   {
     computer_id: 1,
@@ -721,6 +691,12 @@ export const navItems: NavItem[] = [
   //   icon: "logo",
   //   label: "logout",
   // },
+  {
+    title: "Sessions",
+    href: "/dashboard/sessions",
+    icon: "airplay",
+    label: "session",
+  },
 ];
 
 export const ReportList = [

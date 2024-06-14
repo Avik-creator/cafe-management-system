@@ -31,16 +31,6 @@ export interface FooterItem {
 
 /* API data format */
 
-export type User = {
-  username: string;
-  first_name: string;
-  last_name: string;
-  email: string;
-  phone: string;
-  address: string;
-  dob: string | Date;
-};
-
 export type Computers = {
   computer_id: number;
   Model_No: string;
@@ -75,14 +65,6 @@ export type Cafe = {
   price: number;
 };
 
-export type Session = {
-  is_ongoing: boolean;
-  start: string;
-  user: number;
-  end: string;
-  cafe: number;
-};
-
 export type report = {
   title: string;
   description: string;
@@ -94,3 +76,50 @@ export type ReportStatusEnum = [
   { id: 2; name: "Approved" },
   { id: 3; name: "Rejected" }
 ];
+
+export type User = {
+  id: number;
+  password: string;
+  last_login: string | null;
+  is_superuser: boolean;
+  username: string;
+  is_staff: boolean;
+  is_active: boolean;
+  date_joined: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone: string;
+  address: string;
+  dob: string | Date;
+  time_created: string;
+};
+
+// export type User = {
+//   username: string;
+//   first_name: string;
+//   last_name: string;
+//   email: string;
+//   phone: string;
+//   address: string;
+//   dob: string | Date;
+// };
+interface ReportData {
+  id: number;
+  title: string;
+  description: string;
+  current_session_id: number;
+  report_date: string;
+  status: number | null;
+}
+
+export type Session = {
+  id: number;
+  is_ongoing: boolean;
+  end: string | null;
+  user: number;
+  time_created: string;
+  report_data: ReportData[];
+  sub_total: number;
+  user_data: User[];
+};

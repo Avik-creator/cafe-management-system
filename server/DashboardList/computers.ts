@@ -3,6 +3,7 @@
 import { cookies } from "next/headers";
 import { revalidatePath } from "next/cache";
 import { Computers } from "@/types";
+import { ADD_COMPUTERS, COMPUTER_URL } from "../ApiList";
 
 interface addComputers {
   modelno: string;
@@ -11,9 +12,6 @@ interface addComputers {
   status: string;
   current_session: string;
 }
-
-const COMPUTER_URL = "http://4.227.136.16:8080/v1/computer/list";
-const ADD_COMPUTERS = "http://4.227.136.16:8080/v1/computer/add";
 
 export async function getComputerList(): Promise<Computers[] | null> {
   try {
@@ -86,7 +84,7 @@ export async function deleteComputers(computerId: string) {
     }
 
     const response = await fetch(
-      `http://4.227.136.16:8080/v1/computer/manage/${computerId}`,
+      `${process.env.SERVER_API_BASE_URL}/computer/manage/${computerId}`,
       {
         method: "DELETE",
         headers: {
@@ -122,7 +120,7 @@ export async function updateComputer(
     }
 
     const response = await fetch(
-      `http://4.227.136.16:8080/v1/computer/manage/${computerId}`,
+      `${process.env.SERVER_API_BASE_URL}/computer/manage/${computerId}`,
       {
         method: "PUT",
         headers: {
@@ -156,7 +154,7 @@ export async function getComputer(computerId: string) {
     }
 
     const response = await fetch(
-      `http://4.227.136.16:8080/v1/computer/manage/${computerId}`,
+      `${process.env.SERVER_API_BASE_URL}/computer/manage/${computerId}`,
       {
         method: "GET",
         headers: {

@@ -3,14 +3,13 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { JwtPayload as DefaultJwtPayload, jwtDecode } from "jwt-decode";
-import { users } from "@/constants/data";
-
-const REGISTER_URL = "http://4.227.136.16:8080/v1/user/addCafeUser";
-const AUTH_URL = "http://4.227.136.16:8080/v1/user/token";
-const MANAGE_PROFILE_URL = "http://4.227.136.16:8080/v1/user/manageUser";
-const ADD_REPORT_URL = "http://4.227.136.16:8080/v1/report/add";
-const GET_COMPUTER_LIST_URL =
-  "http://4.227.136.16:8080/v1/computer/listofavailablecomputer";
+import {
+  AUTH_URL,
+  REGISTER_URL,
+  MANAGE_PROFILE_URL,
+  ADD_REPORT_URL,
+  GET_COMPUTER_LIST_URL,
+} from "../ApiList";
 
 interface JwtPayload extends DefaultJwtPayload {
   user_id: string;

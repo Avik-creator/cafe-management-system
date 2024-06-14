@@ -2,10 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
-
-const USER_LISTURL = "http://4.227.136.16:8080/v1/user/listCafeUsers";
-const ADD_USER = "http://4.227.136.16:8080/v1/user/addCafeUser";
-const MANAGE_USER = "http://4.227.136.16:8080/v1/user/manageUser";
+import { USER_LISTURL, ADD_USER, MANAGE_USER } from "../ApiList";
 
 interface User {
   username: string;

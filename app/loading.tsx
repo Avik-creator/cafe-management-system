@@ -3,8 +3,8 @@ import React from "react";
 
 const Loading = () => {
   return (
-    <div className="h-[40rem] relative w-full bg-black flex flex-col items-center justify-center overflow-hidden rounded-md">
-      <div className="w-full absolute inset-0 h-screen">
+    <div className="h-[40rem] bg-black relative ">
+      <div className="inset-0 flex flex-col items-center justify-center overflow-hidden rounded-md  absolute w-full">
         <SparklesCore
           id="tsparticlesfullpage"
           background="transparent"
