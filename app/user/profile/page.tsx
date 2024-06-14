@@ -44,18 +44,16 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import {
-  closeSession,
   editCafeUserProfile,
   getCafeUserProfile,
   reportSubmit,
   showListAvailableComputers,
   signout,
-  startSession,
 } from "@/server/Auth/authAPI";
+import { startSession, closeSession } from "@/server/DashboardList/sessions";
 import { useRouter } from "next/navigation";
 import { Textarea } from "@/components/ui/textarea";
-// import { Form } from "@/components/ui/form";
-import { toast, useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/components/ui/use-toast";
 
 export default function Component() {
   const { toast } = useToast();
@@ -100,7 +98,7 @@ export default function Component() {
     price: "Loading ...",
   });
 
-  const [logoutDisabled, setLogoutDisabled] = useState(false)
+  const [logoutDisabled, setLogoutDisabled] = useState(false);
 
   const handleEditFormChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -159,7 +157,7 @@ export default function Component() {
     e.preventDefault();
     setIsSelectDisabled(true);
     const status = await startSession(selectedValue);
-    setLogoutDisabled(true)
+    setLogoutDisabled(true);
     console.log("status", status);
   };
 
@@ -214,12 +212,12 @@ export default function Component() {
       });
     } else {
       setBillDetails(billData);
-      setLogoutDisabled(false)
+      setLogoutDisabled(false);
     }
   };
 
   const logout = async () => {
-    setLogoutDisabled(true)
+    setLogoutDisabled(true);
     toast({
       title: "Logging you out ...",
       variant: "default",
@@ -229,14 +227,13 @@ export default function Component() {
       toast({
         title: "Logged out successfully",
         variant: "success",
-      });  
-      } catch (error) {
+      });
+    } catch (error) {
       toast({
         title: "Could not log you out",
         description: "Please try to log out some time later",
         variant: "destructive",
-      });  
-      
+      });
     }
     router.push("/user/signin");
   };
@@ -308,7 +305,9 @@ export default function Component() {
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                   {/* <AlertDialogCancel hidden>Cancel</AlertDialogCancel> */}
-                  <AlertDialogAction onClick={logout} disabled={logoutDisabled}>Logout</AlertDialogAction>
+                  <AlertDialogAction onClick={logout} disabled={logoutDisabled}>
+                    Logout
+                  </AlertDialogAction>
                 </AlertDialogFooter>
               </AlertDialogContent>
             </AlertDialog>

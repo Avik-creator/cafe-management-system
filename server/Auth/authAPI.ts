@@ -51,7 +51,10 @@ export async function getUserAuth(username: string, password: string) {
 
     if (!response.ok) {
       if (response.status === 401) {
-        return { status: response.status, message: "Incorrect username or password" };
+        return {
+          status: response.status,
+          message: "Incorrect username or password",
+        };
       }
       throw new Error(`Error: ${response.statusText}`);
     }
@@ -214,73 +217,6 @@ export async function showListAvailableComputers() {
 
     const computerList = await response.json();
     return computerList;
-  } catch (error) {
-    console.error("Error loading computers:", error);
-    return null;
-  }
-}
-
-export async function startSession(data: any) {
-  try {
-    const cookieStore = cookies();
-    const accessToken = cookieStore.get("access")?.value;
-
-    const user = await getUserId();
-
-    const payload = {
-      user,
-      modelno: data,
-    };
-
-    const response = await fetch(
-      "http://4.227.136.16:8080/v1/session/startsession",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
-        },
-        body: JSON.stringify(payload),
-      }
-    );
-
-    if (!response.ok) {
-      console.log("Session could not be started");
-
-      throw new Error(`Error: ${response.statusText}`);
-    }
-    return 200;
-  } catch (error) {
-    console.error("Error loading computers:", error);
-    return null;
-  }
-}
-
-export async function closeSession() {
-  try {
-    const cookieStore = cookies();
-    const accessToken = cookieStore.get("access")?.value;
-
-    const user_id = await getUserId();
-
-    const response = await fetch(
-      `http://4.227.136.16:8080/v1/session/closesession/${user_id}`,
-      {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
-        },
-      }
-    );
-
-    if (!response.ok) {
-      console.log("Session could not be closed or not found.");
-      return 404
-    }
-
-    const data = await response.json();
-    return data;
   } catch (error) {
     console.error("Error loading computers:", error);
     return null;

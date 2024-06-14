@@ -2,18 +2,13 @@
 
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
-import { USER_LISTURL, ADD_USER, MANAGE_USER } from "../ApiList";
-
-interface User {
-  username: string;
-  password: string;
-  first_name: string;
-  last_name: string;
-  email: string;
-  phone: string;
-  address: string;
-  dob: Date;
-}
+import {
+  USER_LISTURL,
+  ADD_USER,
+  MANAGE_USER,
+  DELETE_USER_API,
+} from "../ApiList";
+import { User } from "@/types";
 
 export async function getUsersList(): Promise<User[] | null> {
   try {
@@ -130,6 +125,35 @@ export async function updateUser(user: any, id: String) {
     return 200;
   } catch (error) {
     console.error("Error updating user:", error);
+    return 500;
+  }
+}
+
+export async function deleteUser(userId: string) {
+  try {
+    const cookieStore = cookies();
+    const accessToken = cookieStore.get("access")?.value;
+
+    if (!accessToken) {
+      throw new Error("No Access Token Avaliable. Intruder Alert!!!");
+    }
+
+    const response = await fetch(`${DELETE_USER_API}/${userId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.statusText}`);
+    }
+
+    revalidatePath("/dashboard/user");
+    return 200;
+  } catch (error) {
+    console.error("Error deleting user:", error);
     return 500;
   }
 }

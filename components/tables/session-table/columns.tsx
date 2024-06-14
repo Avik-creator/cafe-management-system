@@ -1,13 +1,13 @@
 "use client";
-import { ColumnDef } from "@tanstack/react-table";
-// import { CellAction } from "./cell-action";
-import { User } from "@/types/index";
 import { Checkbox } from "@/components/ui/checkbox";
-import { ArrowUpDown, MoreHorizontal } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { CellAction } from "./cell-action";
 
-export const columns: ColumnDef<User>[] = [
+import { ColumnDef } from "@tanstack/react-table";
+import { CellAction } from "./cell-action";
+import { ArrowUpDown } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Session } from "@/types";
+
+export const columns: ColumnDef<Session>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -28,7 +28,41 @@ export const columns: ColumnDef<User>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: "username",
+    accessorKey: "id",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          {"Session ID"}
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+  },
+  {
+    accessorKey: "is_ongoing",
+    header: "Is Ongoing",
+  },
+  {
+    accessorKey: "sub_total",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          {"Sub Total"}
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+    cell: ({ row }) => `Rs. ${row.original.sub_total}`,
+  },
+
+  {
+    accessorKey: "user_data[0].username",
     header: ({ column }) => {
       return (
         <Button
@@ -40,60 +74,42 @@ export const columns: ColumnDef<User>[] = [
         </Button>
       );
     },
+    cell: ({ row }) => row.original.user_data[0].username,
   },
+
   {
-    accessorKey: "email",
+    accessorKey: "report_data.length",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          {"Email Id"}
+          {"Number of Reports"}
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
     },
+    cell: ({ row }) => row.original.report_data.length,
   },
   {
-    accessorKey: "first_name",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          {"First Name"}
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
+    accessorKey: "time_created",
+    header: "Time Created",
+    cell: ({ row }) => {
+      const date = new Date(row.original.time_created);
+      const formattedDate = date.toLocaleDateString("en-CA");
+      return formattedDate;
     },
   },
   {
-    accessorKey: "last_name",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          {"Last Name"}
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
+    accessorKey: "end",
+    header: "End Time",
+    cell: ({ row }) => {
+      if (row.original.end === null) return "Ongoing";
+      const date = new Date(row.original.end);
+      const formattedDate = date.toLocaleDateString("en-CA");
+      return formattedDate;
     },
-  },
-  {
-    accessorKey: "phone",
-    header: "Phone Number",
-  },
-  {
-    accessorKey: "dob",
-    header: "Date of Birth",
-  },
-  {
-    accessorKey: "address",
-    header: "User Address",
   },
   {
     id: "actions",
