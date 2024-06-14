@@ -31,7 +31,6 @@ export const getUserId = () => {
     }
 
     const jwtDecoded = cookieDecoding(accessToken as string);
-    console.log(jwtDecoded.user_id);
 
     return jwtDecoded.user_id;
   } catch (error) {
@@ -246,8 +245,7 @@ export async function startSession(data: any) {
     );
 
     if (!response.ok) {
-      console.log("Session could not be started");
-
+      console.log("Session could not be started");  
       throw new Error(`Error: ${response.statusText}`);
     }
     return 200;

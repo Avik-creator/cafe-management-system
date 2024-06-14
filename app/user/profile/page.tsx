@@ -55,7 +55,9 @@ import {
 import { useRouter } from "next/navigation";
 import { Textarea } from "@/components/ui/textarea";
 // import { Form } from "@/components/ui/form";
-import { toast, useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/components/ui/use-toast";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Component() {
   const { toast } = useToast();
@@ -70,6 +72,7 @@ export default function Component() {
     address: "",
     dob: "",
   });
+  const [profileLoading, setProfileLoading] = useState(true);
 
   const [isSelectDisabled, setIsSelectDisabled] = useState(false);
   const [computerList, setComputerList] = useState<Array<{ Model_No: string }>>(
@@ -97,10 +100,13 @@ export default function Component() {
 
   const [billDetails, setBillDetails] = useState({
     Cafeusername: "Loading...",
-    price: "Loading ...",
+    price: "Loading...",
   });
 
-  const [logoutDisabled, setLogoutDisabled] = useState(false)
+  const [logoutDisabled, setLogoutDisabled] = useState(false);
+
+  const [localValue, setLocalValue, localKeyExists, removeLocal] =
+    useLocalStorage<string>("system", "");
 
   const handleEditFormChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -131,36 +137,58 @@ export default function Component() {
 
   const handleSelectChange = (value: string) => {
     setSelectedValue(value);
-    console.log(selectedValue);
   };
 
   useEffect(() => {
-    async function loadUserProfileId() {
-      // const user_id = await getUserId()
-      // console.log("USER ID IN PROFILE PAGE", user_id);.
-      const profileData = await getCafeUserProfile();
-      setUserProfile(profileData);
-
+    async function loadUserProfile() {
+      try {
+        const profileData = await getCafeUserProfile();
+        if (profileData) {
+          setProfileLoading(false);
+          setUserProfile(profileData);
+        } else {
+          setProfileLoading(true);
+          toast({
+            title: "Failed to fetch profile",
+            description: "Please reload the page or login again",
+            variant: "destructive",
+          });
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    async function loadComputerList() {
       const computerList = await showListAvailableComputers();
       setComputerList(computerList);
     }
-    loadUserProfileId();
+    loadUserProfile();
+
+    if (userProfile && localKeyExists()) {
+      setSelectedValue(localValue);
+      setIsSelectDisabled(true);
+      } else {
+      loadComputerList();
+    }
   }, []);
 
   useEffect(() => {
     // Update editFormData only when userProfile changes and userProfile.username is set
-    if (userProfile.username !== "") {
+    if (userProfile && userProfile.username !== "") {
       const { username, ...rest } = userProfile;
       setEditFormData(rest); // Update editFormData with rest of the fields
     }
   }, [userProfile]);
 
+
   const handleComputerSelectSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setIsSelectDisabled(true);
-    const status = await startSession(selectedValue);
-    setLogoutDisabled(true)
-    console.log("status", status);
+
+    await startSession(selectedValue);
+
+    setLogoutDisabled(true);
+    setLocalValue(selectedValue);
   };
 
   const handleReportSubmit = async (e: FormEvent) => {
@@ -214,12 +242,13 @@ export default function Component() {
       });
     } else {
       setBillDetails(billData);
-      setLogoutDisabled(false)
+      removeLocal();
+      setLogoutDisabled(false);
     }
   };
 
   const logout = async () => {
-    setLogoutDisabled(true)
+    setLogoutDisabled(true);
     toast({
       title: "Logging you out ...",
       variant: "default",
@@ -229,14 +258,13 @@ export default function Component() {
       toast({
         title: "Logged out successfully",
         variant: "success",
-      });  
-      } catch (error) {
+      });
+    } catch (error) {
       toast({
         title: "Could not log you out",
         description: "Please try to log out some time later",
         variant: "destructive",
-      });  
-      
+      });
     }
     router.push("/user/signin");
   };
@@ -251,16 +279,22 @@ export default function Component() {
           <div className="lg:ml-auto flex items-center gap-2 justify-center">
             <img
               alt="Avatar"
-              className="rounded-full"
+              className="rounded-full invert"
               height="32"
-              src="/placeholder.svg"
+              src="https://svgshare.com/i/7aS.svg"
               style={{
                 aspectRatio: "32/32",
                 objectFit: "cover",
               }}
               width="32"
             />
-            <div className="font-semibold">{`${userProfile.username}`}</div>
+
+            {!profileLoading ? (
+              <div className="font-semibold">{`${userProfile?.username}`}</div>
+            ) : (
+              <Skeleton className="h-4 w-[100px]" />
+            )}
+
             <Button size="sm" variant="secondary">
               Report Problem
             </Button>
@@ -292,7 +326,7 @@ export default function Component() {
                           Billing Name:{" "}
                         </span>
                         <span className="text-left">
-                          {billDetails?.Cafeusername}
+                          {billDetails.Cafeusername ?? "-"}
                         </span>
                       </div>
                       <div className="grid grid-cols-2 items-center gap-4">
@@ -300,7 +334,7 @@ export default function Component() {
                           Total Bill:{" "}
                         </span>
                         <span className="text-left">
-                          Rs. {billDetails?.price}
+                          Rs. {billDetails.price ?? 0}
                         </span>
                       </div>
                     </div>
@@ -308,15 +342,18 @@ export default function Component() {
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                   {/* <AlertDialogCancel hidden>Cancel</AlertDialogCancel> */}
-                  <AlertDialogAction onClick={logout} disabled={logoutDisabled}>Logout</AlertDialogAction>
+                  <AlertDialogAction onClick={logout} disabled={logoutDisabled}>
+                    Logout
+                  </AlertDialogAction>
                 </AlertDialogFooter>
               </AlertDialogContent>
             </AlertDialog>
           </div>
         </header>
+
         <main className="flex-1 flex flex-col gap-4 p-4 md:gap-8 md:p-6 ">
           <form onSubmit={handleComputerSelectSubmit} className="flex flex-row">
-            <Select name="modelno" onValueChange={handleSelectChange}>
+            <Select name="modelno" value={selectedValue} onValueChange={handleSelectChange}>
               <SelectTrigger
                 className="w-1/4 bg-slate-700"
                 disabled={computerList.length <= 0 || isSelectDisabled}
@@ -348,13 +385,21 @@ export default function Component() {
               <CardContent className="grid gap-2 text-sm">
                 <div>
                   <div className="font-medium">Name</div>
-                  <div>
-                    {userProfile.first_name} {userProfile.last_name}
-                  </div>
+                  {!profileLoading ? (
+                    <div>
+                      {userProfile.first_name} {userProfile.last_name}
+                    </div>
+                  ) : (
+                    <Skeleton className="h-5 w-[250px]" />
+                  )}
                 </div>
                 <div>
                   <div className="font-medium">Email</div>
-                  <div>{userProfile.email}</div>
+                  {!profileLoading ? (
+                    <div>{userProfile.email}</div>
+                  ) : (
+                    <Skeleton className="h-5 w-[250px]" />
+                  )}
                 </div>
               </CardContent>
             </Card>
