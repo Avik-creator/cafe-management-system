@@ -105,7 +105,8 @@ export const columns: ColumnDef<Session>[] = [
     accessorKey: "end",
     header: "End Time",
     cell: ({ row }) => {
-      if (row.original.end === null) return "Ongoing";
+      if (row.original.end === null || row.original.end === undefined)
+        return "OnGoing";
       const date = new Date(row.original.end);
       const formattedDate = date.toLocaleDateString("en-CA");
       return formattedDate;
