@@ -22,7 +22,7 @@ export default function SignIn() {
             <CardHeader className="space-y-1">
               <CardTitle className="text-2xl text-center">Sign in</CardTitle>
               <CardDescription className="text-center">
-                Enter your email and password to login
+                Enter your username and password to login
               </CardDescription>
             </CardHeader>
             <CardContent>

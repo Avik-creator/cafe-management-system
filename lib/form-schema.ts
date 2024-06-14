@@ -93,7 +93,7 @@ export const SignupFormSchema = z
     first_name: z.string({ required_error: "First Name is required" }),
     last_name: z.string({ required_error: "Last Name is required" }),
     username: z.string({ required_error: "Username is required" }),
-    dob: z.date().pipe(z.coerce.string()),
+    dob: z.date(),
     address: z.string({ required_error: "Address is required" }),
     phone: z.string({ required_error: "Phone is required" }),
   })
