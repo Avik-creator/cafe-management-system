@@ -50,7 +50,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
         onClose={() => setOpen(false)}
         onConfirm={onConfirm}
         loading={loading}
-        title={`Bill Amount: Rs. ${data.sub_total}`}
+        title={`Bill Amount: Rs.${data.sub_total}`}
         description={`User: ${data.user_data[0].username} is about to be closed. Are you sure?`}
       />
       <DropdownMenu modal={false}>
