@@ -8,6 +8,9 @@ import { revalidatePath } from "next/cache";
 
 export async function getSessionList(): Promise<Session[]> {
   try {
+    const timeoutDuration = 50000;
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), timeoutDuration);
     const cookieStore = cookies();
     const accessToken = cookieStore.get("access")?.value;
 
@@ -21,7 +24,10 @@ export async function getSessionList(): Promise<Session[]> {
         "Content-Type": "application/json",
         Authorization: `Bearer ${accessToken}`,
       },
+      signal: controller.signal,
     });
+
+    clearTimeout(timeoutId);
 
     if (!response.ok) {
       throw new Error(`Error: ${response.statusText}`);
