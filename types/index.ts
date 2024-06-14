@@ -95,15 +95,15 @@ export type User = {
   time_created: string;
 };
 
-// export type User = {
-//   username: string;
-//   first_name: string;
-//   last_name: string;
-//   email: string;
-//   phone: string;
-//   address: string;
-//   dob: string | Date;
-// };
+export type CafeUser = {
+  username: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone: string;
+  address: string;
+  dob: string | Date;
+};
 interface ReportData {
   id: number;
   title: string;

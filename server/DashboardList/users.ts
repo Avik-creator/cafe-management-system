@@ -8,7 +8,7 @@ import {
   MANAGE_USER,
   DELETE_USER_API,
 } from "../ApiList";
-import { User } from "@/types";
+import { CafeUser, User } from "@/types";
 
 export async function getUsersList(): Promise<User[] | null> {
   try {
@@ -39,7 +39,7 @@ export async function getUsersList(): Promise<User[] | null> {
   }
 }
 
-export async function addUser(user: User) {
+export async function addUser(user: CafeUser) {
   try {
     const cookieStore = cookies();
     const accessToken = cookieStore.get("access")?.value;
