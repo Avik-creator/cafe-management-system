@@ -39,9 +39,9 @@ export default function UserAuthForm() {
     setLoading(true);
     try {
       const responseCode = await getUserAuth(data.username, data.password);
-      if (responseCode == 200) {
+      if (responseCode.status == 200) {
         router.push("/dashboard");
-      } else if (responseCode == 401) {
+      } else if (responseCode.status == 401) {
         toast({
           variant: "destructive",
           title: "Wrong Credentials",

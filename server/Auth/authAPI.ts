@@ -5,12 +5,12 @@ import { redirect } from "next/navigation";
 import { JwtPayload as DefaultJwtPayload, jwtDecode } from "jwt-decode";
 import { users } from "@/constants/data";
 
-
 const REGISTER_URL = "http://4.227.136.16:8080/v1/user/addCafeUser";
 const AUTH_URL = "http://4.227.136.16:8080/v1/user/token";
-const MANAGE_PROFILE_URL = "http://4.227.136.16:8080/v1/user/manageUser"
-const ADD_REPORT_URL = "http://4.227.136.16:8080/v1/report/add"
-const GET_COMPUTER_LIST_URL = "http://4.227.136.16:8080/v1/computer/listofavailablecomputer"
+const MANAGE_PROFILE_URL = "http://4.227.136.16:8080/v1/user/manageUser";
+const ADD_REPORT_URL = "http://4.227.136.16:8080/v1/report/add";
+const GET_COMPUTER_LIST_URL =
+  "http://4.227.136.16:8080/v1/computer/listofavailablecomputer";
 
 interface JwtPayload extends DefaultJwtPayload {
   user_id: string;
@@ -19,7 +19,7 @@ interface JwtPayload extends DefaultJwtPayload {
 const cookieDecoding = (token: string): JwtPayload => {
   const decodedToken = jwtDecode<JwtPayload>(token);
   return decodedToken;
-}
+};
 
 export const getUserId = () => {
   try {
@@ -30,15 +30,15 @@ export const getUserId = () => {
       throw new Error("No access token available");
     }
 
-    const jwtDecoded = cookieDecoding(accessToken as string)
+    const jwtDecoded = cookieDecoding(accessToken as string);
     console.log(jwtDecoded.user_id);
 
-    return jwtDecoded.user_id
+    return jwtDecoded.user_id;
   } catch (error) {
     console.error("Error retrieving user ID:", error);
     return null;
   }
-}
+};
 
 export async function getUserAuth(username: string, password: string) {
   try {
@@ -61,12 +61,12 @@ export async function getUserAuth(username: string, password: string) {
     cookies().set("access", data.access, { httpOnly: true, path: "/" });
     cookies().set("refresh", data.refresh, { httpOnly: true, path: "/" });
 
-    const retrievedUserId = await getUserId()
+    const retrievedUserId = await getUserId();
 
     return { status: 200, user_id: retrievedUserId };
   } catch (error) {
     console.error("Error fetching user auth:", error);
-    return 500;
+    return { status: 500 };
   }
 }
 
@@ -81,15 +81,13 @@ export async function signout() {
 
 export async function signUpCafeUser(data: any) {
   try {
-    const response = await fetch(REGISTER_URL,
-      {
-        method: "POST",
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data)
-      }
-    );
+    const response = await fetch(REGISTER_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
 
     if (!response.ok) {
       if (response.status === 401) {
@@ -98,43 +96,37 @@ export async function signUpCafeUser(data: any) {
       throw new Error(`Error: ${response.statusText}`);
     }
 
-    const resData = response.json()
-    return resData
-
+    const resData = response.json();
+    return resData;
   } catch (error) {
     console.log("Server Error in sign up cafe user.");
     return 500; // Internal Server Error
   }
 }
 
-
 export async function getCafeUserProfile() {
   try {
     const cookieStore = cookies();
     const accessToken = cookieStore.get("access")?.value;
 
-    const user_id = await getUserId()
+    const user_id = await getUserId();
 
-
-    const response = await fetch(`${MANAGE_PROFILE_URL}/${user_id}`,
-      {
-        method: "GET",
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${accessToken}`
-        }
-      }
-    );
+    const response = await fetch(`${MANAGE_PROFILE_URL}/${user_id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
 
     if (!response.ok) {
       throw new Error(`Error: ${response.statusText}`);
     }
 
     const data = await response.json();
-    const { id, ...userData } = data
+    const { id, ...userData } = data;
 
     return userData;
-
   } catch (error) {
     console.error("Error fetching user profile details:", error);
     return null;
@@ -146,28 +138,25 @@ export async function editCafeUserProfile(data: any) {
     const cookieStore = cookies();
     const accessToken = cookieStore.get("access")?.value;
 
-    const user_id = await getUserId()
+    const user_id = await getUserId();
 
-    const response = await fetch(`${MANAGE_PROFILE_URL}/${user_id}`,
-      {
-        method: "PATCH",
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${accessToken}`
-        },
-        body: JSON.stringify(data)
-      }
-    );
+    const response = await fetch(`${MANAGE_PROFILE_URL}/${user_id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+      body: JSON.stringify(data),
+    });
 
     if (!response.ok) {
       throw new Error(`Error: ${response.statusText}`);
     }
 
     const resData = await response.json();
-    const { id, ...userData } = resData
+    const { id, ...userData } = resData;
 
     return userData;
-
   } catch (error) {
     console.error("Error fetching user profile details:", error);
     return null;
@@ -179,22 +168,21 @@ export async function reportSubmit(reportDetails: any) {
     const cookieStore = cookies();
     const accessToken = cookieStore.get("access")?.value;
 
-    const user = await getUserId()
+    const user = await getUserId();
 
     const payload = {
-      user, ...reportDetails
-    }
+      user,
+      ...reportDetails,
+    };
 
-    const response = await fetch(ADD_REPORT_URL,
-      {
-        method: "POST",
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${accessToken}`
-        },
-        body: JSON.stringify(payload)
-      }
-    );
+    const response = await fetch(ADD_REPORT_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+      body: JSON.stringify(payload),
+    });
 
     if (!response.ok) {
       throw new Error(`Error: ${response.statusText}`);
@@ -202,7 +190,6 @@ export async function reportSubmit(reportDetails: any) {
 
     const reportData = await response.json();
     return reportData;
-
   } catch (error) {
     console.error("Error submitting report:", error);
     return null;
@@ -214,16 +201,13 @@ export async function showListAvailableComputers() {
     const cookieStore = cookies();
     const accessToken = cookieStore.get("access")?.value;
 
-
-    const response = await fetch(GET_COMPUTER_LIST_URL,
-      {
-        method: "GET",
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${accessToken}`
-        },
-      }
-    );
+    const response = await fetch(GET_COMPUTER_LIST_URL, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
 
     if (!response.ok) {
       throw new Error(`Error: ${response.statusText}`);
@@ -231,7 +215,6 @@ export async function showListAvailableComputers() {
 
     const computerList = await response.json();
     return computerList;
-
   } catch (error) {
     console.error("Error loading computers:", error);
     return null;
@@ -243,20 +226,22 @@ export async function startSession(data: any) {
     const cookieStore = cookies();
     const accessToken = cookieStore.get("access")?.value;
 
-    const user = await getUserId()
+    const user = await getUserId();
 
     const payload = {
-      user, modelno: data
-    }
+      user,
+      modelno: data,
+    };
 
-    const response = await fetch("http://4.227.136.16:8080/v1/session/startsession",
+    const response = await fetch(
+      "http://4.227.136.16:8080/v1/session/startsession",
       {
         method: "POST",
         headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${accessToken}`
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
         },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(payload),
       }
     );
 
@@ -266,7 +251,6 @@ export async function startSession(data: any) {
       throw new Error(`Error: ${response.statusText}`);
     }
     return 200;
-
   } catch (error) {
     console.error("Error loading computers:", error);
     return null;
@@ -278,14 +262,15 @@ export async function closeSession() {
     const cookieStore = cookies();
     const accessToken = cookieStore.get("access")?.value;
 
-    const user_id = await getUserId()
+    const user_id = await getUserId();
 
-    const response = await fetch(`http://4.227.136.16:8080/v1/session/closesession/${user_id}`,
+    const response = await fetch(
+      `http://4.227.136.16:8080/v1/session/closesession/${user_id}`,
       {
         method: "PATCH",
         headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${accessToken}`
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
         },
       }
     );
@@ -297,10 +282,8 @@ export async function closeSession() {
 
     const data = await response.json();
     return data;
-
   } catch (error) {
     console.error("Error loading computers:", error);
     return null;
   }
 }
-
