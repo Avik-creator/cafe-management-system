@@ -100,6 +100,8 @@ export default function Component() {
     price: "Loading ...",
   });
 
+  const [logoutDisabled, setLogoutDisabled] = useState(false)
+
   const handleEditFormChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     console.log(name, value, editFormData);
@@ -157,6 +159,7 @@ export default function Component() {
     e.preventDefault();
     setIsSelectDisabled(true);
     const status = await startSession(selectedValue);
+    setLogoutDisabled(true)
     console.log("status", status);
   };
 
@@ -211,10 +214,12 @@ export default function Component() {
       });
     } else {
       setBillDetails(billData);
+      setLogoutDisabled(false)
     }
   };
 
   const logout = async () => {
+    setLogoutDisabled(true)
     toast({
       title: "Logging you out ...",
       variant: "default",
@@ -303,7 +308,7 @@ export default function Component() {
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                   {/* <AlertDialogCancel hidden>Cancel</AlertDialogCancel> */}
-                  <AlertDialogAction onClick={logout}>Logout</AlertDialogAction>
+                  <AlertDialogAction onClick={logout} disabled={logoutDisabled}>Logout</AlertDialogAction>
                 </AlertDialogFooter>
               </AlertDialogContent>
             </AlertDialog>
