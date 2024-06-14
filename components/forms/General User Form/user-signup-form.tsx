@@ -44,14 +44,33 @@ export default function UserSignUpForm() {
     const formattedDate = data.dob
       ? format(new Date(data.dob), "yyyy-MM-dd")
       : "";
+    //@ts-ignore
+    newData.dob = formattedDate.toString();
 
-    newData.dob = formattedDate;
+    try {
+      const signupData = await signUpCafeUser(newData);
+      console.log("SIGN UP DATA:", signupData);
 
-    const signupData = await signUpCafeUser(newData);
-    console.log("SIGN UP DATA:", signupData);
-
-    if (signupData != 401) {
-      router.push("/user/sigin");
+      if (signupData != 401) {
+        toast({
+          title: "Account Created Successfully",
+          description: "Please login with newly created username and password.",
+          variant: "success"
+        });
+        router.push("/user/signin");
+      } else {
+        toast({
+          title: "Account creation Failed",
+          description: "Please try to create an account again some time later.",
+          variant: "destructive",
+        });
+      }
+    } catch (error: any) {
+      toast({
+        title: "Error",
+        description: error.message,
+        variant: "destructive",
+      });
     }
   };
 
@@ -221,32 +240,29 @@ export default function UserSignUpForm() {
                 <FormLabel>Date of Birth</FormLabel>
                 <Popover>
                   <PopoverTrigger asChild>
-                    <FormControl>
-                      <Button
-                        variant={"outline"}
-                        className={cn(
-                          "pl-3 text-left font-normal",
-                          !field.value && "text-muted-foreground"
-                        )}
-                      >
-                        {field.value ? (
-                          format(Number(field.value), "PPP")
-                        ) : (
-                          <span>Pick a date</span>
-                        )}
-                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                      </Button>
-                    </FormControl>
+                    <Button
+                      variant={"outline"}
+                      className={cn(
+                        "w-[240px] justify-start text-left font-normal",
+                        !field.value && "text-muted-foreground"
+                      )}
+                    >
+                      <CalendarIcon className="mr-2 h-4 w-4" />
+                      {field.value ? (
+                        format(Number(field.value), "yyyy-MM-dd")
+                      ) : (
+                        <span>Pick a date</span>
+                      )}
+                    </Button>
                   </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0" align="start">
+                  <PopoverContent align="start" className=" w-auto p-0">
                     <Calendar
                       mode="single"
-                      selected={field.value ? new Date(field.value) : undefined}
+                      captionLayout="dropdown-buttons"
+                      selected={field.value}
                       onSelect={field.onChange}
-                      disabled={(date) =>
-                        date > new Date() || date < new Date("1900-01-01")
-                      }
-                      initialFocus
+                      fromYear={1960}
+                      toYear={2030}
                     />
                   </PopoverContent>
                 </Popover>
@@ -260,13 +276,6 @@ export default function UserSignUpForm() {
             disabled={loading}
             className="ml-auto w-full mt-6"
             type="submit"
-            onClick={() => {
-              toast({
-                title: "Account Successfully Created",
-                description:
-                  "Please login with newly created username and password.",
-              });
-            }}
           >
             Sign Up
           </Button>

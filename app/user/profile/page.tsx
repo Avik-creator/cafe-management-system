@@ -54,7 +54,7 @@ import {
 } from "@/server/Auth/authAPI";
 import { useRouter } from "next/navigation";
 import { Textarea } from "@/components/ui/textarea";
-import { Form } from "@/components/ui/form";
+// import { Form } from "@/components/ui/form";
 import { toast, useToast } from "@/components/ui/use-toast";
 
 export default function Component() {
@@ -96,9 +96,11 @@ export default function Component() {
   });
 
   const [billDetails, setBillDetails] = useState({
-    Cafeusername: "",
-    price: "",
+    Cafeusername: "Loading...",
+    price: "Loading ...",
   });
+
+  const [logoutDisabled, setLogoutDisabled] = useState(false)
 
   const handleEditFormChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -157,8 +159,8 @@ export default function Component() {
     e.preventDefault();
     setIsSelectDisabled(true);
     const status = await startSession(selectedValue);
+    setLogoutDisabled(true)
     console.log("status", status);
-
   };
 
   const handleReportSubmit = async (e: FormEvent) => {
@@ -205,11 +207,37 @@ export default function Component() {
 
   const exitSession = async () => {
     const billData = await closeSession();
-    setBillDetails(billData);
+    if (billData === 404) {
+      setBillDetails({
+        Cafeusername: "-",
+        price: "0",
+      });
+    } else {
+      setBillDetails(billData);
+      setLogoutDisabled(false)
+    }
   };
 
   const logout = async () => {
-    await signout();
+    setLogoutDisabled(true)
+    toast({
+      title: "Logging you out ...",
+      variant: "default",
+    });
+    try {
+      await signout();
+      toast({
+        title: "Logged out successfully",
+        variant: "success",
+      });  
+      } catch (error) {
+      toast({
+        title: "Could not log you out",
+        description: "Please try to log out some time later",
+        variant: "destructive",
+      });  
+      
+    }
     router.push("/user/signin");
   };
 
@@ -253,16 +281,34 @@ export default function Component() {
                 </Button>
               </AlertDialogTrigger>
               <AlertDialogContent>
-                <AlertDialogHeader >
-                  <AlertDialogTitle className="text-center">Bill Details</AlertDialogTitle>
+                <AlertDialogHeader>
+                  <AlertDialogTitle className="text-center">
+                    Bill Details
+                  </AlertDialogTitle>
                   <AlertDialogDescription className="text-center font-bold text-lg">
-                    <div>Name: {billDetails.Cafeusername}</div>
-                    <div>Bill: Rs.{billDetails.price}</div>
+                    <div className="grid gap-4 py-4">
+                      <div className="grid grid-cols-2 items-center gap-2">
+                        <span className="text-right font-normal">
+                          Billing Name:{" "}
+                        </span>
+                        <span className="text-left">
+                          {billDetails?.Cafeusername}
+                        </span>
+                      </div>
+                      <div className="grid grid-cols-2 items-center gap-4">
+                        <span className="text-right font-normal">
+                          Total Bill:{" "}
+                        </span>
+                        <span className="text-left">
+                          Rs. {billDetails?.price}
+                        </span>
+                      </div>
+                    </div>
                   </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                  {/* <AlertDialogCancel>Cancel</AlertDialogCancel> */}
-                  <AlertDialogAction onClick={logout}>Logout</AlertDialogAction>
+                  {/* <AlertDialogCancel hidden>Cancel</AlertDialogCancel> */}
+                  <AlertDialogAction onClick={logout} disabled={logoutDisabled}>Logout</AlertDialogAction>
                 </AlertDialogFooter>
               </AlertDialogContent>
             </AlertDialog>
@@ -315,12 +361,12 @@ export default function Component() {
             <Card>
               <CardHeader className="flex flex-row items-center justify-between">
                 <CardTitle>Report Problem</CardTitle>
-                <Button size="sm" variant="secondary">
+                {/* <Button size="sm" variant="secondary">
                   Report Problem
-                </Button>
+                </Button> */}
               </CardHeader>
               <CardContent className="">
-                <form onSubmit={handleReportSubmit} className="grid gap-4 ">
+                <form onSubmit={handleReportSubmit} className="grid gap-4">
                   <div>
                     <Label className="sr-only" htmlFor="report-title">
                       Title
@@ -331,6 +377,7 @@ export default function Component() {
                       placeholder="Report title"
                       value={reportFormData.title}
                       onChange={handleReportFormChange}
+                      disabled={!isSelectDisabled}
                     />
                   </div>
                   <div>
@@ -343,10 +390,15 @@ export default function Component() {
                       placeholder="Report Description"
                       value={reportFormData.description}
                       onChange={handleReportFormChange}
+                      disabled={!isSelectDisabled}
                     />
                   </div>
                   <CardFooter className="flex flex-row items-center justify-between">
-                    <Button className="ml-auto" type="submit">
+                    <Button
+                      className="ml-auto"
+                      type="submit"
+                      disabled={!isSelectDisabled}
+                    >
                       Submit Report
                     </Button>
                   </CardFooter>

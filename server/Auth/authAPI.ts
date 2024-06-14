@@ -51,7 +51,7 @@ export async function getUserAuth(username: string, password: string) {
 
     if (!response.ok) {
       if (response.status === 401) {
-        return { status: 401 };
+        return { status: response.status, message: "Incorrect username or password" };
       }
       throw new Error(`Error: ${response.statusText}`);
     }
@@ -275,8 +275,8 @@ export async function closeSession() {
     );
 
     if (!response.ok) {
-      console.log("Session could not be closed");
-      throw new Error(`Error: ${response.statusText}`);
+      console.log("Session could not be closed or not found.");
+      return 404
     }
 
     const data = await response.json();

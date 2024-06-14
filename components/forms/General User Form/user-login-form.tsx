@@ -17,9 +17,11 @@ import { useForm } from "react-hook-form";
 
 import { type UserSigninFormValues, SigninFormSchema } from "@/lib/form-schema";
 import { getUserAuth } from "@/server/Auth/authAPI";
+import { useToast } from "@/components/ui/use-toast";
 
 export default function UserSigninForm() {
-  const router = useRouter()
+  const router = useRouter();
+  const { toast } = useToast();
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl");
   const [loading, setLoading] = useState(false);
@@ -28,14 +30,21 @@ export default function UserSigninForm() {
     resolver: zodResolver(SigninFormSchema),
   });
 
-
   const onSubmit = async (data: UserSigninFormValues) => {
-    const signinData = await getUserAuth(data.username, data.password)
-    console.log("SIGN UP DATA:", data)
-    console.log("SIGN IN RESPONSE DATA:", signinData.user_id);
+    const signinData = await getUserAuth(data.username, data.password);
 
-    if(signinData.status === 200 && typeof signinData.user_id == "number") {
-      router.push("/user/profile")
+    if (signinData.status === 200 && typeof signinData.user_id == "number") {
+      toast({
+        title: "Logged in successfully",
+        variant: "success",
+      });
+      router.push("/user/profile");
+    } else if (signinData.status === 401) {
+      toast({
+        title: "Login Failed",
+        description: signinData.message,
+        variant: "destructive",
+      });
     }
   };
 

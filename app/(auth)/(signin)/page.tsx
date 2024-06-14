@@ -75,20 +75,30 @@ export default function LoginPage() {
             <p className="px-8 text-center text-sm text-muted-foreground">
               By clicking continue, you agree to our{" "}
               <Link
-                href="/terms"
+                href="/"
                 className="underline underline-offset-4 hover:text-primary"
               >
                 Terms of Service
               </Link>{" "}
               and{" "}
               <Link
-                href="/privacy"
+                href="/"
                 className="underline underline-offset-4 hover:text-primary"
               >
                 Privacy Policy
               </Link>
               .
             </p>
+            <p className="mt-2 text-sm text-center text-white">
+                {" "}
+                Not Admin?{" "}
+                <Link
+                  href={"/user/signin"}
+                  className=" text-blue-600 hover:underline"
+                >
+                  Login as user
+                </Link>
+              </p>
           </div>
         </div>
       </div>
