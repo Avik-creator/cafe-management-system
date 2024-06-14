@@ -279,7 +279,7 @@ export default function Component() {
               </SelectTrigger>
               <SelectContent>
                 {computerList.map((computer) => (
-                  <SelectItem value={computer.Model_No}>
+                  <SelectItem key={computer.Model_No} value={computer.Model_No}>
                     {computer.Model_No}
                   </SelectItem>
                 ))}
