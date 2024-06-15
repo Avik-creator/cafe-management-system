@@ -7,8 +7,6 @@ import { getSessionList } from "@/server/DashboardList/sessions";
 
 const breadcrumbItems = [{ title: "Sessions", link: "/dashboard/sessions" }];
 export const maxDuration = 40;
-export const runtime = "edge";
-export const preferredRegion = "home";
 type paramsProps = {
   searchParams: {
     [key: string]: string | string[] | undefined;
