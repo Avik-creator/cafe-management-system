@@ -30,7 +30,6 @@ export const getUserId = () => {
     }
 
     const jwtDecoded = cookieDecoding(accessToken as string);
-    console.log(jwtDecoded.user_id);
 
     return jwtDecoded.user_id;
   } catch (error) {
