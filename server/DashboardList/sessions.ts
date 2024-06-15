@@ -1,5 +1,5 @@
 "use server";
-
+export const maxDuration = 40;
 import { cookies } from "next/headers";
 import { SESSION_CLOSE_API, SESSION_LIST, START_SESSION } from "../ApiList";
 import { Session } from "@/types";
