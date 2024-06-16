@@ -31,8 +31,9 @@ export default function UserSigninForm() {
   });
 
   const onSubmit = async (data: UserSigninFormValues) => {
+    setLoading(true)
     const signinData = await getUserAuth(data.username, data.password);
-
+    
     if (signinData.status === 200 && typeof signinData.user_id == "number") {
       toast({
         title: "Logged in successfully",
@@ -40,6 +41,7 @@ export default function UserSigninForm() {
       });
       router.push("/user/profile");
     } else if (signinData.status === 401) {
+      setLoading(false)
       toast({
         title: "Login Failed",
         description: signinData.message,
@@ -94,7 +96,7 @@ export default function UserSigninForm() {
           />
 
           <Button disabled={loading} className="ml-auto w-full" type="submit">
-            Signin
+            Sign In
           </Button>
         </form>
       </Form>

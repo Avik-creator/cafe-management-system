@@ -16,3 +16,5 @@ export const SESSION_CLOSE_API = `${process.env.SERVER_API_BASE_URL}/session/clo
 export const START_SESSION = `${process.env.SERVER_API_BASE_URL}/session/startsession`;
 
 export const DELETE_USER_API = `${process.env.SERVER_API_BASE_URL}/user/manageUser`;
+
+export const CHANGE_USER_PASSWORD_URL = `${process.env.SERVER_API_BASE_URL}/user/change-password/`;
