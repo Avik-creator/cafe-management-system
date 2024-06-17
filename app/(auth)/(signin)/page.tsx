@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import dynamic from "next/dynamic";
 import { globeConfig, sampleArcs } from "@/contants";
+import { motion } from "framer-motion";
 
 const World = dynamic(
   () => import("../../../components/globe").then((m) => m.World),
@@ -90,15 +91,29 @@ export default function LoginPage() {
               .
             </p>
             <p className="mt-2 text-sm text-center text-white">
-                {" "}
-                Not Admin?{" "}
-                <Link
-                  href={"/user/signin"}
-                  className=" text-blue-600 hover:underline"
-                >
-                  Login as user
+              {" "}
+              Not Admin?{" "}
+              <Link
+                href={"/user/signin"}
+                className=" text-blue-600 hover:underline"
+              >
+                Login as user
+              </Link>
+            </p>
+            <p className="mt-2 text-sm text-center text-white">
+              {" "}
+              Want to know more about us?{"  "}
+              <motion.div
+                initial={{ scale: 1 }}
+                whileHover={{ scale: 1.1 }}
+                transition={{ duration: 1 }}
+                className="inline-block"
+              >
+                <Link href={"/team"} className=" text-blue-600 hover:underline">
+                  Meet Our Team
                 </Link>
-              </p>
+              </motion.div>
+            </p>
           </div>
         </div>
       </div>

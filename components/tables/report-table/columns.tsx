@@ -68,6 +68,12 @@ export const columns: ColumnDef<Report>[] = [
         </Button>
       );
     },
+    cell: ({ row }) =>
+      `Rs. ${
+        row.original.status === null
+          ? "PENDING"
+          : row.original.status.toUpperCase()
+      }`,
   },
   {
     id: "actions",
