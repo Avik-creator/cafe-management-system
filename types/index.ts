@@ -43,6 +43,7 @@ export type Report = {
   report_id: number;
   title: string;
   description: string;
+  status: string;
   user: {
     id: number;
     user_name: string;

@@ -662,7 +662,7 @@ export const navItems: NavItem[] = [
     label: "Dashboard",
   },
   {
-    title: "User",
+    title: "Users",
     href: "/dashboard/user",
     icon: "user",
     label: "user",
