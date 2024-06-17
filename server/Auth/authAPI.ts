@@ -9,6 +9,7 @@ import {
   MANAGE_PROFILE_URL,
   ADD_REPORT_URL,
   GET_COMPUTER_LIST_URL,
+  CHANGE_USER_PASSWORD_URL,
 } from "../ApiList";
 
 interface JwtPayload extends DefaultJwtPayload {
@@ -218,6 +219,40 @@ export async function showListAvailableComputers() {
     return computerList;
   } catch (error) {
     console.error("Error loading computers:", error);
+    return null;
+  }
+}
+
+export async function changePassword(data: any) {
+  try {
+    console.log(data)
+    const cookieStore = cookies();
+    const accessToken = cookieStore.get("access")?.value;    
+
+    const response = await fetch(CHANGE_USER_PASSWORD_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+      body: JSON.stringify(data)
+    });
+    
+    console.log(response)
+    
+    if (!response.ok) {
+      throw new Error(`Error: ${response.statusText}`);
+    }
+    
+
+    const resData = await response.json();
+    if(response.status === 200 ) {
+      return resData.detail
+    } else if (response.status === 400 ) {
+      return resData.old_password[0] || resData.new_password[0]
+    }
+  } catch (error) {
+    console.error("Error changing password:", error);
     return null;
   }
 }

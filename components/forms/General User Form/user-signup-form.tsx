@@ -39,19 +39,21 @@ export default function UserSignUpForm() {
   });
 
   const onSubmit = async (data: SignupFormValues) => {
+    setLoading(true)
     const { confirmPassword, ...newData } = data;
-
+    
     const formattedDate = data.dob
-      ? format(new Date(data.dob), "yyyy-MM-dd")
-      : "";
+    ? format(new Date(data.dob), "yyyy-MM-dd")
+    : "";
     //@ts-ignore
     newData.dob = formattedDate.toString();
-
+    
     try {
       const signupData = await signUpCafeUser(newData);
       console.log("SIGN UP DATA:", signupData);
-
+      
       if (signupData != 401) {
+        setLoading(true)
         toast({
           title: "Account Created Successfully",
           description: "Please login with newly created username and password.",
@@ -59,6 +61,7 @@ export default function UserSignUpForm() {
         });
         router.push("/user/signin");
       } else {
+        setLoading(false)
         toast({
           title: "Account creation Failed",
           description: "Please try to create an account again some time later.",
@@ -66,6 +69,7 @@ export default function UserSignUpForm() {
         });
       }
     } catch (error: any) {
+      setLoading(false)
       toast({
         title: "Error",
         description: error.message,

@@ -40,10 +40,13 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 
+
+
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import {
+  changePassword,
   editCafeUserProfile,
   getCafeUserProfile,
   reportSubmit,
@@ -57,11 +60,12 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { Skeleton } from "@/components/ui/skeleton";
+import { ChangePassword } from "@/components/modal/change-password";
 
 export default function Component() {
   const { toast } = useToast();
   const router = useRouter();
-  const [isEditing, setIsEditing] = useState(false);
+
   const [userProfile, setUserProfile] = useState({
     username: "",
     first_name: "",
@@ -77,8 +81,11 @@ export default function Component() {
   const [computerList, setComputerList] = useState<Array<{ Model_No: string }>>(
     []
   );
-  const [selectedValue, setSelectedValue] = useState("");
+  const [selectedComputer, setSelectedComputer] = useState<string | undefined>(
+    undefined
+  );
 
+  const [isEditing, setIsEditing] = useState(false);
   const [editFormData, setEditFormData] = useState({
     first_name: "",
     last_name: "",
@@ -135,7 +142,7 @@ export default function Component() {
   };
 
   const handleSelectChange = (value: string) => {
-    setSelectedValue(value);
+    setSelectedComputer(value);
   };
 
   useEffect(() => {
@@ -157,37 +164,46 @@ export default function Component() {
         console.log(error);
       }
     }
-    async function loadComputerList() {
-      const computerList = await showListAvailableComputers();
-      setComputerList(computerList);
-    }
-    loadUserProfile();
 
-    if (userProfile && localKeyExists()) {
-      setSelectedValue(localValue);
-      setIsSelectDisabled(true);
-      } else {
-      loadComputerList();
+    async function loadComputerList() {
+      if (userProfile) {
+        const computerList = await showListAvailableComputers();
+        setComputerList(computerList);
+      }
     }
-  }, []);
+
+    async function populateSelectComputer() {
+      const isLocalValExisting = await localKeyExists();
+      if (userProfile && isLocalValExisting) {
+        setSelectedComputer(localValue.toString());
+        setIsSelectDisabled(true);
+      } else {
+        await loadComputerList();
+      }
+    }
+    async function loadInitialData() {
+      await loadUserProfile();
+      await populateSelectComputer().catch(console.error);
+    }
+    loadInitialData();
+  }, [userProfile.username]);
 
   useEffect(() => {
     // Update editFormData only when userProfile changes and userProfile.username is set
     if (userProfile && userProfile.username !== "") {
       const { username, ...rest } = userProfile;
-      setEditFormData(rest); // Update editFormData with rest of the fields
+      setEditFormData(rest);
     }
   }, [userProfile]);
-
 
   const handleComputerSelectSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setIsSelectDisabled(true);
 
-    await startSession(selectedValue);
+    await startSession(selectedComputer);
 
     setLogoutDisabled(true);
-    setLocalValue(selectedValue);
+    setLocalValue(selectedComputer!);
   };
 
   const handleReportSubmit = async (e: FormEvent) => {
@@ -268,6 +284,7 @@ export default function Component() {
     router.push("/user/signin");
   };
 
+
   return (
     <ScrollArea className="h-screen">
       <div className="flex flex-col min-h-screen mb-20">
@@ -300,6 +317,8 @@ export default function Component() {
             <Button size="sm" variant="outline">
               My account
             </Button>
+
+            <ChangePassword/>
 
             <AlertDialog>
               <AlertDialogTrigger asChild>
@@ -351,30 +370,42 @@ export default function Component() {
         </header>
 
         <main className="flex-1 flex flex-col gap-4 p-4 md:gap-8 md:p-6 ">
-          <form onSubmit={handleComputerSelectSubmit} className="flex flex-row">
-            <Select name="modelno" value={selectedValue} onValueChange={handleSelectChange}>
-              <SelectTrigger
-                className="w-1/4 bg-slate-700"
-                disabled={computerList.length <= 0 || isSelectDisabled}
+          <Card className="pt-4">
+            <CardContent className="grid gap-2 text-sm">
+              <form
+                onSubmit={handleComputerSelectSubmit}
+                className="flex flex-row"
               >
-                <SelectValue placeholder="Select a Computer" />
-              </SelectTrigger>
-              <SelectContent>
-                {computerList.map((computer) => (
-                  <SelectItem key={computer.Model_No} value={computer.Model_No}>
-                    {computer.Model_No}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-            <Button
-              disabled={computerList.length <= 0 || isSelectDisabled}
-              type="submit"
-              className="gap-4"
-            >
-              Submit
-            </Button>
-          </form>
+                <Select
+                  name="modelno"
+                  value={selectedComputer}
+                  onValueChange={handleSelectChange}
+                  disabled={computerList?.length <= 0 || isSelectDisabled}
+                >
+                  <SelectTrigger className="w-1/4 bg-slate-700 rounded-tr-none rounded-br-none">
+                    <SelectValue placeholder="Select a Computer" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {computerList?.map((computer) => (
+                      <SelectItem
+                        key={computer.Model_No}
+                        value={computer.Model_No}
+                      >
+                        {computer.Model_No}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <Button
+                  disabled={computerList?.length <= 0 || isSelectDisabled}
+                  type="submit"
+                  className="gap-4 rounded-tl-none rounded-bl-none"
+                >
+                  Submit
+                </Button>
+              </form>
+            </CardContent>
+          </Card>
 
           <div className="grid gap-4">
             <Card>

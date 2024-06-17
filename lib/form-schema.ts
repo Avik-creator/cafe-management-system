@@ -110,14 +110,20 @@ export const editUserConfirmFormSchema = z.object({
 export const editUserFormSchema = z.object({
   email: z.string().email({ message: "Enter a valid email address" }),
   password: z
-    .string({ required_error: "Password is required" })
-    .min(6, { message: "Password must be at least 6 characters" }),
+  .string({ required_error: "Password is required" })
+  .min(6, { message: "Password must be at least 6 characters" }),
   first_name: z.string(),
   last_name: z.string(),
   username: z.string({ required_error: "Username is required" }),
   dob: z.date(),
   address: z.string(),
   phone: z.string(),
+});
+
+export const ChangePasswordFormSchema = z.object({
+  old_password: z.string({ required_error: "Old Password is Required" }),
+  new_password: z.string({ required_error: "New Password is required" }),
+  confirm_password: z.string({ required_error: "Enter New Password again" }),
 });
 
 export type SignupFormValues = z.infer<typeof SignupFormSchema>;
@@ -131,3 +137,5 @@ export type ComputerFormValues = z.infer<typeof ComputerFormSchema>;
 export type ReportFormValues = z.infer<typeof ReportScheme>;
 
 export type ProfileFormValues = z.infer<typeof profileSchema>;
+
+export type ChangePasswordFormValues = z.infer<typeof ChangePasswordFormSchema>;
