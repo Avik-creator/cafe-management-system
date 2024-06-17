@@ -72,28 +72,28 @@ const teamMembers = [
   },
   {
     name: "Subha Sadhu",
-    role: "Frontend Lead Developer",
+    role: "Frontend Developer",
     image: Subha,
     description:
       "I am Subha Sadhu. Currently a student and an aspiring software developer. I am currently learning to code and engineer softwares for the use of fellow humans. I consider myself a learner for life and love to learn about programming and the underlying engineering and working of the systems.",
   },
   {
     name: "Rudra Banerjee",
-    role: "Backend",
+    role: "Backend Developer",
     image: Rudra,
     description:
       "Makautian aspiring to become a full stack developer with a continuous learning attitude. Currently working on ML projects as well  as a Django Backend developer.",
   },
   {
     name: "Snehasis Sardar",
-    role: "Backend",
+    role: "Backend Developer",
     image: Snehasis,
     description:
       "I am a Machine Learning enthusiast and backend developer currently learning Django to enhance my web development skills with innovative data-driven solutions.",
   },
   {
     name: "Avik Mukherjee",
-    role: "Frontend",
+    role: "Frontend Lead Developer",
     image: Avik,
     description: "A Former Child.",
   },
