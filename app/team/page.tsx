@@ -65,10 +65,23 @@ export default function Component() {
 const teamMembers = [
   {
     name: "Nirvik Ghosh",
-    role: "Backend Lead Developer",
+    role: "Backend Developer",
     image: Nirvik,
     description:
       "I am a pre-final year B.Tech Information Technology student at Maulana Abul Kalam Azad University of Technology. My primary programming language is Python, with expertise in Flask, Django, and MySQL. I have a strong interest in backend web development and have completed numerous projects using these technologies. I excel in teamwork, am a quick learner, and take responsibility seriously. In my free time, I enjoy watching anime and playing games.",
+  },
+  {
+    name: "Avik Mukherjee",
+    role: "Frontend Developer",
+    image: Avik,
+    description: "A Former Child.",
+  },
+  {
+    name: "Rudra Banerjee",
+    role: "Backend Developer",
+    image: Rudra,
+    description:
+    "Makautian aspiring to become a full stack developer with a continuous learning attitude. Currently working on ML projects as well  as a Django Backend developer.",
   },
   {
     name: "Subha Sadhu",
@@ -78,23 +91,10 @@ const teamMembers = [
       "I am Subha Sadhu. Currently a student and an aspiring software developer. I am currently learning to code and engineer softwares for the use of fellow humans. I consider myself a learner for life and love to learn about programming and the underlying engineering and working of the systems.",
   },
   {
-    name: "Rudra Banerjee",
-    role: "Backend Developer",
-    image: Rudra,
-    description:
-      "Makautian aspiring to become a full stack developer with a continuous learning attitude. Currently working on ML projects as well  as a Django Backend developer.",
-  },
-  {
     name: "Snehasis Sardar",
     role: "Backend Developer",
     image: Snehasis,
     description:
       "I am a Machine Learning enthusiast and backend developer currently learning Django to enhance my web development skills with innovative data-driven solutions.",
-  },
-  {
-    name: "Avik Mukherjee",
-    role: "Frontend Lead Developer",
-    image: Avik,
-    description: "A Former Child.",
   },
 ];

@@ -91,18 +91,16 @@ export async function signUpCafeUser(data: any) {
       body: JSON.stringify(data),
     });
 
+
     if (!response.ok) {
-      if (response.status === 401) {
-        return 401;
-      }
       throw new Error(`Error: ${response.statusText}`);
     }
 
     const resData = response.json();
-    return resData;
+    return response.status;
   } catch (error) {
     console.log("Server Error in sign up cafe user.");
-    return 500; // Internal Server Error
+    return null;
   }
 }
 
