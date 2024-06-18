@@ -72,7 +72,7 @@ const teamMembers = [
   },
   {
     name: "Subha Sadhu",
-    role: "Frontend Developer",
+    role: "Lead Frontend Developer",
     image: Subha,
     description:
       "I am Subha Sadhu. Currently a student and an aspiring software developer. I am currently learning to code and engineer softwares for the use of fellow humans. I consider myself a learner for life and love to learn about programming and the underlying engineering and working of the systems.",
@@ -93,7 +93,7 @@ const teamMembers = [
   },
   {
     name: "Avik Mukherjee",
-    role: "Frontend Lead Developer",
+    role: "Frontend Developer",
     image: Avik,
     description: "A Former Child.",
   },
