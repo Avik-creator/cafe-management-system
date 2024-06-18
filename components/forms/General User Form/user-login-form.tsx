@@ -34,17 +34,16 @@ export default function UserSigninForm() {
     setLoading(true)
     const signinData = await getUserAuth(data.username, data.password);
     
-    if (signinData.status === 200 && typeof signinData.user_id == "number") {
+    if (signinData! && signinData.status === 200 && typeof signinData.user_id == "number") {
       toast({
         title: "Logged in successfully",
         variant: "success",
       });
       router.push("/user/profile");
-    } else if (signinData.status === 401) {
+    } else {
       setLoading(false)
       toast({
         title: "Login Failed",
-        description: signinData.message,
         variant: "destructive",
       });
     }

@@ -29,12 +29,12 @@ export default function SignUp() {
               <UserSignUpForm />
             </CardContent>
             <CardFooter className="sm:mb-10">
-              <p className="text-xs text-center text-white">
+              <p className="text-sm text-center">
                 {" "}
-                Don&apos;t have an account?{" "}
+                Already have an account?{" "}
                 <Link
                   href={"/user/signin"}
-                  className=" text-blue-600 hover:underline"
+                  className=" text-blue-400 hover:underline"
                 >
                   Sign In
                 </Link>

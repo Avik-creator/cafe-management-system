@@ -52,7 +52,7 @@ export default function UserSignUpForm() {
       const signupData = await signUpCafeUser(newData);
       console.log("SIGN UP DATA:", signupData);
       
-      if (signupData != 401) {
+      if (signupData === 201) {
         setLoading(true)
         toast({
           title: "Account Created Successfully",
@@ -267,6 +267,7 @@ export default function UserSignUpForm() {
                       onSelect={field.onChange}
                       fromYear={1960}
                       toYear={2030}
+                      disabled={loading}
                     />
                   </PopoverContent>
                 </Popover>

@@ -382,7 +382,7 @@ export default function Component() {
                   onValueChange={handleSelectChange}
                   disabled={computerList?.length <= 0 || isSelectDisabled}
                 >
-                  <SelectTrigger className="w-1/4 bg-slate-700 rounded-tr-none rounded-br-none">
+                  <SelectTrigger className="w-1/4 rounded-tr-none rounded-br-none">
                     <SelectValue placeholder="Select a Computer" />
                   </SelectTrigger>
                   <SelectContent>

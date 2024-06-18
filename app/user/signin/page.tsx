@@ -29,24 +29,24 @@ export default function SignIn() {
               <UserSigninForm />
             </CardContent>
             <CardFooter aria-disabled className="flex flex-col">
-              <p className="mt-2 text-sm text-center text-white">
+              <p className="mt-2 text-sm text-center">
                 {" "}
                 Don&apos;t have an account?{" "}
                 <Link 
                   href={"/user/signup"}
-                  className=" text-blue-600 hover:underline"
+                  className=" text-blue-400 hover:underline"
                 >
                   Sign up
                 </Link>
               </p>
-              <p className="mt-2 text-sm text-center text-white">
+              <p className="mt-2 text-sm text-center">
                 {" "}
                 Not a user?{" "}
                 <Link
                   href={"/"}
-                  className=" text-blue-600 hover:underline"
+                  className=" text-blue-400 hover:underline"
                 >
-                  Login as admin
+                  Login as Admin
                 </Link>
               </p>
             </CardFooter>
