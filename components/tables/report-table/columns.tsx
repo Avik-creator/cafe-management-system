@@ -69,7 +69,7 @@ export const columns: ColumnDef<Report>[] = [
       );
     },
     cell: ({ row }) =>
-      `Rs. ${
+      `${
         row.original.status === null
           ? "PENDING"
           : row.original.status.toUpperCase()
