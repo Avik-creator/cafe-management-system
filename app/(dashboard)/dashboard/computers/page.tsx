@@ -11,6 +11,8 @@ import Link from "next/link";
 
 const breadcrumbItems = [{ title: "Computer", link: "/dashboard/computers" }];
 
+export const revalidate = 600;
+
 export default async function page() {
   const computerList = getComputerList();
 

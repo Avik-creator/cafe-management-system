@@ -14,6 +14,8 @@ type paramsProps = {
   };
 };
 
+export const revalidate = 600;
+
 export default async function page({ searchParams }: paramsProps) {
   const page = Number(searchParams.page) || 1;
   const pageLimit = Number(searchParams.limit) || 10;

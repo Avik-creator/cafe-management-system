@@ -7,6 +7,8 @@ import { getComputerList } from "@/server/DashboardList/computers";
 import { getReportList } from "@/server/DashboardList/reports";
 import { getUsersList } from "@/server/DashboardList/users";
 
+export const revalidate = 600;
+
 export default async function page() {
   const getUsers = await getUsersList();
   const getComputers = await getComputerList();

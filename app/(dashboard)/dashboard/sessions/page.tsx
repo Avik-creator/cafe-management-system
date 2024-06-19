@@ -13,6 +13,8 @@ type paramsProps = {
   };
 };
 
+export const revalidate = 600;
+
 export default async function page({ searchParams }: paramsProps) {
   const sessions = await getSessionList();
 
