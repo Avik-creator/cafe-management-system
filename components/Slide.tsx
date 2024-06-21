@@ -7,9 +7,15 @@ type Props = {
   children: React.ReactNode;
   className?: string;
   delay?: number;
+  index?: number;
 };
 
-export default function Slide({ children, delay, className }: Props) {
+export default function Slide({
+  children,
+  delay,
+  className,
+  index = 1,
+}: Props) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
   const controls = useAnimation();
@@ -27,14 +33,18 @@ export default function Slide({ children, delay, className }: Props) {
         hidden: { opacity: 0, translateX: 90 },
         visible: { opacity: 1, translateX: 0 },
       }}
-      transition={{
-        type: "tween",
-        duration: 0.5,
-        damping: 8,
-        delay: delay,
-        stiffness: 10,
+      whileInView={{
+        opacity: 1,
+        x: 0, // Slide in to its original position
+        transition: {
+          duration: 1, // Animation duration
+        },
       }}
-      initial="hidden"
+      initial={{
+        opacity: 0,
+        x: index % 2 === 0 ? 50 : -50,
+      }}
+      viewport={{ once: true }}
       animate={controls}
       className={className}
     >

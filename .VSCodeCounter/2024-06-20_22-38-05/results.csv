@@ -1,0 +1,126 @@
+"filename", "language", "JSON", "JavaScript", "JSON with Comments", "TypeScript", "TypeScript JSX", "Markdown", "CSS", "comment", "blank", "total"
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/.eslintrc.json", "JSON", 3, 0, 0, 0, 0, 0, 0, 0, 1, 4
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/README.md", "Markdown", 0, 0, 0, 0, 0, 25, 0, 0, 15, 40
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/app/(auth)/(signin)/page.tsx", "TypeScript JSX", 0, 0, 0, 0, 119, 0, 0, 0, 4, 123
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/app/(dashboard)/dashboard/computers/[computerId]/loading.tsx", "TypeScript JSX", 0, 0, 0, 0, 40, 0, 0, 0, 4, 44
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/app/(dashboard)/dashboard/computers/[computerId]/page.tsx", "TypeScript JSX", 0, 0, 0, 0, 19, 0, 0, 0, 3, 22
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/app/(dashboard)/dashboard/computers/loading.tsx", "TypeScript JSX", 0, 0, 0, 0, 49, 0, 0, 0, 5, 54
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/app/(dashboard)/dashboard/computers/page.tsx", "TypeScript JSX", 0, 0, 0, 0, 41, 0, 0, 0, 9, 50
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/app/(dashboard)/dashboard/layout.tsx", "TypeScript JSX", 0, 0, 0, 0, 22, 0, 0, 0, 4, 26
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/app/(dashboard)/dashboard/loading.tsx", "TypeScript JSX", 0, 0, 0, 0, 42, 0, 0, 0, 4, 46
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/app/(dashboard)/dashboard/page.tsx", "TypeScript JSX", 0, 0, 0, 0, 114, 0, 0, 1, 7, 122
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/app/(dashboard)/dashboard/profile/page.tsx", "TypeScript JSX", 0, 0, 0, 0, 14, 0, 0, 0, 2, 16
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/app/(dashboard)/dashboard/reports/[reportId]/loading.tsx", "TypeScript JSX", 0, 0, 0, 0, 40, 0, 0, 0, 4, 44
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/app/(dashboard)/dashboard/reports/[reportId]/page.tsx", "TypeScript JSX", 0, 0, 0, 0, 26, 0, 0, 1, 4, 31
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/app/(dashboard)/dashboard/reports/loading.tsx", "TypeScript JSX", 0, 0, 0, 0, 49, 0, 0, 0, 5, 54
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/app/(dashboard)/dashboard/reports/page.tsx", "TypeScript JSX", 0, 0, 0, 0, 38, 0, 0, 0, 11, 49
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/app/(dashboard)/dashboard/sessions/page.tsx", "TypeScript JSX", 0, 0, 0, 0, 33, 0, 0, 0, 8, 41
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/app/(dashboard)/dashboard/user/[userId]/page.tsx", "TypeScript JSX", 0, 0, 0, 0, 12, 0, 0, 0, 2, 14
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/app/(dashboard)/dashboard/user/loading.tsx", "TypeScript JSX", 0, 0, 0, 0, 49, 0, 0, 0, 5, 54
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/app/(dashboard)/dashboard/user/page.tsx", "TypeScript JSX", 0, 0, 0, 0, 16, 0, 0, 0, 5, 21
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/app/globals.css", "CSS", 0, 0, 0, 0, 0, 0, 69, 0, 23, 92
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/app/layout.tsx", "TypeScript JSX", 0, 0, 0, 0, 26, 0, 0, 0, 5, 31
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/app/loading.tsx", "TypeScript JSX", 0, 0, 0, 0, 23, 0, 0, 0, 3, 26
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/app/not-found.tsx", "TypeScript JSX", 0, 0, 0, 0, 32, 0, 0, 0, 5, 37
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/app/team/page.tsx", "TypeScript JSX", 0, 0, 0, 0, 98, 0, 0, 0, 3, 101
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/app/user/layout.tsx", "TypeScript JSX", 0, 0, 0, 0, 22, 0, 0, 0, 4, 26
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/app/user/profile/page.tsx", "TypeScript JSX", 0, 0, 0, 0, 606, 0, 0, 6, 43, 655
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/app/user/signin/page.tsx", "TypeScript JSX", 0, 0, 0, 0, 55, 0, 0, 0, 4, 59
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/app/user/signup/page.tsx", "TypeScript JSX", 0, 0, 0, 0, 45, 0, 0, 0, 4, 49
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components.json", "JSON", 17, 0, 0, 0, 0, 0, 0, 0, 0, 17
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/Data-charts.tsx", "TypeScript JSX", 0, 0, 0, 0, 25, 0, 0, 0, 4, 29
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/Slide.tsx", "TypeScript JSX", 0, 0, 0, 0, 39, 0, 0, 0, 6, 45
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/areaVarient.tsx", "TypeScript JSX", 0, 0, 0, 0, 108, 0, 0, 0, 5, 113
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/breadcrumb.tsx", "TypeScript JSX", 0, 0, 0, 0, 39, 0, 0, 0, 4, 43
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/chart.tsx", "TypeScript JSX", 0, 0, 0, 0, 33, 0, 0, 0, 5, 38
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/dashboard-nav.tsx", "TypeScript JSX", 0, 0, 0, 0, 55, 0, 0, 0, 7, 62
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/date-range-picker.tsx", "TypeScript JSX", 0, 0, 0, 0, 61, 0, 0, 0, 3, 64
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/forms/Admin Forms/admin-auth-form.tsx", "TypeScript JSX", 0, 0, 0, 0, 113, 0, 0, 0, 8, 121
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/forms/Admin Forms/computer-form.tsx", "TypeScript JSX", 0, 0, 0, 0, 309, 0, 0, 27, 11, 347
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/forms/Admin Forms/report-form.tsx", "TypeScript JSX", 0, 0, 0, 0, 240, 0, 0, 4, 17, 261
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/forms/Admin Forms/user-form.tsx", "TypeScript JSX", 0, 0, 0, 0, 297, 0, 0, 3, 20, 320
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/forms/Admin Forms/user-signup-form.tsx", "TypeScript JSX", 0, 0, 0, 0, 225, 0, 0, 23, 15, 263
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/forms/General User Form/user-login-form.tsx", "TypeScript JSX", 0, 0, 0, 0, 95, 0, 0, 0, 10, 105
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/forms/General User Form/user-signup-form.tsx", "TypeScript JSX", 0, 0, 0, 0, 272, 0, 0, 1, 19, 292
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/forms/user-profile-stepper/create-profile.tsx", "TypeScript JSX", 0, 0, 0, 0, 253, 0, 0, 16, 16, 285
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/globe.tsx", "TypeScript JSX", 0, 0, 0, 0, 271, 0, 0, 1, 34, 306
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/google-gemini-effect.tsx", "TypeScript JSX", 0, 0, 0, 0, 87, 0, 0, 0, 3, 90
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/icons.tsx", "TypeScript JSX", 0, 0, 0, 0, 82, 0, 0, 0, 3, 85
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/layout/ThemeToggle/theme-provider.tsx", "TypeScript JSX", 0, 0, 0, 0, 9, 0, 0, 0, 3, 12
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/layout/ThemeToggle/theme-toggle.tsx", "TypeScript JSX", 0, 0, 0, 0, 36, 0, 0, 0, 2, 38
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/layout/header.tsx", "TypeScript JSX", 0, 0, 0, 0, 34, 0, 0, 1, 3, 38
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/layout/mobile-sidebar.tsx", "TypeScript JSX", 0, 0, 0, 0, 32, 0, 0, 2, 4, 38
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/layout/providers.tsx", "TypeScript JSX", 0, 0, 0, 0, 13, 0, 0, 0, 2, 15
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/layout/sidebar.tsx", "TypeScript JSX", 0, 0, 0, 0, 21, 0, 0, 0, 2, 23
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/layout/user-header.tsx", "TypeScript JSX", 0, 0, 0, 0, 34, 0, 0, 2, 3, 39
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/layout/user-mobile-sidebar.tsx", "TypeScript JSX", 0, 0, 0, 0, 40, 0, 0, 2, 5, 47
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/layout/user-nav.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 0, 2, 2
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/modal/alert-modal.tsx", "TypeScript JSX", 0, 0, 0, 0, 45, 0, 0, 0, 6, 51
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/modal/change-password.tsx", "TypeScript JSX", 0, 0, 0, 0, 162, 0, 0, 0, 9, 171
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/overview.tsx", "TypeScript JSX", 0, 0, 0, 0, 75, 0, 0, 0, 4, 79
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/recent-sales.tsx", "TypeScript JSX", 0, 0, 0, 0, 66, 0, 0, 0, 2, 68
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/sparkels.tsx", "TypeScript JSX", 0, 0, 0, 0, 430, 0, 0, 0, 6, 436
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/splashScreen.tsx", "TypeScript JSX", 0, 0, 0, 0, 18, 0, 0, 0, 6, 24
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/splashScreenProvider.tsx", "TypeScript JSX", 0, 0, 0, 0, 19, 0, 0, 0, 7, 26
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/tables/computer-table/cell-action.tsx", "TypeScript JSX", 0, 0, 0, 0, 74, 0, 0, 0, 6, 80
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/tables/computer-table/columns.tsx", "TypeScript JSX", 0, 0, 0, 0, 58, 0, 0, 0, 4, 62
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/tables/report-table/cell-action.tsx", "TypeScript JSX", 0, 0, 0, 0, 49, 0, 0, 0, 6, 55
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/tables/report-table/columns.tsx", "TypeScript JSX", 0, 0, 0, 0, 78, 0, 0, 0, 5, 83
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/tables/session-table/cell-action.tsx", "TypeScript JSX", 0, 0, 0, 0, 69, 0, 0, 0, 5, 74
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/tables/session-table/columns.tsx", "TypeScript JSX", 0, 0, 0, 0, 115, 0, 0, 0, 5, 120
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/tables/user-tables/cell-action.tsx", "TypeScript JSX", 0, 0, 0, 0, 66, 0, 0, 0, 5, 71
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/tables/user-tables/client.tsx", "TypeScript JSX", 0, 0, 0, 0, 22, 0, 0, 6, 6, 34
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/tables/user-tables/columns.tsx", "TypeScript JSX", 0, 0, 0, 0, 100, 0, 0, 1, 2, 103
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/ui/accordion.tsx", "TypeScript JSX", 0, 0, 0, 0, 50, 0, 0, 0, 8, 58
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/ui/alert-dialog.tsx", "TypeScript JSX", 0, 0, 0, 0, 130, 0, 0, 1, 15, 146
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/ui/alert.tsx", "TypeScript JSX", 0, 0, 0, 0, 53, 0, 0, 0, 7, 60
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/ui/avatar.tsx", "TypeScript JSX", 0, 0, 0, 0, 44, 0, 0, 0, 7, 51
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/ui/badge.tsx", "TypeScript JSX", 0, 0, 0, 0, 31, 0, 0, 0, 6, 37
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/ui/button.tsx", "TypeScript JSX", 0, 0, 0, 0, 52, 0, 0, 0, 6, 58
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/ui/calendar.tsx", "TypeScript JSX", 0, 0, 0, 0, 104, 0, 0, 0, 5, 109
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/ui/card.tsx", "TypeScript JSX", 0, 0, 0, 0, 75, 0, 0, 0, 9, 84
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/ui/checkbox.tsx", "TypeScript JSX", 0, 0, 0, 0, 26, 0, 0, 0, 5, 31
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/ui/data-table.tsx", "TypeScript JSX", 0, 0, 0, 0, 248, 0, 0, 0, 13, 261
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/ui/dialog.tsx", "TypeScript JSX", 0, 0, 0, 0, 109, 0, 0, 0, 14, 123
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/ui/dropdown-menu.tsx", "TypeScript JSX", 0, 0, 0, 0, 187, 0, 0, 0, 19, 206
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/ui/form.tsx", "TypeScript JSX", 0, 0, 0, 0, 157, 0, 0, 0, 25, 182
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/ui/heading.tsx", "TypeScript JSX", 0, 0, 0, 0, 12, 0, 0, 0, 2, 14
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/ui/input.tsx", "TypeScript JSX", 0, 0, 0, 0, 21, 0, 0, 0, 5, 26
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/ui/label.tsx", "TypeScript JSX", 0, 0, 0, 0, 21, 0, 0, 0, 6, 27
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/ui/modal.tsx", "TypeScript JSX", 0, 0, 0, 0, 39, 0, 0, 0, 4, 43
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/ui/popover.tsx", "TypeScript JSX", 0, 0, 0, 0, 25, 0, 0, 0, 7, 32
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/ui/scroll-area.tsx", "TypeScript JSX", 0, 0, 0, 0, 43, 0, 0, 0, 6, 49
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/ui/select.tsx", "TypeScript JSX", 0, 0, 0, 0, 109, 0, 0, 0, 12, 121
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/ui/separator.tsx", "TypeScript JSX", 0, 0, 0, 0, 27, 0, 0, 0, 5, 32
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/ui/sheet.tsx", "TypeScript JSX", 0, 0, 0, 0, 125, 0, 0, 0, 16, 141
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/ui/skeleton.tsx", "TypeScript JSX", 0, 0, 0, 0, 13, 0, 0, 0, 3, 16
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/ui/slider.tsx", "TypeScript JSX", 0, 0, 0, 0, 24, 0, 0, 0, 5, 29
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/ui/switch.tsx", "TypeScript JSX", 0, 0, 0, 0, 25, 0, 0, 0, 5, 30
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/ui/table.tsx", "TypeScript JSX", 0, 0, 0, 0, 107, 0, 0, 0, 11, 118
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/ui/tabs.tsx", "TypeScript JSX", 0, 0, 0, 0, 48, 0, 0, 0, 8, 56
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/ui/textarea.tsx", "TypeScript JSX", 0, 0, 0, 0, 20, 0, 0, 0, 5, 25
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/ui/toast.tsx", "TypeScript JSX", 0, 0, 0, 0, 117, 0, 0, 0, 13, 130
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/ui/toaster.tsx", "TypeScript JSX", 0, 0, 0, 0, 32, 0, 0, 0, 4, 36
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/ui/use-toast.ts", "TypeScript", 0, 0, 0, 156, 0, 0, 0, 3, 31, 190
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/components/view-profile.tsx", "TypeScript JSX", 0, 0, 0, 0, 123, 0, 0, 39, 3, 165
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/constants/data.ts", "TypeScript", 0, 0, 0, 789, 0, 0, 0, 43, 12, 844
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/constants/globe.json", "JSON", 37387, 0, 0, 0, 0, 0, 0, 0, 0, 37387
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/contants.ts", "TypeScript", 0, 0, 0, 385, 0, 0, 0, 0, 1, 386
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/hooks/useLocalStorage.ts", "TypeScript", 0, 0, 0, 43, 0, 0, 0, 0, 5, 48
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/lib/form-schema.ts", "TypeScript", 0, 0, 0, 118, 0, 0, 0, 8, 15, 141
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/lib/utils.ts", "TypeScript", 0, 0, 0, 5, 0, 0, 0, 0, 3, 8
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/middleware.ts", "TypeScript", 0, 0, 0, 16, 0, 0, 0, 0, 6, 22
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/next.config.mjs", "JavaScript", 0, 2, 0, 0, 0, 0, 0, 1, 2, 5
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/package-lock.json", "JSON", 7799, 0, 0, 0, 0, 0, 0, 0, 1, 7800
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/package.json", "JSON", 70, 0, 0, 0, 0, 0, 0, 0, 1, 71
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/postcss.config.js", "JavaScript", 0, 6, 0, 0, 0, 0, 0, 0, 1, 7
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/server/ApiList.tsx", "TypeScript JSX", 0, 0, 0, 0, 15, 0, 0, 0, 5, 20
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/server/Auth/authAPI.ts", "TypeScript", 0, 0, 0, 211, 0, 0, 0, 0, 46, 257
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/server/DashboardList/computers.ts", "TypeScript", 0, 0, 0, 147, 0, 0, 0, 0, 31, 178
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/server/DashboardList/reports.ts", "TypeScript", 0, 0, 0, 99, 0, 0, 0, 1, 19, 119
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/server/DashboardList/sessions.ts", "TypeScript", 0, 0, 0, 115, 0, 0, 0, 0, 26, 141
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/server/DashboardList/users.ts", "TypeScript", 0, 0, 0, 134, 0, 0, 0, 0, 26, 160
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/tailwind.config.ts", "TypeScript", 0, 0, 0, 156, 0, 0, 0, 0, 7, 163
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/tsconfig.json", "JSON with Comments", 0, 0, 59, 0, 0, 0, 0, 0, 1, 60
+"/Users/avikmukherjee/Desktop/All Projects/College Project/cafe-management-system/types/index.ts", "TypeScript", 0, 0, 0, 112, 0, 0, 0, 1, 14, 127
+"Total", "-", 45276, 8, 59, 2486, 8111, 25, 69, 194, 1008, 57236
